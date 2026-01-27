@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "Launch Localhost",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "chrome",
+            "name": "Launch Production (Vercel)",
+            "request": "launch",
+            "url": "https://buildify-website-xi.vercel.app/"
+        }
+    ]
+}

@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    /* White */
+    --foreground: 240 10% 3.9%;
+    /* Zinc 950 */
+
+    --card: 0 0% 100%;
+    /* White */
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 240 5.9% 10%;
+    /* Zinc 900 */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    /* Zinc 100 */
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    /* Zinc 100 */
+    --muted-foreground: 240 3.8% 46.1%;
+    /* Zinc 500 */
+
+    --accent: 240 4.8% 95.9%;
+    /* Zinc 100 */
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    /* Zinc 200 - The Key Border Color */
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+
+    --radius: 0rem;
+    /* Removing default radius preference, though components might override */
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    /* Zinc 950 */
+    --foreground: 0 0% 98%;
+    /* Zinc 50 */
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+
+    --secondary: 240 3.7% 15.9%;
+    /* Zinc 800 */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    /* Zinc 800 */
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    /* Zinc 800 */
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@keyframes border-glow {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-border-glow {
+  animation: border-glow 6s linear infinite;
+}
+
+.glow-gradient {
+  background: conic-gradient(from 0deg,
+      #22c55e,
+      /* green */
+      #f97316,
+      /* orange */
+      #a855f7,
+      /* purple */
+      #ec4899,
+      /* pink - added for smoother transition */
+      #22c55e
+      /* back to green */
+    );
+}
+
+.glow-blur {
+  filter: blur(12px);
+  opacity: 0.4;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

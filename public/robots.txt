@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://usebuildify.com/sitemap.xml
