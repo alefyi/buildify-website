@@ -28,6 +28,7 @@ export const SEO: React.FC<SEOProps> = ({
             {noIndex && <meta name="robots" content="noindex" />}
 
             {/* Open Graph */}
+            <meta name="google-site-verification" content="tOnqDTjkYq7jXM7ul8CMd7fmEiwiLuuFki9rylp5ytY" />
             <meta property="og:title" content={siteTitle} />
             <meta property="og:description" content={description} />
             <meta property="og:image" content={image} />
