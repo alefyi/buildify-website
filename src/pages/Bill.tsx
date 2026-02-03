@@ -9,7 +9,7 @@ const Bill: React.FC = () => {
     const billingPortalUrl = "https://billingportal.buildifyhq.com/p/login/3cs8ze7UffYRcEM5kk";
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col">
             <SEO
                 title="Billing Support"
                 description="Manage your Buildify subscription, update billing info, or inquire about charges from Buildify, Ozone, or Hidaku LLC."
@@ -17,7 +17,7 @@ const Bill: React.FC = () => {
             />
 
             {/* 1. Hero Section */}
-            <section className="pt-32 pb-24 border-b border-zinc-200 bg-white overflow-hidden relative">
+            <section className="pt-20 md:pt-32 pb-24 border-b border-zinc-200 bg-white overflow-hidden relative">
                 <div className="max-w-[1200px] mx-auto px-6 relative z-10">
                     <div className="flex items-center gap-4 mb-8">
                         <div className="h-10 w-10 bg-zinc-100 rounded-[4px] flex items-center justify-center border border-zinc-200">
@@ -34,7 +34,7 @@ const Bill: React.FC = () => {
                             Tagged expenses with <span className="font-bold text-black">"buildifyhq.com/bill"</span> or <span className="font-bold text-black">"Ozone Coverage"</span> are from us, Buildify, for your development invoice or subscription.
                         </p>
                         <p className="text-base text-zinc-400">
-                            <strong>Note:</strong> You might've known us as Ozone previously. We're the same company! In some cases, charges might appear as <span className="text-zinc-500 font-medium">Hidaku LLC</span>, our legal entity.
+                            <strong>Note:</strong> You might've known us as Ozone, our former name. We are now fully Buildify! In some cases, charges might appear as <span className="text-zinc-500 font-medium">Hidaku LLC</span>, our legal entity.
                         </p>
                     </div>
 
@@ -113,7 +113,7 @@ const Bill: React.FC = () => {
                         {[
                             { q: "How do I cancel?", a: "All of our subscriptions are month-to-month, and you can cancel anytime—no hassle. You can manage your subscription and cancel directly through your customer portal." },
                             { q: "Can I pause my plan?", a: "Yes. If you need to take a break, you can pause your subscription without canceling. This way, you won’t lose access to your data, settings, or progress." },
-                            { q: "What is Ozone / Hidaku?", a: "You might've known us as Ozone previously. We rebranded to Buildify! Hidaku LLC is our legal entity handling billing. It is all the same company." },
+                            { q: "What is Ozone / Hidaku?", a: "Ozone was our former name. We are now Buildify. Hidaku LLC is our legal entity handling billing." },
                             { q: "How do I update my card?", a: "You can update your billing information by accessing your customer portal. The email where you receive our messages is your login." }
                         ].map((faq, i) => (
                             <div

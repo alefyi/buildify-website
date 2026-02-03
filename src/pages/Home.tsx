@@ -8,6 +8,7 @@ import { GrowthTool } from "@/components/GrowthTool";
 
 import { OrganizationSchema } from "@/components/Schema";
 import { SEO } from "@/components/SEO";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
 import amcham from "@/assets/partners/amcham.png";
 import foundersFirst from "@/assets/partners/founders_first.png";
 import co100 from "@/assets/partners/co100.png";
@@ -25,8 +26,9 @@ const Home = () => {
             />
             <OrganizationSchema />
             {/* 1. The Hook (Hero) */}
-            <section className="pt-32 pb-32 border-b border-zinc-200 bg-white">
-                <div className="max-w-[1200px] mx-auto px-6">
+            <section className="pt-20 md:pt-32 pb-32 border-b border-zinc-200 bg-white relative overflow-hidden">
+                <DottedGlowBackground />
+                <div className="max-w-[1200px] mx-auto px-6 relative z-10">
                     <div className="flex items-center gap-4 mb-10">
                         <svg width="125" height="41" viewBox="0 0 125 41" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-10 w-auto opacity-90">
                             <path d="M120.325 1H4.5C2.567 1 1 2.567 1 4.5V36.5C1 38.433 2.567 40 4.5 40H120.325C122.258 40 123.825 38.433 123.825 36.5V4.5C123.825 2.567 122.258 1 120.325 1Z" fill="#F3F4F5" />

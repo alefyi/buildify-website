@@ -1,5 +1,6 @@
 import React from 'react';
 import { SEO } from "@/components/SEO";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Calculator, ArrowRight, Home as HomeIcon } from 'lucide-react';
@@ -14,8 +15,8 @@ const NotFound = () => {
             />
 
             <main className="flex-1 flex flex-col items-center justify-center relative overflow-hidden px-6 py-32">
-                {/* Background Grid Pattern (Subtle) */}
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+                {/* Dotted Glow Background */}
+                <DottedGlowBackground />
                 <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white pointer-events-none"></div>
 
                 <div className="relative z-10 max-w-4xl w-full text-center">

@@ -24,8 +24,8 @@ export const mainRoutes: Route[] = [
     // Enterprise Link
     { path: "/enterprise", label: "Enterprise", section: "Enterprise" },
 
-    // Pricing Link
-    { path: "/pricing", label: "Pricing", section: "Pricing" },
+    // Business Link
+    { path: "/business", label: "Business", section: "Pricing" },
 ];
 
 export const footerRoutes = [
@@ -50,16 +50,21 @@ export const footerRoutes = [
     {
         title: "Resources",
         links: [
+            { label: "Insights (Blog)", href: "/insights" },
             { label: "App Calculator", href: "/app-calculator/for-business" },
             { label: "Help Center", href: "/contact" },
+            { label: "Referral Program", href: "/referral" },
         ]
     },
     {
         title: "Company",
         links: [
+            { label: "Enterprise", href: "/enterprise" },
             { label: "Contact", href: "/contact" },
-            { label: "Privacy", href: "/disclosures/privacy" },
-            { label: "Terms", href: "/disclosures/terms" },
+            { label: "Privacy Policy", href: "/disclosures/privacy" },
+            { label: "Terms of Service", href: "/disclosures/terms" },
+            { label: "Acceptable Use", href: "/disclosures/acceptable-use" },
+            { label: "NDA", href: "/disclosures/nda" },
         ]
     },
 ];

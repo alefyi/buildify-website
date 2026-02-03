@@ -7,7 +7,6 @@ export const OrganizationSchema = () => {
         "@type": "Organization",
         "name": "Buildify",
         "legalName": "Hidaku LLC",
-        "alternateName": "Ozone",
         "url": "https://usebuildify.com",
         "logo": "https://usebuildify.com/favicon.png",
         "description": "Top-rated Application Development Agency specializing in Adalo and React. We provide subscription-based software teams for businesses.",

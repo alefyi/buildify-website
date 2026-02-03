@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { SEO } from "@/components/SEO";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
 import { Link } from "react-router-dom";
 import { useUseCases } from "@/hooks/useUseCases";
 import { Button } from "@/components/ui/button";
@@ -69,19 +70,20 @@ const UseCases = () => {
                 {/* Main Content (Left) */}
                 <div className="flex-1 w-full lg:pr-12">
                     {/* Hero - Modified: px-8 to match grid padding */}
-                    <div className="px-8 py-32 border-b border-zinc-100">
-                        <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase">
+                    <div className="px-8 py-32 border-b border-zinc-100 relative overflow-hidden">
+                        <DottedGlowBackground />
+                        <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase relative z-10">
                             Industries
                         </Badge>
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-black">
+                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-black relative z-10">
                             Built for Your Business.
                         </h1>
-                        <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-8">
+                        <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-8 relative z-10">
                             Find your industry to see exactly how we can help you scale.
                         </p>
 
                         {/* Search Bar */}
-                        <div className="max-w-md relative">
+                        <div className="max-w-md relative z-10">
                             <div className="relative">
                                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
                                 <Input

@@ -57,7 +57,7 @@ const Adalo = () => {
             <FAQSchema items={FAQS} />
 
             {/* Hero Section */}
-            <section className="pt-32 pb-20 border-b border-zinc-200">
+            <section className="pt-20 md:pt-32 pb-20 border-b border-zinc-200">
                 <div className="max-w-[1200px] mx-auto px-6">
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 mb-6">
                         <span className="w-2 h-2 rounded-full bg-[#FF4F00]"></span> {/* Adalo Brand Color */}
@@ -77,11 +77,7 @@ const Adalo = () => {
                                 Audit My Adalo App
                             </Button>
                         </Link>
-                        <Link to="/contact">
-                            <Button variant="outline" size="lg" className="h-12 px-8 text-base bg-white hover:bg-zinc-50 text-black border-zinc-200 rounded-[4px] shadow-none">
-                                Migrate to Code
-                            </Button>
-                        </Link>
+
                     </div>
                 </div>
             </section>

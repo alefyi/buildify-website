@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Navigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
 import { JSONLD } from "@/components/Schema";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Quote, CheckCircle, Terminal, Layers, TrendingUp, AlertCircle, Smartphone, Globe, Database, ArrowUpRight } from "lucide-react";
@@ -16,12 +17,19 @@ const IndustryPage = () => {
         return getUseCaseBySlug(industry || "");
     }, [industry, getUseCaseBySlug]);
 
+    // Quality Check: Identify "Skeleton" pages
+    // If the page lacks a unique testimonial, has few benefits, or very short solution text, we noindex it.
+    const isSkeleton = useMemo(() => {
+        if (!data) return true;
+        const hasTestimonial = data.testimonial.quote && data.testimonial.quote.length > 10;
+        const hasBenefits = data.benefits.length >= 3;
+        const hasContent = data.solution.text.length > 50;
+
+        return !hasTestimonial || !hasBenefits || !hasContent;
+    }, [data]);
+
     if (!data) {
-        return <div className="py-40 text-center">
-            <h1 className="text-2xl font-bold mb-4">Industry Not Found</h1>
-            <p className="text-zinc-500 mb-8">We couldn't find the use case for '{industry}'.</p>
-            <Link to="/use-cases"><Button>View All Use Cases</Button></Link>
-        </div>;
+        return <Navigate to="/use-cases" replace />;
     }
 
     return (
@@ -29,8 +37,14 @@ const IndustryPage = () => {
             <SEO
                 title={data.seo.title}
                 description={data.seo.description}
-                url={`https://usebuildify.com/${industry}`}
+                url={`https://usebuildify.com/for/${industry}`}
+                noIndex={isSkeleton}
             />
+            {isSkeleton && (
+                <div className="bg-yellow-50 border-b border-yellow-200 p-2 text-center text-xs text-yellow-800 font-mono">
+                    ⚠️ ADMIN: Page marked noindex due to thin content (missing benefits or testimonial)
+                </div>
+            )}
             <JSONLD data={{
                 "@context": "https://schema.org",
                 "@type": "SoftwareApplication",
@@ -63,8 +77,9 @@ const IndustryPage = () => {
             }} />
 
             {/* 1. Hero (Matches Home.tsx Hero) */}
-            <section className="pt-32 pb-32 border-b border-zinc-200 bg-white">
-                <div className="max-w-[1200px] mx-auto px-6">
+            <section className="pt-20 md:pt-32 pb-32 border-b border-zinc-200 bg-white relative overflow-hidden">
+                <DottedGlowBackground />
+                <div className="max-w-[1200px] mx-auto px-6 relative z-10">
                     <div className="mb-10">
                         <Badge variant="outline" className="px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase bg-zinc-50 mb-8">
                             {data.name} Solutions

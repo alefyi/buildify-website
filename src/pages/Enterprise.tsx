@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SEO } from "@/components/SEO";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Shield, Server, ArrowRight, Activity, Globe, Lock, Code2, Database, ChevronDown, Check, Terminal, ArrowUpRight } from "lucide-react";
@@ -23,8 +24,9 @@ const Enterprise = () => {
             />
 
             {/* 1. Hero Section (Standardized) */}
-            <section className="bg-white pt-32 pb-32 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+            <section className="bg-white pt-20 md:pt-32 pb-32 border-b border-zinc-200 relative overflow-hidden">
+                <DottedGlowBackground />
+                <div className="max-w-[1200px] mx-auto px-6 relative z-10">
                     <div className="mb-12">
                         <div className="w-12 h-12 bg-zinc-50 border border-zinc-200 rounded-[4px] flex items-center justify-center mb-10">
                             <Globe className="w-6 h-6 text-black" />

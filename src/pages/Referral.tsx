@@ -64,7 +64,7 @@ const Referral = () => {
                     description="Earn $650 for every referral that becomes a Buildify client. Simple, transparent, and unlimited."
                     url="https://usebuildify.com/referral"
                 />
-                <div className="flex-1 flex flex-col items-center justify-center pt-32 pb-20 text-center px-6">
+                <div className="flex-1 flex flex-col items-center justify-center pt-20 md:pt-32 pb-20 text-center px-6">
                     <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
                         <Check className="w-8 h-8" />
                     </div>
@@ -89,7 +89,7 @@ const Referral = () => {
             />
 
             {/* 1. Hero Section (Glow Effect on Money) */}
-            <section className="pt-32 pb-20 border-b border-zinc-200 bg-white">
+            <section className="pt-20 md:pt-32 pb-20 border-b border-zinc-200 bg-white">
                 <div className="max-w-[1200px] mx-auto px-6 text-center">
                     <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase bg-zinc-50">
                         Partner Program

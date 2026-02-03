@@ -4,5 +4,17 @@
             "source": "/(.*)",
             "destination": "/index.html"
         }
+    ],
+    "redirects": [
+        {
+            "source": "/pricing",
+            "destination": "/business",
+            "permanent": true
+        },
+        {
+            "source": "/bio",
+            "destination": "/creators",
+            "permanent": true
+        }
     ]
 }

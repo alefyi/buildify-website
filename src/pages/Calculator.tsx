@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { SEO } from "@/components/SEO";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Check, ArrowRight, RefreshCcw, DollarSign, Calculator as CalculatorIcon, Zap } from "lucide-react";
@@ -151,8 +152,9 @@ const Calculator = () => {
                 url="https://usebuildify.com/app-calculator"
             />
 
-            <section className="bg-white pt-32 pb-32 px-6 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto">
+            <section className="bg-white pt-20 md:pt-32 pb-32 px-6 border-b border-zinc-200 relative overflow-hidden">
+                <DottedGlowBackground />
+                <div className="max-w-[1200px] mx-auto relative z-10">
                     <div className="w-12 h-12 bg-zinc-50 border border-zinc-200 rounded-md flex items-center justify-center mb-10">
                         <CalculatorIcon className="w-5 h-5 text-black" />
                     </div>

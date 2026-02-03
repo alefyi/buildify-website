@@ -13,6 +13,8 @@ const Development = React.lazy(() => import('./pages/Development'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 const Calculator = React.lazy(() => import('./pages/Calculator'));
 const BlogPost = React.lazy(() => import('./pages/BlogPost'));
+const BlogIndex = React.lazy(() => import('./pages/BlogIndex'));
+
 const StyleGuide = React.lazy(() => import('./pages/StyleGuide'));
 const ServicePage = React.lazy(() => import('./pages/ServicePage'));
 const Enterprise = React.lazy(() => import('./pages/Enterprise'));
@@ -21,11 +23,12 @@ const BrandingIdentity = React.lazy(() => import('./pages/BrandingIdentity'));
 const Wireframes = React.lazy(() => import('./pages/Wireframes'));
 const NextVersions = React.lazy(() => import('./pages/NextVersions'));
 const UseCases = React.lazy(() => import('./pages/UseCases'));
-const Pricing = React.lazy(() => import('./pages/Pricing'));
+const Business = React.lazy(() => import('./pages/Business'));
 const Referral = React.lazy(() => import('./pages/Referral'));
 const Bill = React.lazy(() => import('./pages/Bill'));
 const Adalo = React.lazy(() => import('./pages/Adalo'));
-const Bio = React.lazy(() => import('./pages/Bio'));
+const Creators = React.lazy(() => import('./pages/Creators'));
+const AuthorPage = React.lazy(() => import('./pages/AuthorPage'));
 
 // Legal Pages
 const Privacy = React.lazy(() => import('./pages/disclosures/Privacy'));
@@ -56,14 +59,15 @@ const App: React.FC = () => {
                             <Route path="branding-identity" element={<BrandingIdentity />} />
                             <Route path="wireframes-blueprints" element={<Wireframes />} />
                             <Route path="next-versions" element={<NextVersions />} />
-                            <Route path="insights" element={<ServicePage />} />
+                            <Route path="insights" element={<BlogIndex />} />
                             <Route path="enterprise" element={<Enterprise />} />
                             <Route path="use-cases" element={<UseCases />} />
-                            <Route path="pricing" element={<Pricing />} />
+                            <Route path="business" element={<Business />} />
                             <Route path="referral" element={<Referral />} />
                             <Route path="bill" element={<Bill />} />
                             <Route path="adalo" element={<Adalo />} />
-                            <Route path="bio" element={<Bio />} />
+                            <Route path="creators" element={<Creators />} />
+                            <Route path="author/:name" element={<AuthorPage />} />
 
                             {/* Disclosures (Legal) */}
                             <Route path="disclosures/privacy" element={<Privacy />} />

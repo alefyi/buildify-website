@@ -108,7 +108,7 @@ export const industries: IndustryData[] = [
         ],
         "testimonial": {
             "quote": "Children lost interest, leading to unpredictable attendance and payments. By implementing tiered credits for post-treatment checkups (monthly activity pass) and automating follow-ups through a branded rewards app, we secure predictable, high-margin resolution work. We've boosted engagement and stabilized revenue.",
-            "author": "Chloe Green",
+            "author": "Emily White",
             "business": "Zenith Enrichment Center"
         }
     },
@@ -398,7 +398,7 @@ export const industries: IndustryData[] = [
         ],
         "testimonial": {
             "quote": "Members lost motivation and dropped out, missing the full value of their fitness. By implementing tiered credits for post-treatment checkups (consistent class attendance rewards) and automating follow-ups through a branded rewards app, we secure predictable, high-margin resolution work. We've secured their long-term fitness commitment.",
-            "author": "Chloe Davies",
+            "author": "Jessica Green",
             "business": "The Barre Method"
         }
     },
@@ -1239,7 +1239,7 @@ export const industries: IndustryData[] = [
         ],
         "testimonial": {
             "quote": "Customers only called during an emergency, sacrificing easy, scheduled service work. By creating a rewards program for bi-weekly bookings (recurring device maintenance credit) managed exclusively through our customer loyalty app, we secure dependable recurring revenue. We've secured predictable scheduled service work.",
-            "author": "Chloe Davies",
+            "author": "Olivia Brown",
             "business": "Tech Fix Computer Repair"
         }
     },
@@ -1442,7 +1442,7 @@ export const industries: IndustryData[] = [
         ],
         "testimonial": {
             "quote": "Our strongest clients felt undervalued and left for introductory deals. By inviting clients back for finishing care with a small credit (lifetime member tier) managed directly in a client app, we immediately earn trust for future large-scale projects. Our top clients feel prioritized and stay.",
-            "author": "Sarah Davies",
+            "author": "Rachel Adams",
             "business": "Apex CrossFit"
         }
     },
@@ -1644,8 +1644,8 @@ export const industries: IndustryData[] = [
             "Stop Coupon Switch: Stop customers needing suit and shirt pressing from using competitors offering coupons."
         ],
         "testimonial": {
-            "quote": "Customers used competitors offering coupons, losing dependable weekly revenue. By crediting repeat cleanings with a discount tier (dry cleaning rewards card) managed within a digital loyalty platform, we consistently fill slow weeks on the schedule. We've secured dependable, high-volume weekly revenue.",
-            "author": "Sarah Davies",
+            "quote": "Customers used competitors offering coupons, losing dependable weekly revenue. By crediting repeat cleanings with a discount tier (dry cleaning rewards card) managed within a digital loyalty platform, we consistently fill slow weeks on the schedule. We've secured dependable, high-volume weekly weekly revenue.",
+            "author": "Laura Miller",
             "business": "Express Cleaners"
         }
     },
@@ -1790,7 +1790,7 @@ export const industries: IndustryData[] = [
         ],
         "testimonial": {
             "quote": "Organizers forgot our brand after the initial job, costing us annual business. By offering loyalty points for product purchases and pre-booked color boosts (referral reward) scheduled directly through our mobile loyalty platform, we secure reliable long-term revenue. We've secured predictable, high-margin annual business.",
-            "author": "Chloe Davies",
+            "author": "Rebecca Wilson",
             "business": "Seamless Events Planning"
         }
     },
@@ -1963,8 +1963,8 @@ export const industries: IndustryData[] = [
             "Dedicated Participants: Stop losing the reliable, dedicated participants who drive consistent monthly revenue."
         ],
         "testimonial": {
-            "quote": "We lost the reliable, dedicated participants who drive consistent revenue. By creating a class-pack renewal bonus for returning members deployed through a mobile loyalty platform, we secure reliable monthly subscription income. Our dedicated participants are now rewarded and retained.",
-            "author": "Chloe Davies",
+            "quote": "Dedicated participants felt no incentive and risked leaving. By creating a class-pack renewal bonus for returning members deployed through a mobile loyalty platform, we secure reliable monthly subscription income. Our dedicated participants are now rewarded and retained.",
+            "author": "Natalie Cole",
             "business": "Elevate Fitness"
         }
     },
@@ -2022,7 +2022,7 @@ export const industries: IndustryData[] = [
         ],
         "testimonial": {
             "quote": "We were missing the chance to secure back-to-back contracts from event organizers. By inviting clients back for finishing care with a small credit managed directly in a client app, we immediately earn trust for future large-scale projects. Our calendar is finally predictable.",
-            "author": "Sarah Davies",
+            "author": "Sophia Martinez",
             "business": "Elite Event Catering"
         }
     },
@@ -5620,6 +5620,35 @@ export const industries: IndustryData[] = [
             "quote": "Students treated our studio as a pay-as-you-go option. By setting up automated preferred client rates for weekly class bundles and pushing reminders via the loyalty platform, our studio runs at full capacity. We've ensured students commit to their full wellness journey.",
             "author": "Sarah Kim",
             "business": "Inner Peace Yoga"
+        }
+    },
+    {
+        "name": "Loyalty Programs",
+        "slug": "business",
+        "seo": {
+            "title": "Loyalty Programs for Business: Increase Retention",
+            "description": "Grow repeat business with Buildify. Your custom loyalty app from  per month."
+        },
+        "hero": {
+            "title": "Launch a Custom Loyalty Program for your Business for /mo.",
+            "subtitle": "Increase Customer Retention, Lifetime Value, and Repeat Frequency."
+        },
+        "problem": {
+            "text": "Without a structured loyalty program, your customers drift to competitors who offer incentives, costing you predictable monthly revenue."
+        },
+        "solution": {
+            "text": "Before next week, launch a digital rewards system. Track points and automate retention offers directly through a branded app to secure consistent growth.",
+            "valueProp": "Turn Occasional Buyers into Lifelong Customers."
+        },
+        "benefits": [
+            "Automate Retention: Send automated push notifications to bring customers back before they churn.",
+            "increase Lifetime Value: Reward high-value behaviors to increase average spend per customer.",
+            "Data-Driven Growth: Own your customer data and stop relying on unstable social media algorithms."
+        ],
+        "testimonial": {
+            "quote": "We were losing customers to competitors with better rewards. By launching a custom loyalty program with Buildify, we increased retention by 40% and stabilized our monthly revenue. It's the best investment we've made.",
+            "author": "Sarah Jenks",
+            "business": "Growth Director"
         }
     }
 ];

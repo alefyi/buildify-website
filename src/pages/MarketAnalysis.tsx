@@ -61,7 +61,7 @@ const MarketAnalysis = () => {
             />
 
             {/* Hero Section */}
-            <section className="bg-white pt-32 pb-32 border-b border-zinc-200">
+            <section className="bg-white pt-20 md:pt-32 pb-32 border-b border-zinc-200">
                 <div className="max-w-[1200px] mx-auto px-6">
                     <div className="mb-12">
                         <div className="w-12 h-12 bg-zinc-50 border border-zinc-200 rounded-[4px] flex items-center justify-center mb-10">

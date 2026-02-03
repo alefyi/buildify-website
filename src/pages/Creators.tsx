@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SEO } from "@/components/SEO";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
 import { BioPageSchema } from "@/components/Schema";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,7 @@ import {
 } from "lucide-react";
 import { BioAuditTool } from "@/components/BioAuditTool";
 
-const Bio = () => {
+const Creators = () => {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
 
     return (
@@ -29,13 +30,14 @@ const Bio = () => {
             <SEO
                 title="Own Your Identity - Bio Page"
                 description="Stop building your brand on a subdomain. Launch a high-performance, multi-page site on your own custom domain in under 48 hours."
-                url="https://usebuildify.com/bio"
+                url="https://usebuildify.com/creators"
             />
             <BioPageSchema />
 
             {/* 1. Hero Section */}
-            <section className="bg-white pt-32 pb-24 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+            <section className="bg-white pt-20 md:pt-32 pb-24 border-b border-zinc-200 relative overflow-hidden">
+                <DottedGlowBackground />
+                <div className="max-w-[1200px] mx-auto px-6 relative z-10">
                     <div className="mb-12">
                         <div className="w-12 h-12 bg-zinc-50 border border-zinc-200 rounded-[4px] flex items-center justify-center mb-10">
                             <Smartphone className="w-6 h-6 text-black" />
@@ -276,4 +278,4 @@ const Bio = () => {
     );
 };
 
-export default Bio;
+export default Creators;

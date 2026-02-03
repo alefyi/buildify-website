@@ -46,7 +46,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://usebuildify.com/pricing</loc>
+    <loc>https://usebuildify.com/business</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -62,6 +62,11 @@
   </url>
   <url>
     <loc>https://usebuildify.com/adalo</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://usebuildify.com/creators</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

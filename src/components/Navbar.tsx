@@ -83,13 +83,13 @@ const Navbar = () => {
                         </div>
                     </div>
 
-                    {/* Bio Link */}
-                    <Link to="/bio" className="text-sm font-medium text-zinc-600 hover:text-black transition-colors py-2">
+                    {/* Creators Link */}
+                    <Link to="/creators" className="text-sm font-medium text-zinc-600 hover:text-black transition-colors py-2">
                         Creators
                     </Link>
 
-                    {/* Pricing Link */}
-                    <Link to="/pricing" className="text-sm font-medium text-zinc-600 hover:text-black transition-colors py-2">
+                    {/* Business Link */}
+                    <Link to="/business" className="text-sm font-medium text-zinc-600 hover:text-black transition-colors py-2">
                         Business
                     </Link>
                 </div>
@@ -118,8 +118,8 @@ const Navbar = () => {
                     {[
                         { label: "Solutions", items: mainRoutes.filter(r => r.section === "Solutions") },
                         { label: "Calculate", items: mainRoutes.filter(r => r.section === "Calculate") },
-                        { label: "Creators", path: "/bio" },
-                        { label: "Business", path: "/pricing" },
+                        { label: "Creators", path: "/creators" },
+                        { label: "Business", path: "/business" },
                     ].map((item) => (
                         <div key={item.label} className="border-b border-zinc-100 last:border-0 pb-4">
                             {item.path ? (
