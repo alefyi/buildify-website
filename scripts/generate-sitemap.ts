@@ -1,7 +1,8 @@
 
 import fs from 'fs';
 import path from 'path';
-import { industries } from '../src/data/industries';
+import { industries } from '../src/data/industries.ts';
+import { posts } from '../src/data/posts.ts';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -37,6 +38,17 @@ const staticRoutes = [
 ];
 
 const generateSitemap = () => {
+    // Get all blog posts
+    // Note: We need to import posts dynamically or use the imported data
+    // Since we are in a script, we can rely on the import from ../src/data/posts.ts if we fix the import
+    // But posts.ts uses "export const posts = ...", so we can import it.
+
+    const blogUrls = posts.map(post => ({
+        loc: `${BASE_URL}/post/${post.slug}`,
+        changefreq: 'weekly',
+        priority: '0.9' // High priority for content
+    }));
+
     const urls = [
         ...staticRoutes.map(route => ({
             loc: `${BASE_URL}${route}`,
@@ -47,7 +59,8 @@ const generateSitemap = () => {
             loc: `${BASE_URL}/for/${ind.slug}`,
             changefreq: 'monthly',
             priority: '0.7'
-        }))
+        })),
+        ...blogUrls
     ];
 
     const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
