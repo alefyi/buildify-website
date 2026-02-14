@@ -62,7 +62,7 @@ const MarketAnalysis = () => {
 
             {/* Hero Section */}
             <section className="bg-white pt-20 md:pt-32 pb-32 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+                <div className="max-w-layout mx-auto px-6">
                     <div className="mb-12">
                         <div className="w-12 h-12 bg-zinc-50 border border-zinc-200 rounded-[4px] flex items-center justify-center mb-10">
                             <Search className="w-6 h-6 text-black" />
@@ -85,7 +85,7 @@ const MarketAnalysis = () => {
 
             {/* How We Work (Steps) */}
             <section className="py-32 bg-zinc-50 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+                <div className="max-w-layout mx-auto px-6">
                     <div className="mb-20">
                         <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-6 font-bold">The Process</p>
                         <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 leading-[0.9]">Truth Hurts (Them)</h2>
@@ -110,7 +110,7 @@ const MarketAnalysis = () => {
 
             {/* Everything Included */}
             <section className="py-32 bg-white border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+                <div className="max-w-layout mx-auto px-6">
                     <div className="mb-20">
                         <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-6 font-bold">Deliverables</p>
                         <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 leading-[0.9]">The Playbook</h2>
@@ -134,7 +134,7 @@ const MarketAnalysis = () => {
 
             {/* CTA */}
             <section className="py-32 bg-white">
-                <div className="max-w-[1200px] mx-auto px-6 text-center">
+                <div className="max-w-layout mx-auto px-6 text-center">
                     <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase">
                         Get Started
                     </Badge>

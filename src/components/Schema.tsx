@@ -106,3 +106,52 @@ export const BioPageSchema = () => {
         </Helmet>
     );
 };
+
+export const WebsiteSchema = () => {
+    const schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "name": "Buildify",
+                "url": "https://usebuildify.com",
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://usebuildify.com/insights?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "App Calculator",
+                "url": "https://usebuildify.com/app-calculator/for-business"
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "For Creators",
+                "url": "https://usebuildify.com/creators"
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "Business Solutions",
+                "url": "https://usebuildify.com/business"
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "Insights",
+                "url": "https://usebuildify.com/insights"
+            },
+            {
+                "@type": "SiteNavigationElement",
+                "name": "Get a Scope",
+                "url": "https://usebuildify.com/form/scope-estimate"
+            }
+        ]
+    };
+
+    return (
+        <Helmet>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        </Helmet>
+    );
+};

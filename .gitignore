@@ -1,6 +1,20 @@
 node_modules
 .env
+.env*.local
 dist
 .DS_Store
 .vercel
-.env*.local
+
+# Google Search Console credentials (keep local, never push)
+gsc-*.json
+
+# Mac resource forks (junk files)
+._*
+
+# Build artifacts and temp files
+bin/
+commit_*.txt
+commit_diff.txt
+lighthouse-report.json
+scan_results.txt
+*.log

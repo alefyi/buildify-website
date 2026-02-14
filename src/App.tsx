@@ -29,6 +29,7 @@ const Bill = React.lazy(() => import('./pages/Bill'));
 const Adalo = React.lazy(() => import('./pages/Adalo'));
 const Creators = React.lazy(() => import('./pages/Creators'));
 const AuthorPage = React.lazy(() => import('./pages/AuthorPage'));
+const Discovery = React.lazy(() => import('./pages/Discovery'));
 
 // Legal Pages
 const Privacy = React.lazy(() => import('./pages/disclosures/Privacy'));
@@ -39,11 +40,15 @@ const ScopeEstimate = React.lazy(() => import('./pages/forms/ScopeEstimate'));
 
 // 404
 import NotFound from './pages/NotFound';
+import Banner from './components/Banner';
+
+const USCCGrant = React.lazy(() => import('./pages/USCCGrant'));
 
 const App: React.FC = () => {
     return (
         <HelmetProvider>
             <Router>
+                <Banner />
                 <Suspense fallback={<LoadingSpinner />}>
                     <Routes>
                         <Route path="/" element={<Layout />}>
@@ -68,6 +73,8 @@ const App: React.FC = () => {
                             <Route path="adalo" element={<Adalo />} />
                             <Route path="creators" element={<Creators />} />
                             <Route path="author/:name" element={<AuthorPage />} />
+                            <Route path="discovery" element={<Discovery />} />
+                            <Route path="uscc-grant" element={<USCCGrant />} />
 
                             {/* Disclosures (Legal) */}
                             <Route path="disclosures/privacy" element={<Privacy />} />

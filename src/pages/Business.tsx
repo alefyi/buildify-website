@@ -7,6 +7,8 @@ import { Check, X, ArrowRight, Minus, Smartphone, Star, Bell, Calendar, Sparkles
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { BuildifyIcon } from "@/components/BuildifyIcon";
+import { industries } from "@/data/industries";
+import { posts } from "@/data/posts";
 
 const Business = () => {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -14,9 +16,9 @@ const Business = () => {
     return (
         <div className="flex flex-col min-h-screen font-sans">
             <SEO
-                title="Simple Pricing"
+                title="Buildify for Business | Solutions & Pricing"
                 description="One simple price. Your entire technical team. No setup fees, no contracts, just results."
-                url="https://usebuildify.com/pricing"
+                url="https://usebuildify.com/business"
             />
 
             {/* 1. Hero Section (Centered Clean Card) */}
@@ -63,6 +65,45 @@ const Business = () => {
                             </div>
 
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 1.5 Solutions by Industry (New Section) */}
+            <section className="bg-zinc-50 py-24 border-b border-zinc-200">
+                <div className="max-w-[1200px] mx-auto px-6">
+                    <div className="text-center mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black mb-6">Solutions by Industry.</h2>
+                        <p className="text-zinc-500 text-lg">Tailored strategies for your specific business model.</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {industries.filter(i => ['restaurant', 'retail-store', 'appliance-repair-service'].includes(i.slug)).map((industry) => (
+                            <Link key={industry.slug} to={`/for/${industry.slug}`} className="group block h-full">
+                                <div className="bg-white border border-zinc-200 p-8 rounded-sm hover:border-black transition-all h-full flex flex-col">
+                                    <div className="mb-4">
+                                        <div className="w-10 h-10 bg-zinc-100 rounded-full flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
+                                            <ArrowRight className="w-5 h-5" />
+                                        </div>
+                                    </div>
+                                    <h3 className="text-xl font-bold mb-2 group-hover:underline decoration-1 underline-offset-4">{industry.name}</h3>
+                                    <p className="text-zinc-500 text-sm leading-relaxed mb-4 line-clamp-3">
+                                        {industry.seo.description}
+                                    </p>
+                                    <div className="mt-auto pt-4 flex items-center text-xs font-bold uppercase tracking-wider">
+                                        View Solution <ArrowRight className="ml-2 w-4 h-4" />
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+
+                    <div className="mt-12 text-center">
+                        <Link to="/industries">
+                            <Button variant="outline" className="h-12 px-8">
+                                View All Industries
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -211,9 +252,9 @@ const Business = () => {
                                 "We launched in 4 days. The speed was unbelievable."
                             </p>
                             <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 bg-zinc-100 rounded-full flex items-center justify-center font-bold text-[10px]">JD</div>
+                                <div className="w-6 h-6 bg-zinc-100 rounded-full flex items-center justify-center font-bold text-[10px]">MC</div>
                                 <div>
-                                    <p className="text-[10px] font-bold text-black">John Doe</p>
+                                    <p className="text-[10px] font-bold text-black">Michael Chang</p>
                                 </div>
                             </div>
                         </div>
@@ -223,7 +264,11 @@ const Business = () => {
                             { q: "Do I have to build the app?", a: "No. We build everything. You just provide the vision." },
                             { q: "Is there a contract?", a: "No contracts. Pause or cancel anytime." },
                             { q: "What if I need help?", a: "We provide 24/7 US-based support via Slack and Email." },
-                            { q: "Are there really no setup fees?", a: "Zero. You pay $650/mo and we start building." }
+                            { q: "Are there really no setup fees?", a: "Zero. You pay $650/mo and we start building." },
+                            { q: "Is hosting handling included?", a: "Yes. We cover AWS/Vercel hosting, SSL certificates, and scaling costs." },
+                            { q: "Can I update the content myself?", a: "Absolutely. We include a CMS and Admin Dashboard for you to manage products/posts." },
+                            { q: "How do you handle App Store rejection?", a: "We handle the entire submission process and fix any compliance issues for free." },
+                            { q: "Will this help my SEO?", a: "Yes. We build with Next.js for perfect Core Web Vitals and include Schema markup by default." }
                         ].map((faq, i) => (
                             <div
                                 key={faq.q}
@@ -251,6 +296,60 @@ const Business = () => {
                 </div>
             </section>
 
+            {/* 3.5 Business Resources (New Section) */}
+            <section className="py-24 border-b border-zinc-200 bg-white">
+                <div className="max-w-[1200px] mx-auto px-6">
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                        <div>
+                            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-black mb-4">Business Resources.</h2>
+                            <p className="text-zinc-500 text-lg">Deep dives into ROI, retention, and growth.</p>
+                        </div>
+                        <Link to="/insights">
+                            <Button variant="outline" className="h-12 px-8 hidden md:flex">
+                                View All Articles
+                            </Button>
+                        </Link>
+                    </div>
+
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {posts.filter(p => ['restaurant-roi-calculator-demo', 'technical-barriers-for-local-retail-shop-owners', 'technical-barriers-for-local-restaurant-owners'].includes(p.slug)).slice(0, 3).map((post) => (
+                            <Link key={post.slug} to={`/post/${post.slug}`} className="group block">
+                                <article className="flex flex-col h-full">
+                                    <div className="aspect-video bg-zinc-100 mb-6 rounded-sm overflow-hidden border border-zinc-100">
+                                        {/* Placeholder for post image if available, else generic pattern */}
+                                        <div className="w-full h-full bg-zinc-50 flex items-center justify-center text-zinc-300">
+                                            <BuildifyIcon className="w-12 h-12 opacity-20" />
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-3 text-xs text-zinc-400 mb-3 uppercase tracking-wider font-medium">
+                                        <span>{post.readingTime}</span>
+                                        <span>•</span>
+                                        <span>{post.date}</span>
+                                    </div>
+                                    <h3 className="text-xl font-bold mb-3 leading-tight group-hover:underline decoration-1 underline-offset-4">
+                                        {post.title}
+                                    </h3>
+                                    <p className="text-zinc-500 text-sm leading-relaxed line-clamp-3 mb-4">
+                                        {post.excerpt}
+                                    </p>
+                                    <div className="mt-auto text-xs font-bold uppercase tracking-wider flex items-center">
+                                        Read Article <ArrowRight className="ml-2 w-3 h-3 transition-transform group-hover:translate-x-1" />
+                                    </div>
+                                </article>
+                            </Link>
+                        ))}
+                    </div>
+                    <div className="mt-12 md:hidden">
+                        <Link to="/insights">
+                            <Button variant="outline" className="w-full h-12">
+                                View All Articles
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
             {/* CTA Section (Boxed Vercel Style - Correct Spacing) */}
             <section className="py-32 lg:py-48 bg-zinc-50 border-b border-zinc-200">
                 <div className="max-w-[1200px] mx-auto px-6">
@@ -272,7 +371,7 @@ const Business = () => {
                     </div>
                 </div>
             </section>
-        </div>
+        </div >
     );
 };
 

@@ -37,7 +37,7 @@ const Creators = () => {
             {/* 1. Hero Section */}
             <section className="bg-white pt-20 md:pt-32 pb-24 border-b border-zinc-200 relative overflow-hidden">
                 <DottedGlowBackground />
-                <div className="max-w-[1200px] mx-auto px-6 relative z-10">
+                <div className="max-w-layout mx-auto px-6 relative z-10">
                     <div className="mb-12">
                         <div className="w-12 h-12 bg-zinc-50 border border-zinc-200 rounded-[4px] flex items-center justify-center mb-10">
                             <Smartphone className="w-6 h-6 text-black" />
@@ -57,7 +57,7 @@ const Creators = () => {
 
             {/* 2. Value Props (Why Your Domain Matters) */}
             <section className="border-b border-zinc-200 bg-zinc-50">
-                <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[1px] bg-zinc-200 border-x border-zinc-200">
+                <div className="max-w-layout mx-auto grid grid-cols-1 lg:grid-cols-2 gap-[1px] bg-zinc-200 border-x border-zinc-200">
                     {[
                         {
                             title: "Owned Authority",
@@ -91,7 +91,7 @@ const Creators = () => {
 
             {/* 3. Comparison Table: The New Standard vs. Legacy Tools */}
             <section className="py-24 bg-white border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+                <div className="max-w-layout mx-auto px-6">
                     <div className="mb-16">
                         <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-400 mb-6">Comparison</p>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tighter mb-4 leading-[0.9]">The New Standard vs. Legacy Tools</h2>
@@ -129,7 +129,7 @@ const Creators = () => {
 
             {/* 4. Creator Tier Section */}
             <section className="bg-black text-white py-24 border-b border-zinc-800">
-                <div className="max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div className="max-w-layout mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div>
                         <div className="inline-flex items-center gap-2 px-3 py-1 border border-zinc-700 rounded-full mb-8">
                             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -179,7 +179,7 @@ const Creators = () => {
 
             {/* 5. Comparison Table: Professional Infrastructure vs. Link Lists */}
             <section className="py-24 bg-white border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+                <div className="max-w-layout mx-auto px-6">
                     <div className="mb-16">
                         <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-400 mb-6">Infrastructure</p>
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tighter mb-4 leading-[0.9]">Professional Infrastructure vs. Link Lists</h2>
@@ -216,7 +216,7 @@ const Creators = () => {
 
             {/* 6. AEO/GEO/Performance Section */}
             <section className="bg-zinc-50 py-24 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+                <div className="max-w-layout mx-auto px-6">
                     <div className="mb-16 text-center max-w-3xl mx-auto">
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tighter mb-6">Optimized for the 2026 Discovery Stack</h2>
                         <p className="text-lg text-zinc-500 leading-relaxed">
@@ -255,7 +255,7 @@ const Creators = () => {
 
             {/* 7. CTA (Vercel Style) */}
             <section className="py-32 bg-white border-t border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6 flex justify-center">
+                <div className="max-w-layout mx-auto px-6 flex justify-center">
                     <div className="w-full max-w-[800px] border border-black bg-zinc-50 p-12 md:p-16 text-center rounded-none shadow-none">
                         <div className="mb-8 px-3 py-1 text-[10px] font-bold tracking-[0.2em] border border-black text-black rounded-sm uppercase inline-block">
                             Start Now

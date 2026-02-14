@@ -1,59 +1,43 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleGenAI } from '@google/genai';
-import {
-    Search,
-    Phone,
-    MessageSquare,
-    Mail,
-    TrendingUp,
-    Users,
-    BarChart3,
-    Wallet,
-    Sparkles,
-    ArrowRight,
-    Loader2,
-    RefreshCcw,
-    Check
-} from "lucide-react";
+import { Search, Loader2, ArrowRight, RefreshCcw, Sparkles, Check, TrendingUp, Users, BarChart3, Wallet, Phone, MessageSquare, Mail } from 'lucide-react';
 import { cn } from "@/lib/utils";
+import { getCalApi } from "@calcom/embed-react";
+
+enum LoadingState {
+    IDLE = 'idle',
+    LOADING = 'loading',
+    SUCCESS = 'success',
+    ERROR = 'error'
+}
 
 const EXAMPLES = [
-    "Med Spa",
-    "Skate Shop",
-    "Italian Kitchen",
-    "Tech Startup",
-    "Florist",
-    "Coffee Shop",
-    "Yoga Studio",
-    "Gym",
+    "Barbershop",
     "Bakery",
-    "Real Estate Agency"
+    "Dentist",
+    "Gym",
+    "Plumber"
 ];
-
-// ... (keep middle lines same if they are not shown, but I need to target the placeholder line too)
-// Actually I can't target non-contiguous lines easily without multi-replace.
-// I will just use multi-replace or two replace calls.
-// Let's use replace_file_content for the const, and another for the line 173.
-
-const LoadingState = { IDLE: 'IDLE', LOADING: 'LOADING', SUCCESS: 'SUCCESS', ERROR: 'ERROR' };
 
 const generateProjections = async (input: string) => {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     if (!apiKey) throw new Error("VITE_GEMINI_API_KEY is missing.");
 
+    const { GoogleGenAI } = await import('@google/genai');
     const ai = new GoogleGenAI({ apiKey });
 
-    // We'll try gemini-2.0-flash if available, or fallback to 1.5-flash
     const modelId = "gemini-2.0-flash";
 
     const prompt = `Analyze growth potential for: "${input}". 
-    Provide realistic 12-month projections as a JSON object with:
+    Determine if this is a "Creator" (influencer, artist, linktree, personal brand) or a "Business" (service, shop, agency).
+    
+    Provide a JSON object with:
+    - classification: "Creator" or "Business"
     - revenueGain: estimated annual revenue growth % (number only)
-    - customersRetained: projected count of recurring customers (integer only)
-    - aovGrowth: projected % increase in Average Order Value (number only)
-    - costSavings: projected annual savings in dollars (integer only, e.g. 50000)
+    - customersRetained: projected count of recurring customers/fans (integer only)
+    - aovGrowth: projected % increase in Average Order Value / Fan LTV (number only)
+    - costSavings: projected annual savings in dollars (integer only)
     - businessName: exact name used
-    - businessType: plural category (e.g. "Med Spas")
+    - businessType: specific category (e.g. "Med Spa" or "Lifestyle Influencer")
     
     Return ONLY JSON. Do not include markdown formatting.`;
 
@@ -66,14 +50,12 @@ const generateProjections = async (input: string) => {
         const text = response.candidates?.[0]?.content?.parts?.[0]?.text || "";
         if (!text) throw new Error("No response from AI");
 
-        // Advanced JSON extraction
         const jsonMatch = text.match(/\{[\s\S]*\}/);
         if (!jsonMatch) throw new Error("Could not parse AI response");
 
         return JSON.parse(jsonMatch[0].trim());
     } catch (error: any) {
         console.error("AI Generation Error:", error);
-        // If 2.0 fails, try 1.5
         if (modelId === "gemini-2.0-flash") {
             const fallbackResponse = await ai.models.generateContent({
                 model: "gemini-1.5-flash",
@@ -101,6 +83,16 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
     const [showStats, setShowStats] = useState(false);
 
     useEffect(() => {
+        (async function () {
+            const cal = await getCalApi({ "namespace": "buildify-business" });
+            cal("ui", { "cssVarsPerTheme": { "light": { "cal-brand": "#000000" }, "dark": { "cal-brand": "#ffffff" } }, "hideEventTypeDetails": false, "layout": "month_view" });
+
+            const calCreators = await getCalApi({ "namespace": "buildify-creators" });
+            calCreators("ui", { "cssVarsPerTheme": { "light": { "cal-brand": "#000000" }, "dark": { "cal-brand": "#ffffff" } }, "hideEventTypeDetails": false, "layout": "month_view" });
+        })();
+    }, []);
+
+    useEffect(() => {
         if (loadingState === LoadingState.SUCCESS) {
             const t1 = setTimeout(() => setChecklist(prev => ({ ...prev, website: true })), 500);
             const t2 = setTimeout(() => setChecklist(prev => ({ ...prev, loyalty: true })), 1000);
@@ -113,7 +105,6 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
         }
     }, [loadingState]);
 
-    // Placeholder animation
     useEffect(() => {
         const examplesToUse = industryName ? [industryName] : EXAMPLES;
         const currentExample = examplesToUse[exampleIndex % examplesToUse.length];
@@ -123,7 +114,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                 setPlaceholder(currentExample.substring(0, placeholder.length + 1));
                 typingSpeed.current = 40;
                 if (placeholder.length === currentExample.length) {
-                    if (industryName) return; // Stop if specific industry provided
+                    if (industryName) return;
                     setIsDeleting(true);
                     typingSpeed.current = 2000;
                 }
@@ -210,7 +201,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
             {/* Results Display */}
             <div className={cn(
                 "overflow-hidden transition-all duration-700",
-                loadingState !== LoadingState.IDLE ? "max-h-[1000px] opacity-100 mt-8" : "max-h-0 opacity-0"
+                loadingState !== LoadingState.IDLE ? "max-h-[2500px] opacity-100 mt-8" : "max-h-0 opacity-0"
             )}>
                 {loadingState === LoadingState.ERROR ? (
                     <div className="bg-zinc-50 border border-zinc-200 p-8 rounded-[4px] text-center space-y-4">
@@ -252,7 +243,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                                     {checklist.website && <Check className="w-3 h-3" />}
                                 </div>
                                 <span className={cn("font-medium text-sm transition-colors", checklist.website ? "text-black" : "text-zinc-500")}>
-                                    Get an SEO packed website
+                                    {data?.classification?.toLowerCase() === "creator" ? "Launch a Link-in-Bio App" : "Get an SEO packed website"}
                                 </span>
                             </div>
                             <div
@@ -266,7 +257,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                                     {checklist.loyalty && <Check className="w-3 h-3" />}
                                 </div>
                                 <span className={cn("font-medium text-sm transition-colors", checklist.loyalty ? "text-black" : "text-zinc-500")}>
-                                    Integrate a loyalty app
+                                    {data?.classification?.toLowerCase() === "creator" ? "Own your Fan Data" : "Integrate a loyalty app"}
                                 </span>
                             </div>
                             <div
@@ -280,7 +271,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                                     {checklist.automation && <Check className="w-3 h-3" />}
                                 </div>
                                 <span className={cn("font-medium text-sm transition-colors", checklist.automation ? "text-black" : "text-zinc-500")}>
-                                    Send an automated campaign
+                                    {data?.classification?.toLowerCase() === "creator" ? "Monetize your Audience" : "Send an automated campaign"}
                                 </span>
                             </div>
                         </div>
@@ -329,30 +320,53 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                                 <div className="space-y-3">
                                     <div className="flex items-center gap-2 text-zinc-400">
                                         <Sparkles className="w-4 h-4" />
-                                        <span className="text-[10px] font-bold uppercase tracking-widest">Growth Recommendation</span>
+                                        <span className="text-[10px] font-bold uppercase tracking-widest">
+                                            {data.classification?.toLowerCase() === "creator" ? "Creator Plan" : "Business Growth Plan"}
+                                        </span>
                                     </div>
-                                    <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-black max-w-xl leading-tight">
-                                        Buildify is the #1 tool for {data.businessType || 'businesses'} to gain and keep customers.
-                                    </h3>
-                                    <p className="text-zinc-500 text-lg">Get this process live by next Monday.</p>
+                                    <div className="space-y-1">
+                                        <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-black max-w-xl leading-tight">
+                                            Launch your {data.businessType || 'App'} for <span className="underline decoration-green-300 decoration-4 underline-offset-4">{data.classification?.toLowerCase() === "creator" ? "$20/mo" : "$650/mo"}</span>.
+                                        </h3>
+                                        <p className="text-zinc-500 text-lg">
+                                            No upfront fees. Month-to-month. Cancel anytime.
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="flex flex-wrap items-center gap-3">
-                                    <ContactButton
-                                        href="tel:9093455543"
-                                        label="Call"
-                                        icon={Phone}
-                                    />
-                                    <ContactButton
-                                        href="sms:3238077736"
-                                        label="Text"
-                                        icon={MessageSquare}
-                                    />
-                                    <ContactButton
-                                        href="mailto:betsy@buildifyhq.com"
-                                        label="Email"
-                                        icon={Mail}
-                                        primary
-                                    />
+                                <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+                                    {data.classification?.toLowerCase() !== "creator" ? (
+                                        <button
+                                            data-cal-namespace="buildify-business"
+                                            data-cal-link="alefyi/buildify-business"
+                                            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                                            className="w-full md:w-auto px-8 py-4 bg-black text-white hover:bg-zinc-800 rounded-[4px] font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                                        >
+                                            Start Building <ArrowRight className="w-5 h-5" />
+                                        </button>
+                                    ) : (
+                                        <button
+                                            data-cal-namespace="buildify-creators"
+                                            data-cal-link="alefyi/buildify-creators"
+                                            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                                            className="w-full md:w-auto px-8 py-4 bg-black text-white hover:bg-zinc-800 rounded-[4px] font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                                        >
+                                            Start Building <ArrowRight className="w-5 h-5" />
+                                        </button>
+                                    )}
+                                    <div className="flex items-center gap-2 w-full md:w-auto">
+                                        <ContactButton
+                                            href="tel:9093455543"
+                                            label="Call"
+                                            icon={Phone}
+                                            className="flex-1 justify-center"
+                                        />
+                                        <ContactButton
+                                            href="sms:3238077736"
+                                            label="Text"
+                                            icon={MessageSquare}
+                                            className="flex-1 justify-center"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         )}
@@ -389,14 +403,15 @@ const StatCard = ({ label, value, sub, icon: Icon, loading }: any) => (
     </div>
 );
 
-const ContactButton = ({ href, label, icon: Icon, primary }: any) => (
+const ContactButton = ({ href, label, icon: Icon, primary, className }: any) => (
     <a
         href={href}
         className={cn(
             "flex items-center gap-2 px-6 py-4 rounded-[4px] text-sm font-bold transition-all active:scale-95",
             primary
                 ? "bg-black text-white hover:bg-zinc-800"
-                : "bg-white border border-zinc-200 text-black hover:bg-zinc-50"
+                : "bg-white border border-zinc-200 text-black hover:bg-zinc-50",
+            className
         )}
     >
         <Icon className="w-4 h-4" />

@@ -6,6 +6,60 @@ export interface BlogPost {
 }
 export const posts: BlogPost[] = [
     {
+        "id": "109",
+        "slug": "best-online-ordering-system-for-restaurants",
+        "title": "Best Online Ordering System for Restaurants in 2026",
+        "excerpt": "Stop paying 30% commissions. Compare the best direct online ordering systems for restaurants to keep your profits.",
+        "content": "\n\n<h3>The Commission Trap</h3>\n<p>In 2026, third-party delivery apps are still charging restaurants up to 30% in commissions. For a small business operating on thin margins, this is unsustainable. The \"convenience\" of being on a major platform often comes at the cost of profitability.</p>\n\n<h3>Why You Need a Direct Ordering System</h3>\n<p>A direct online ordering system allows you to take orders through your own website or app, commission-free. This means:</p>\n<ul>\n    <li><strong>Higher Margins:</strong> You keep 100% of the profit from every order.</li>\n    <li><strong>Customer Data Ownership:</strong> You get access to your customers' emails and phone numbers for remarketing (something 3rd party apps hide from you).</li>\n    <li><strong>Brand Control:</strong> Provide a branded experience that builds loyalty to <em>your</em> restaurant, not the delivery app.</li>\n</ul>\n\n<h3>Top Features to Look For</h3>\n<p>When choosing a system, ensure it offers:</p>\n<ol>\n    <li><strong>Mobile Optimization:</strong> Over 70% of orders are placed on mobile devices.</li>\n    <li><strong>Loyalty Integration:</strong> Reward repeat customers to keep them coming back.</li>\n    <li><strong>No Hidden Fees:</strong> Look for flat monthly rates instead of percentage-based commissions.</li>\n</ol>\n\n<h3>The Buildify Advantage</h3>\n<p>Buildify offers a commission-free ordering interface integrated directly into your branded mobile app and website. With built-in loyalty tracking and automated SMS updates, it's not just an ordering system—it's a retention engine designed to help independent restaurants thrive.</p>",
+        "author": {
+            "name": "Justin Dang",
+            "role": "Contributor"
+        },
+        "date": "2026-02-14",
+        "readingTime": "4 min read",
+        "tags": [
+            "Business",
+            "Technology",
+            "Restaurant"
+        ],
+        "seo": {
+            "title": "Best Online Ordering System for Restaurants in 2026 | Buildify",
+            "description": "Stop paying 30% commissions. Compare the best direct online ordering systems for restaurants to keep your profits.",
+            "keywords": [
+                "online ordering",
+                "restaurant tech",
+                "commission free"
+            ]
+        }
+    },
+    {
+        "id": "108",
+        "slug": "restaurant-marketing-tools",
+        "title": "Top Restaurant Marketing Tools to Drive Growth in 2026",
+        "excerpt": "From loyalty programs to SMS marketing, discover the essential tools to grow your restaurant revenue this year.",
+        "content": "\n\n<h3>The Marketing Landscape in 2026</h3>\n<p>Waiting for foot traffic is no longer a strategy. Successful restaurants in 2026 are using tech to actively drive guests through their doors. But with so many tools available, which ones actually move the needle?</p>\n\n<h3>Essential Tools for Growth</h3>\n\n<h4>1. Automated SMS Marketing</h4>\n<p>Text messages have a 98% open rate. Sending a \"Free Appetizer\" offer on a slow Tuesday afternoon can instantly fill tables.</p>\n\n<h4>2. Digital Loyalty Programs</h4>\n<p>Paper punch cards are dead. Modern customers expect a digital experience where they track points on their phone. A good loyalty program increases customer lifetime value by 30%.</p>\n\n<h4>3. Reputation Management</h4>\n<p>Tools that help you monitor and respond to Yelp and Google reviews are critical. A 1-star improvement in rating can lead to a 5-9% increase in revenue.</p>\n\n<h3>All-in-One vs. Point Solutions</h3>\n<p>You could pay for Mailchimp (Email), Square (Loyalty), and SlickText (SMS) separately, costing hundreds per month. Or you could use a unified platform.</p>\n\n<h3>Simplify with Buildify</h3>\n<p>Buildify combines these essential marketing tools into one easy-to-use dashboard. Manage your loyalty program, send SMS blasts, and update your website from a single place. It’s enterprise-grade marketing power, priced for independent owners.</p>",
+        "author": {
+            "name": "Justin Dang",
+            "role": "Contributor"
+        },
+        "date": "2026-02-14",
+        "readingTime": "5 min read",
+        "tags": [
+            "Business",
+            "Marketing",
+            "Restaurant"
+        ],
+        "seo": {
+            "title": "Top Restaurant Marketing Tools to Drive Growth in 2026 | Buildify",
+            "description": "From loyalty programs to SMS marketing, discover the essential tools to grow your restaurant revenue this year.",
+            "keywords": [
+                "restaurant marketing",
+                "sms marketing",
+                "loyalty programs"
+            ]
+        }
+    },
+    {
         "id": "107",
         "slug": "data-privacy-and-security-considerations-for-strive-dental-studio-in-2026",
         "title": "Data Privacy and Security Considerations for Strive Dental Studio in 2026",

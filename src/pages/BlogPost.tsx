@@ -21,6 +21,11 @@ const BlogPost = () => {
     if (!post) {
         return (
             <div className="min-h-[60vh] flex flex-col items-center justify-center p-6 text-center">
+                <SEO
+                    title="Post Not Found"
+                    description="The article you are looking for does not exist."
+                    noIndex={true}
+                />
                 <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
                 <p className="text-zinc-500 mb-8">The article you are looking for does not exist or has been moved.</p>
                 <Link to="/insights">
@@ -33,8 +38,8 @@ const BlogPost = () => {
     return (
         <div className="flex flex-col min-h-screen font-sans bg-white">
             <SEO
-                title={post.seo.title}
-                description={post.seo.description}
+                title={post.seo.title.replace(' | Buildify', '')}
+                description={post.excerpt || post.seo.description}
                 url={`https://usebuildify.com/post/${post.slug}`}
             />
             <JSONLD data={{
@@ -42,9 +47,11 @@ const BlogPost = () => {
                 "@type": "BlogPosting",
                 "headline": post.title,
                 "description": post.seo.description,
+                "image": "https://usebuildify.com/og-image.jpg",
                 "author": {
                     "@type": "Person",
-                    "name": post.author.name
+                    "name": post.author.name,
+                    "url": `https://usebuildify.com/author/${encodeURIComponent(post.author.name)}`
                 },
                 "publisher": {
                     "@type": "Organization",
@@ -55,6 +62,7 @@ const BlogPost = () => {
                     }
                 },
                 "datePublished": post.date,
+                "dateModified": post.date,
                 "mainEntityOfPage": {
                     "@type": "WebPage",
                     "@id": `https://usebuildify.com/post/${post.slug}`

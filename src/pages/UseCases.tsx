@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, ArrowUpRight, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { SmartInput } from "@/components/ui/smart-input";
 
 // Simple Levenshtein distance for "Did you mean"
 const levenshteinDistance = (a: string, b: string): number => {
@@ -84,16 +85,13 @@ const UseCases = () => {
 
                         {/* Search Bar */}
                         <div className="max-w-md relative z-10">
-                            <div className="relative">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-zinc-400" />
-                                <Input
-                                    type="text"
-                                    placeholder="Search your industry..."
-                                    className="pl-10 h-12 text-lg border-zinc-200 bg-white"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                />
-                            </div>
+                            <SmartInput
+                                type="text"
+                                placeholder="Search your industry..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="text-lg"
+                            />
                             {/* Did You Mean */}
                             {didYouMean && (
                                 <div className="mt-2 text-sm text-zinc-500">

@@ -10,7 +10,7 @@ const Layout: React.FC = () => {
         <div className="min-h-screen bg-background font-sans antialiased text-foreground flex flex-col">
             <ScrollToTop />
             <Navbar />
-            <main className="flex-1 flex flex-col pt-16" role="main">
+            <main className="flex-1 flex flex-col" role="main">
                 <Suspense fallback={
                     <div className="flex-1 flex items-center justify-center min-h-[50vh]">
                         <Loader2 className="w-8 h-8 animate-spin text-zinc-400" />

@@ -32,10 +32,13 @@ export const footerRoutes = [
     {
         title: "Product",
         links: [
+            { label: "Pricing", href: "/business" },
             { label: "Development", href: "/development" },
             { label: "Market Analysis", href: "/market-analysis" },
             { label: "Branding & Identity", href: "/branding-identity" },
             { label: "Wireframes", href: "/wireframes-blueprints" },
+            { label: "Next Versions", href: "/next-versions" },
+            { label: "For Creators", href: "/creators" },
         ]
     },
     {
@@ -44,6 +47,7 @@ export const footerRoutes = [
             { label: "For Restaurants", href: "/for/restaurant" },
             { label: "For Gyms", href: "/for/gym" },
             { label: "Loyalty Programs", href: "/for/business" },
+            { label: "Use Cases", href: "/use-cases" },
             { label: "For Adalo", href: "/adalo" },
         ]
     },

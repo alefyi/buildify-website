@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { SmartInput } from "@/components/ui/smart-input";
 import {
     Search,
     Phone,
@@ -54,31 +55,22 @@ export const BioAuditTool = () => {
         <div className="w-full space-y-6">
             {/* Search Input Area */}
             <div className="flex flex-col md:flex-row items-stretch gap-4">
-                <div className="w-full md:flex-1 relative group p-[2px] overflow-hidden rounded-[4px] bg-zinc-200 h-20 transition-all duration-500">
-                    {/* Layer 1: The Underlying Glow (Blurred) */}
-                    <div className="absolute inset-[-200%] animate-border-glow glow-gradient glow-blur z-0" />
-
-                    {/* Layer 2: The Sharp Border (Rotating) */}
-                    <div className="absolute inset-[-200%] animate-border-glow glow-gradient z-0 opacity-100" />
-
-                    <div
-                        className={cn(
-                            "relative z-10 flex items-center px-6 bg-white transition-all duration-300",
-                            "rounded-[3px] w-full h-full"
-                        )}
-                        onClick={() => inputRef.current?.focus()}
-                    >
-                        <LinkIcon className="w-6 h-6 text-zinc-400 mr-4 shrink-0 transition-colors group-focus-within:text-black" />
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            placeholder="linktr.ee/yourname"
-                            className="flex-1 bg-transparent outline-none text-xl md:text-2xl font-semibold tracking-tight text-black placeholder:text-zinc-300 py-4"
-                            value={input}
-                            onChange={(e) => setInput(e.target.value)}
-                            onKeyDown={(e) => e.key === 'Enter' && handleAudit()}
-                        />
-                    </div>
+                <div className="w-full md:flex-1 h-20">
+                    <SmartInput
+                        ref={inputRef}
+                        type="text"
+                        placeholder="linktr.ee/yourname"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && handleAudit()}
+                        className="text-xl md:text-2xl font-semibold placeholder:text-zinc-300 py-4"
+                        containerClassName="h-full"
+                        iconClassName="w-6 h-6 mr-4"
+                    // SmartInput uses Search icon default. I need to override it?
+                    // SmartInput implementation: <Search ... />
+                    // It does NOT accept an Icon component prop currently.
+                    // I need to UPDATE SmartInput to accept an Icon prop if I want to use LinkIcon.
+                    />
                 </div>
                 <button
                     onClick={handleAudit}

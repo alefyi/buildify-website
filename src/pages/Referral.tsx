@@ -90,7 +90,7 @@ const Referral = () => {
 
             {/* 1. Hero Section (Glow Effect on Money) */}
             <section className="pt-20 md:pt-32 pb-20 border-b border-zinc-200 bg-white">
-                <div className="max-w-[1200px] mx-auto px-6 text-center">
+                <div className="max-w-layout mx-auto px-6 text-center">
                     <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase bg-zinc-50">
                         Partner Program
                     </Badge>
@@ -121,7 +121,7 @@ const Referral = () => {
 
             {/* 2. How it Works (3-Step Process) */}
             <section className="py-24 bg-zinc-50 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+                <div className="max-w-layout mx-auto px-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {[
                             {

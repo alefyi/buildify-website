@@ -39,12 +39,12 @@ const Footer = () => {
                 </div>
 
                 <div className="border-t border-zinc-200 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-xs text-zinc-400">
+                    <p className="text-xs text-zinc-500">
                         © {new Date().getFullYear()} Buildify. All rights reserved.
                     </p>
                     <div className="flex gap-6">
-                        <Link to="/disclosures/privacy" className="text-xs text-zinc-400 hover:text-black">Privacy Policy</Link>
-                        <Link to="/disclosures/terms" className="text-xs text-zinc-400 hover:text-black">Terms of Service</Link>
+                        <Link to="/disclosures/privacy" className="text-xs text-zinc-500 hover:text-black">Privacy Policy</Link>
+                        <Link to="/disclosures/terms" className="text-xs text-zinc-500 hover:text-black">Terms of Service</Link>
                     </div>
                 </div>
             </div>

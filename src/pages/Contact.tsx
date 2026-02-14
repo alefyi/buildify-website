@@ -182,7 +182,7 @@ const Contact = () => {
                             type="text"
                             value={formData.name}
                             onChange={(e) => handleChange('name', e.target.value)}
-                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
+                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-sm bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
                             placeholder="Your name"
                         />
                         <NavButtons onBack={handleBack} onNext={handleNext} isValid={checkValidity()} />
@@ -198,7 +198,7 @@ const Contact = () => {
                             type="email"
                             value={formData.email}
                             onChange={(e) => handleChange('email', e.target.value)}
-                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
+                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-sm bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
                             placeholder="you@example.com"
                         />
                         <NavButtons onBack={handleBack} onNext={handleNext} isValid={checkValidity()} />
@@ -272,7 +272,7 @@ const Contact = () => {
                             type="text"
                             value={formData.budget}
                             onChange={(e) => handleChange('budget', e.target.value)}
-                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
+                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-sm bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
                             placeholder="e.g., $10k - $20k, or just leave blank"
                         />
                         <div className="mt-3 text-sm text-gray-500 italic">No worries if you don't have one yet - totally optional!</div>

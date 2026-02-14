@@ -7,6 +7,7 @@ import { getAllPosts } from '../data/posts';
 import DottedGlowBackground from '../components/DottedGlowBackground';
 import { Badge } from '../components/ui/badge';
 import { Search, User, ArrowRight } from 'lucide-react';
+import { SmartInput } from '../components/ui/smart-input';
 
 const BlogIndex = () => {
     const posts = useMemo(() => getAllPosts(), []);
@@ -43,20 +44,13 @@ const BlogIndex = () => {
                     </p>
 
                     {/* Styled Search Bar (Matches GrowthTool) */}
-                    <div className="max-w-2xl mx-auto relative group p-[2px] overflow-hidden rounded-[4px] bg-zinc-200 transition-all duration-500">
-                        <div className="absolute inset-[-200%] animate-border-glow glow-gradient glow-blur z-0" />
-                        <div className="absolute inset-[-200%] animate-border-glow glow-gradient z-0 opacity-100" />
-
-                        <div className="relative z-10 flex items-center px-4 py-3 bg-white rounded-[3px]">
-                            <Search className="w-5 h-5 text-zinc-400 mr-3 shrink-0" />
-                            <input
-                                type="text"
-                                placeholder="Search articles..."
-                                className="flex-1 bg-transparent outline-none text-base text-black placeholder:text-zinc-400"
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
-                        </div>
+                    <div className="max-w-2xl mx-auto">
+                        <SmartInput
+                            type="text"
+                            placeholder="Search articles..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
                     </div>
                 </div>
             </section>

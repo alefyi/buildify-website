@@ -2,12 +2,13 @@ import React, { useMemo } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import DottedGlowBackground from "@/components/DottedGlowBackground";
-import { JSONLD } from "@/components/Schema";
+import { JSONLD, FAQSchema } from "@/components/Schema";
 import { Button } from "@/components/ui/button";
-import { Check, ArrowRight, Quote, CheckCircle, Terminal, Layers, TrendingUp, AlertCircle, Smartphone, Globe, Database, ArrowUpRight } from "lucide-react";
+import { Check, ArrowRight, Quote, CheckCircle, Terminal, Layers, TrendingUp, AlertCircle, Smartphone, Globe, Database, ArrowUpRight, Shield, X, AlertTriangle } from "lucide-react";
 import { useUseCases } from "@/hooks/useUseCases";
 import { Badge } from "@/components/ui/badge";
 import { GrowthTool } from "@/components/GrowthTool";
+import { getRichUseCase } from "@/data/rich-use-cases";
 
 const IndustryPage = () => {
     const { industry } = useParams(); // URL slug (e.g., 'accounting-firm')
@@ -17,16 +18,38 @@ const IndustryPage = () => {
         return getUseCaseBySlug(industry || "");
     }, [industry, getUseCaseBySlug]);
 
-    // Quality Check: Identify "Skeleton" pages
-    // If the page lacks a unique testimonial, has few benefits, or very short solution text, we noindex it.
-    const isSkeleton = useMemo(() => {
-        if (!data) return true;
-        const hasTestimonial = data.testimonial.quote && data.testimonial.quote.length > 10;
-        const hasBenefits = data.benefits.length >= 3;
-        const hasContent = data.solution.text.length > 50;
+    const richData = useMemo(() => {
+        return industry ? getRichUseCase(industry, data || null) : null;
+    }, [industry, data]);
 
-        return !hasTestimonial || !hasBenefits || !hasContent;
-    }, [data]);
+    const faqItems = useMemo(() => {
+        if (!data) return [];
+        const items = [
+            {
+                q: `What are the biggest growth challenges for a ${data.name}?`,
+                a: data.problem.text
+            },
+            {
+                q: `How does Buildify help ${data.name} businesses?`,
+                a: data.solution.text
+            }
+        ];
+
+        if (richData) {
+            items.push({
+                q: richData.strategicPlaybook.title,
+                a: richData.strategicPlaybook.subtitle
+            });
+
+            if (richData.competitorComparison?.rows?.length > 0) {
+                items.push({
+                    q: `Why choose Buildify over traditional ${data.name} solutions?`,
+                    a: `Traditional solutions often involve "${richData.competitorComparison.rows[0].oldWay}", whereas Buildify offers "${richData.competitorComparison.rows[0].buildifyWay}".`
+                });
+            }
+        }
+        return items;
+    }, [data, richData]);
 
     if (!data) {
         return <Navigate to="/use-cases" replace />;
@@ -38,13 +61,8 @@ const IndustryPage = () => {
                 title={data.seo.title}
                 description={data.seo.description}
                 url={`https://usebuildify.com/for/${industry}`}
-                noIndex={isSkeleton}
             />
-            {isSkeleton && (
-                <div className="bg-yellow-50 border-b border-yellow-200 p-2 text-center text-xs text-yellow-800 font-mono">
-                    ⚠️ ADMIN: Page marked noindex due to thin content (missing benefits or testimonial)
-                </div>
-            )}
+            <FAQSchema items={faqItems} />
             <JSONLD data={{
                 "@context": "https://schema.org",
                 "@type": "SoftwareApplication",
@@ -76,7 +94,7 @@ const IndustryPage = () => {
                 "description": data.seo.description
             }} />
 
-            {/* 1. Hero (Matches Home.tsx Hero) */}
+            {/* 1. Hero */}
             <section className="pt-20 md:pt-32 pb-32 border-b border-zinc-200 bg-white relative overflow-hidden">
                 <DottedGlowBackground />
                 <div className="max-w-[1200px] mx-auto px-6 relative z-10">
@@ -97,7 +115,7 @@ const IndustryPage = () => {
                 </div>
             </section>
 
-            {/* 2. The Problem (Matches Home.tsx "The Grid Mesh") */}
+            {/* 2. The Problem / Context */}
             <section className="border-b border-zinc-200 bg-zinc-50">
                 <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-[1px] bg-zinc-200 border-x border-zinc-200">
                     <div className="p-10 lg:p-16 flex flex-col justify-between h-full bg-white lg:col-span-1">
@@ -112,15 +130,53 @@ const IndustryPage = () => {
                         </div>
                     </div>
 
-                    {/* Problem Statement as a wide card */}
                     <div className="p-10 lg:p-16 bg-white hover:bg-zinc-50 transition-colors lg:col-span-2 flex flex-col justify-center">
                         <h4 className="font-bold text-lg mb-6 tracking-tight text-red-600 uppercase text-xs font-mono">Pain Point</h4>
-                        <p className="text-2xl md:text-3xl text-zinc-900 leading-tight font-medium italic">
+                        <p className="text-2xl md:text-3xl text-zinc-900 leading-tight font-medium italic mb-8">
                             "{data.problem.text}"
                         </p>
+                        {richData?.deepContext && (
+                            <div className="pt-8 border-t border-zinc-100">
+                                <h5 className="font-bold text-lg mb-4">{richData.deepContext.title}</h5>
+                                {richData.deepContext.content}
+                            </div>
+                        )}
                     </div>
                 </div>
             </section>
+
+            {/* 2.5 RICH CONTENT: Competitor Comparison */}
+            {richData && (
+                <section className="border-b border-zinc-200 bg-white">
+                    <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-[1px] bg-zinc-200 border-x border-zinc-200">
+                        {/* Title Row */}
+                        <div className="lg:col-span-3 p-10 lg:p-16 bg-white text-center">
+                            <Badge variant="outline" className="mb-4 text-xs font-mono uppercase">Comparison</Badge>
+                            <h2 className="text-4xl font-bold tracking-tight">{richData.competitorComparison.title}</h2>
+                        </div>
+
+                        {/* Headers */}
+                        <div className="p-6 bg-zinc-50 font-mono text-xs text-zinc-500 uppercase tracking-widest hidden lg:block">Feature</div>
+                        <div className="p-6 bg-zinc-50 font-mono text-xs text-zinc-500 uppercase tracking-widest hidden lg:block">{richData.competitorComparison.columns[0]}</div>
+                        <div className="p-6 bg-black text-white font-mono text-xs uppercase tracking-widest hidden lg:block">{richData.competitorComparison.columns[1]}</div>
+
+                        {/* Rows */}
+                        {richData.competitorComparison.rows.map((row, i) => (
+                            <React.Fragment key={i}>
+                                <div className="p-8 bg-white font-medium text-zinc-900 flex items-center border-b border-zinc-200 lg:border-b-0">{row.feature}</div>
+                                <div className="p-8 bg-white text-zinc-500 flex items-start border-b border-zinc-200 lg:border-b-0">
+                                    <X className="w-4 h-4 text-red-400 mr-2 mt-1 flex-shrink-0" />
+                                    <span className="text-sm leading-relaxed">{row.oldWay}</span>
+                                </div>
+                                <div className="p-8 bg-zinc-50 text-zinc-900 font-medium flex items-start">
+                                    <CheckCircle className="w-4 h-4 text-green-600 mr-2 mt-1 flex-shrink-0" />
+                                    <span className="text-sm leading-relaxed">{row.buildifyWay}</span>
+                                </div>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                </section>
+            )}
 
             {/* 3. The Solution / Value Prop */}
             <section className="border-b border-zinc-200 bg-white">
@@ -155,7 +211,34 @@ const IndustryPage = () => {
                 </div>
             </section>
 
-            {/* 4. Benefits Grid (Matches Home.tsx Services Grid) */}
+            {/* 3.5 RICH CONTENT: Strategic Playbook */}
+            {richData && (
+                <section className="border-b border-zinc-200 bg-white">
+                    <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-zinc-200 border-x border-zinc-200">
+                        {/* Title Row */}
+                        <div className="md:col-span-3 p-10 lg:p-16 bg-white text-center">
+                            <Badge variant="outline" className="mb-4 text-xs font-mono uppercase text-zinc-500 border-zinc-200">Strategic Playbook</Badge>
+                            <h2 className="text-4xl font-bold tracking-tight mb-4 text-black">{richData.strategicPlaybook.title}</h2>
+                            <p className="text-xl text-zinc-500 max-w-2xl mx-auto">{richData.strategicPlaybook.subtitle}</p>
+                        </div>
+
+                        {/* Cards */}
+                        {richData.strategicPlaybook.cards.map((card, i) => (
+                            <div key={i} className="p-10 lg:p-16 bg-white hover:bg-zinc-50 transition-colors group">
+                                <div className="w-12 h-12 bg-zinc-100 border border-zinc-200 rounded-[4px] flex items-center justify-center mb-6 group-hover:bg-white transition-colors">
+                                    <card.icon className="w-6 h-6 text-black" />
+                                </div>
+                                <h3 className="text-xl font-bold mb-4 text-black">{card.title}</h3>
+                                <div className="text-zinc-500 leading-relaxed text-sm space-y-4">
+                                    {card.content}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
+
+            {/* 4. Benefits Grid */}
             <section className="border-b border-zinc-200 bg-zinc-50">
                 <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-zinc-200 border-x border-zinc-200">
                     <div className="p-10 lg:p-16 flex flex-col justify-between h-full bg-white">
@@ -184,7 +267,7 @@ const IndustryPage = () => {
                 </div>
             </section>
 
-            {/* 5. Social Proof (Matches Home.tsx Partners/Testimonials) */}
+            {/* 5. Social Proof */}
             <section className="border-b border-zinc-200 bg-white">
                 <div className="max-w-[1200px] mx-auto border-x border-zinc-200 bg-white p-10 lg:p-16 text-center">
                     <Quote className="w-8 h-8 text-zinc-300 mx-auto mb-6" />
@@ -199,7 +282,7 @@ const IndustryPage = () => {
                 </div>
             </section>
 
-            {/* 6. Final CTA (Matches Home.tsx) */}
+            {/* 6. Final CTA */}
             <section className="py-32 border-t border-zinc-200 bg-zinc-50">
                 <div className="max-w-[1200px] mx-auto px-6 text-center">
                     <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase">

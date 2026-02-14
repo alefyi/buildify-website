@@ -26,6 +26,7 @@ export const SEO: React.FC<SEOProps> = ({
             <title>{siteTitle}</title>
             <meta name="description" content={description} />
             {noIndex && <meta name="robots" content="noindex" />}
+            {!noIndex && <link rel="canonical" href={url} />}
 
             {/* Open Graph */}
             <meta name="google-site-verification" content="tOnqDTjkYq7jXM7ul8CMd7fmEiwiLuuFki9rylp5ytY" />

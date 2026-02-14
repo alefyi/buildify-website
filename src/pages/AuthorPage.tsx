@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getAllPosts } from '../data/posts';
 import { SEO } from '../components/SEO';
+import { JSONLD } from '../components/Schema';
 import { User, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import DottedGlowBackground from '../components/DottedGlowBackground';
@@ -39,6 +40,18 @@ const AuthorPage = () => {
                 description={`Read articles by ${authorData.name} on Buildify.`}
                 url={`https://usebuildify.com/author/${name}`}
             />
+            <JSONLD data={{
+                "@context": "https://schema.org",
+                "@type": "ProfilePage",
+                "mainEntity": {
+                    "@type": "Person",
+                    "name": authorData.name,
+                    "description": authorData.role || 'Contributor',
+                    "image": authorData.avatar || "https://usebuildify.com/og-image.jpg",
+                    "url": `https://usebuildify.com/author/${name}`,
+                    "sameAs": []
+                }
+            }} />
 
             {/* Author Hero */}
             <section className="pt-32 pb-20 border-b border-zinc-200 bg-white relative overflow-hidden">

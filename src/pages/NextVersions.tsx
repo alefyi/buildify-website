@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Zap, RefreshCw, Shield, Activity, ArrowRight, Server, Clock } from "lucide-react";
@@ -54,10 +54,11 @@ const NextVersions = () => {
 
     return (
         <div className="flex flex-col min-h-screen">
-            <Helmet>
-                <title>Post-Launch Support | Buildify</title>
-                <meta name="description" content="Software is never done. We keep it alive. Maintenance, updates, and scaling for your business." />
-            </Helmet>
+            <SEO
+                title="Post-Launch Support"
+                description="Software is never done. We keep it alive. Maintenance, updates, and scaling for your business."
+                url="https://usebuildify.com/next-versions"
+            />
 
             {/* Hero Section */}
             <section className="bg-white pt-20 md:pt-32 pb-32 border-b border-zinc-200">

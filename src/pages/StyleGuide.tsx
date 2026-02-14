@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
+import { SEO } from "@/components/SEO";
+
 const StyleGuide = () => {
     return (
         <div className="min-h-screen bg-white pt-24 pb-24 px-6 md:px-12">
+            <SEO title="Style Guide" description="Internal design system." noIndex={true} />
             <div className="max-w-4xl mx-auto space-y-16">
 
                 {/* Header */}
