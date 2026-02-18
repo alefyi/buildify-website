@@ -30,6 +30,8 @@ const countryCodes = [
     // Simplified list for brevity, can expand if needed
 ];
 
+import { CypherText } from "@/components/animations/CypherText";
+
 const Contact = () => {
     const [step, setStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -157,7 +159,9 @@ const Contact = () => {
                 {/* Step 0: Welcome */}
                 {step === 0 && (
                     <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <h1 className="text-3xl md:text-4xl font-semibold mb-6 leading-tight">Hey there! 👋</h1>
+                        <h1 className="text-3xl md:text-4xl font-semibold mb-6 leading-tight">
+                            <CypherText text="Hey there!" duration={1000} /> 👋
+                        </h1>
                         <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-10">
                             We're Buildify, and we're here to help you bring your app idea to life.
                             Before we jump on a call, we'd love to learn a bit about what you're working on.

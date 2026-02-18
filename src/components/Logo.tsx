@@ -1,13 +1,99 @@
 import React from "react";
 
-export const Logo = ({ className = "w-auto h-8", color = "black" }: { className?: string, color?: string }) => (
-    <svg
-        viewBox="0 0 750 750"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={className}
-    >
-        <rect width="750" height="750" fill="black" />
-        <path d="M423.947 189.626C453.016 169.733 490.102 145.538 519.211 165.372C544.819 182.82 567.09 204.801 584.87 230.162C605.564 259.68 580.189 297.875 559.738 327.562C550.171 341.45 544.569 358.282 544.569 376.423C544.569 394.618 550.204 411.497 559.825 425.41C580.328 455.061 605.77 493.211 585.128 522.765C568.227 546.963 547.242 568.097 523.173 585.169C493.344 606.327 454.508 580.069 424.484 559.188C410.535 549.487 393.585 543.8 375.307 543.8C357.085 543.8 340.183 549.452 326.258 559.098C296.196 579.924 257.312 606.111 227.521 584.899C203.556 567.835 182.662 546.738 165.83 522.598C145.243 493.074 170.599 454.998 191.061 425.387C200.672 411.479 206.302 394.608 206.302 376.423C206.302 358.292 200.706 341.468 191.148 327.584C170.738 297.937 145.449 259.816 166.087 230.328C183.798 205.023 205.978 183.075 231.482 165.631C260.556 145.744 297.687 169.872 326.792 189.713C340.614 199.136 357.317 204.645 375.307 204.645C393.352 204.644 410.101 199.102 423.947 189.626ZM375.537 266.699C314.815 266.699 265.59 315.925 265.59 376.647C265.59 437.37 314.815 486.595 375.537 486.595C436.26 486.595 485.484 437.37 485.484 376.647C485.484 315.925 436.26 266.699 375.537 266.699Z" fill="white" />
-    </svg>
-);
+export const Logo = ({ className = "w-auto h-8", isActive = false }: { className?: string, isActive?: boolean }) => {
+    return (
+        <svg
+            width="1000"
+            height="1000"
+            viewBox="0 0 1000 1000"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={`${className} transition-all duration-300`}
+        >
+            <defs>
+                <linearGradient id="logo-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#ef4444" /> {/* red-500 */}
+                    <stop offset="20%" stopColor="#f97316" /> {/* orange-500 */}
+                    <stop offset="40%" stopColor="#22c55e" /> {/* green-500 */}
+                    <stop offset="60%" stopColor="#3b82f6" /> {/* blue-500 */}
+                    <stop offset="80%" stopColor="#a855f7" /> {/* purple-500 */}
+                    <stop offset="100%" stopColor="#ec4899" /> {/* pink-500 */}
+                </linearGradient>
+                <filter id="logo-glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="15" result="blur" />
+                </filter>
+            </defs>
+
+            {/* Layer 0: Subtle Colored Glow (Fades in) */}
+            <rect
+                x="20" y="20" width="960" height="960" rx="120" ry="120"
+                fill="none"
+                stroke="url(#logo-rainbow)"
+                strokeWidth="40"
+                filter="url(#logo-glow)"
+                style={{
+                    opacity: isActive ? 0.4 : 0,
+                    transition: "opacity 0.7s ease-in-out"
+                }}
+            />
+
+            {/* Layer 0.5: Inner Dots Glow (Fades in) - Colored Rainbow Version */}
+            <g transform="translate(198, 197)"
+                filter="url(#logo-glow)"
+                style={{
+                    opacity: isActive ? 0.4 : 0,
+                    transition: "opacity 0.7s ease-in-out"
+                }}
+            >
+                <circle cx="67.315" cy="189.715" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="67.315" cy="418.965" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="181.946" cy="304.34" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="302.397" cy="187.774" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="185.831" cy="71.1998" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="418.965" cy="67.315" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="535.538" cy="420.907" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="537.479" cy="185.831" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="417.022" cy="539.422" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="185.831" cy="537.479" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="300.456" cy="422.85" r="67.315" fill="url(#logo-rainbow)" />
+                <circle cx="420.907" cy="306.282" r="67.315" fill="url(#logo-rainbow)" />
+            </g>
+
+            {/* Layer 1: Sharp Rainbow Gradient (Always rendered, covered by black) */}
+            <rect
+                x="20" y="20" width="960" height="960" rx="120" ry="120"
+                fill="none"
+                stroke="url(#logo-rainbow)"
+                strokeWidth="40"
+            />
+
+            {/* Layer 2: Black Overlay (Fades out) */}
+            <rect
+                x="20" y="20" width="960" height="960" rx="120" ry="120"
+                fill="none"
+                stroke="black"
+                strokeWidth="40"
+                style={{
+                    opacity: isActive ? 0 : 1,
+                    transition: "opacity 0.7s ease-in-out"
+                }}
+            />
+
+            {/* Inner Content - Black Dots (Fixed) */}
+            <g transform="translate(198, 197)">
+                <circle cx="67.315" cy="189.715" r="67.315" fill="black" />
+                <circle cx="67.315" cy="418.965" r="67.315" fill="black" />
+                <circle cx="181.946" cy="304.34" r="67.315" fill="black" />
+                <circle cx="302.397" cy="187.774" r="67.315" fill="black" />
+                <circle cx="185.831" cy="71.1998" r="67.315" fill="black" />
+                <circle cx="418.965" cy="67.315" r="67.315" fill="black" />
+                <circle cx="535.538" cy="420.907" r="67.315" fill="black" />
+                <circle cx="537.479" cy="185.831" r="67.315" fill="black" />
+                <circle cx="417.022" cy="539.422" r="67.315" fill="black" />
+                <circle cx="185.831" cy="537.479" r="67.315" fill="black" />
+                <circle cx="300.456" cy="422.85" r="67.315" fill="black" />
+                <circle cx="420.907" cy="306.282" r="67.315" fill="black" />
+            </g>
+        </svg>
+    );
+};

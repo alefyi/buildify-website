@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CypherText } from "@/components/animations/CypherText";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -69,8 +70,8 @@ const USCCGrant = () => {
                 <DottedGlowBackground />
                 <div className="max-w-layout mx-auto px-6 relative z-10">
                     <div className="max-w-4xl">
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-8 leading-hero">
-                            Digital Impact Grant <USFlag className="h-10 md:h-16 w-auto rounded-sm shadow-sm inline-block ml-4 align-middle" />
+                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-8 leading-hero min-h-[1.2em]">
+                            <CypherText text="Digital Impact Grant" duration={1500} /> <USFlag className="h-10 md:h-16 w-auto rounded-sm shadow-sm inline-block ml-4 align-middle" />
                         </h1>
                         <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mb-12 leading-relaxed">
                             We cover the development costs for apps that empower American businesses. Transform your idea into a scalable technology platform without the agency price tag.

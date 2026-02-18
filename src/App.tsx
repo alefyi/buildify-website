@@ -5,9 +5,9 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import Layout from './components/Layout';
 import LoadingSpinner from './components/LoadingSpinner';
+import Home from './pages/Home';
 
 // Lazy Load Pages
-const Home = React.lazy(() => import('./pages/Home'));
 const IndustryPage = React.lazy(() => import('./pages/IndustryPage'));
 const Development = React.lazy(() => import('./pages/Development'));
 const Contact = React.lazy(() => import('./pages/Contact'));

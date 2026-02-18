@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Terminal, MessageSquare, PenTool, Hammer, Heart, ArrowRight, Wrench, Server, Shield, Smartphone } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { CypherText } from "@/components/animations/CypherText";
 
 const Development = () => {
     const steps = [
@@ -74,8 +75,8 @@ const Development = () => {
                             <Terminal className="w-6 h-6 text-black" />
                         </div>
                         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-black leading-[1.05]">
-                            We handle the tech stuff. <br className="hidden md:block" />
-                            You run your business.
+                            <CypherText text="We handle the tech stuff." duration={1500} /> <br className="hidden md:block" />
+                            <CypherText text="You run your business." duration={1500} delay={500} />
                         </h1>
                         <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-12">
                             Most people find software confusing. We make it simple. We build your tools, keep them running, and fix things before you even notice—so you never have to think about "code" ever again.

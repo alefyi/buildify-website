@@ -21,6 +21,7 @@ import {
     ChevronDown
 } from "lucide-react";
 import { BioAuditTool } from "@/components/BioAuditTool";
+import { CypherText } from "@/components/animations/CypherText";
 
 const Creators = () => {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -43,8 +44,8 @@ const Creators = () => {
                             <Smartphone className="w-6 h-6 text-black" />
                         </div>
                         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-black leading-[1.05]">
-                            Own Your Identity. <br />
-                            Not Just a Link.
+                            <CypherText text="Own Your Identity." duration={1500} /> <br />
+                            <CypherText text="Not Just a Link." duration={1500} delay={500} />
                         </h1>
                         <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-12">
                             The "link-in-bio" is a relic of the past. Stop building your brand on a subdomain and start owning your digital real estate. Launch a high-performance, multi-page site on your own custom domain in under 48 hours.

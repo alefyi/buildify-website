@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { BuildifyIcon } from "@/components/BuildifyIcon";
 import { industries } from "@/data/industries";
 import { posts } from "@/data/posts";
+import { CypherText } from "@/components/animations/CypherText";
 
 const Business = () => {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -29,7 +30,7 @@ const Business = () => {
                         Zero Overhead
                     </Badge>
                     <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-6 leading-[1.05] max-w-4xl mx-auto">
-                        One simple price.
+                        <CypherText text="One simple price." duration={1500} />
                     </h1>
                     <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mx-auto mb-16 leading-relaxed">
                         Month-to-month. No long-term contracts. Just results.

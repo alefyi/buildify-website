@@ -13,8 +13,13 @@ import amcham from "@/assets/partners/amcham.webp";
 import foundersFirst from "@/assets/partners/founders_first.webp";
 import co100 from "@/assets/partners/co100.webp";
 import chamber from "@/assets/partners/chamber.webp";
+import vodafone from "@/assets/partners/vodafone.svg";
+import tmobile from "@/assets/partners/tmobile.svg";
 import { HeroPattern } from "@/components/HeroPattern";
 import { Section } from "@/components/ui/section";
+import { FadeIn, StaggerContainer, fadeInVariants } from "@/components/animations/FadeIn";
+import { motion } from "framer-motion";
+import { CypherText } from "@/components/animations/CypherText";
 
 const Home = () => {
     const [openFaq, setOpenFaq] = React.useState<number | null>(null);
@@ -34,19 +39,23 @@ const Home = () => {
                 <DottedGlowBackground />
                 <div className="max-w-layout mx-auto px-6 relative z-10">
                     <HeroPattern />
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-8 leading-hero">
-                        We're what your competitors use.
-                    </h1>
+                    <FadeIn delay={0.1}>
+                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-8 leading-hero min-h-[1.2em]">
+                            <CypherText text="We're what your competitors use." duration={1500} />
+                        </h1>
+                    </FadeIn>
 
-                    <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mb-12 leading-relaxed">
-                        We build, brand, maintain, and support the tools your business runs on. All in one place to keep customers coming back.
-                    </p>
+                    <FadeIn delay={0.2}>
+                        <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mb-12 leading-relaxed">
+                            We build, brand, maintain, and support the tools your business runs on. All in one place to keep customers coming back.
+                        </p>
+                    </FadeIn>
 
-
-
-                    <div className="mt-16">
-                        <GrowthTool />
-                    </div>
+                    <FadeIn delay={0.3}>
+                        <div className="mt-16">
+                            <GrowthTool />
+                        </div>
+                    </FadeIn>
                 </div>
             </Section>
 
@@ -54,195 +63,214 @@ const Home = () => {
             <Section variant="grid">
                 <div className="max-w-layout mx-auto grid grid-cols-1 lg:grid-cols-3 gap-px bg-zinc-200 border-x border-zinc-200">
                     <div className="p-10 lg:p-16 flex flex-col justify-between h-full bg-white lg:row-span-2">
-                        <div>
-                            <div className="w-10 h-10 border border-zinc-200 bg-white flex items-center justify-center mb-6 rounded-md">
-                                <AlertCircle className="w-5 h-5 text-black" />
+                        <FadeIn>
+                            <div>
+                                <h3 className="text-2xl font-bold tracking-tight mb-4">What We Do</h3>
+                                <p className="text-zinc-500 leading-relaxed">
+                                    We provide the engineering power of a silicon valley team, at the cost of a freelancer.
+                                </p>
                             </div>
-                            <h3 className="text-2xl font-bold tracking-tight mb-4">The Problem</h3>
-                            <p className="text-zinc-500 leading-relaxed">
-                                Most agencies over-promise and under-deliver. Freelancers ghost. In-house teams get bogged down.
-                            </p>
-                        </div>
-                        <div className="mt-8 pt-8 border-t border-zinc-200">
-                            <p className="font-mono text-xs text-zinc-500 uppercase tracking-wider">Status: FAILED</p>
-                        </div>
+                            <div className="mt-8 pt-8 border-t border-zinc-200">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                    <span className="text-xs font-medium text-green-700 font-mono uppercase tracking-wider">Operational • 99.99% Uptime</span>
+                                </div>
+                            </div>
+                        </FadeIn>
                     </div>
 
+                    {/* Staggered Grid Items */}
                     {[
-                        { title: "Transparency", desc: "No black boxes. You see every commit, every decision.", icon: Terminal },
-                        { title: "Speed", desc: "MVP in weeks. We leverage battle-tested boilerplate.", icon: ArrowUpRight },
-                        { title: "Ownership", desc: "Code quality that survives due diligence.", icon: Database },
-                        { title: "Scale", desc: "Infrastructure ready for 1M+ users from Day 1.", icon: Globe }
-                    ].map((item) => (
-                        <div key={item.title} className="p-10 bg-white hover:bg-zinc-50 transition-colors group">
-                            <item.icon className="w-6 h-6 text-zinc-500 group-hover:text-black transition-colors mb-4" />
-                            <h4 className="font-bold text-lg mb-2 tracking-tight">{item.title}</h4>
-                            <p className="text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
-                        </div>
+                        { title: "No Secrets", desc: "You see every update, every day. No black boxes.", icon: Terminal },
+                        { title: "Launch Fast", desc: "Get your business online in weeks, not months.", icon: ArrowUpRight },
+                        { title: "You Own It", desc: "We build it, you keep it. 100% IP ownership.", icon: Database },
+                        { title: "Growth Ready", Desc: "Built to handle 10 customers or 10 million.", icon: Globe }
+                    ].map((item, i) => (
+                        <FadeIn key={item.title} delay={0.1 + (i * 0.1)} className="h-full">
+                            <div className="p-10 bg-white hover:bg-gradient-to-t hover:from-blue-50/40 hover:to-transparent transition-all duration-500 group h-full">
+                                <item.icon className="w-6 h-6 text-zinc-500 group-hover:text-black transition-colors mb-4" />
+                                <h4 className="font-bold text-lg mb-2 tracking-tight">{item.title}</h4>
+                                <p className="text-sm text-zinc-500 leading-relaxed">{item.desc || item.Desc}</p>
+                            </div>
+                        </FadeIn>
                     ))}
                 </div>
             </Section>
 
             {/* 2.5. Our Partners */}
             {/* 2.5. Our Partners */}
-            <Section variant="full" className="bg-white">
-                <div className="max-w-layout mx-auto border-x border-zinc-200">
-                    <div className="py-10 border-b border-zinc-200 bg-white text-center">
-                        <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest">Recognized By</p>
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-zinc-200 bg-white border-b border-zinc-200">
-                        {[amcham, foundersFirst, co100, chamber].map((logo, i) => (
-                            <div key={i} className="flex items-center justify-center p-10 h-40">
-                                <img
-                                    src={logo}
-                                    alt="Partner"
-                                    width="160"
-                                    height="48"
-                                    loading="lazy"
-                                    decoding="async"
-                                    className="max-h-12 max-w-full object-contain grayscale hover:grayscale-0 transition-all opacity-70 hover:opacity-100"
-                                />
+            <Section variant="full" className="bg-white border-b border-zinc-200">
+                <FadeIn delay={0.2} fullWidth>
+                    <div className="max-w-layout mx-auto border-x border-zinc-200 bg-white">
+                        <div className="py-10 border-b border-zinc-200 text-center">
+                            <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest">Partnered With</p>
+                        </div>
+
+                        <div className="relative w-full overflow-hidden py-12 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+                            <div className="isolate flex w-max items-center gap-16 animate-scroll">
+                                {[
+                                    { name: "Cisco", src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
+                                    { name: "Zoom", src: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg" },
+                                    { name: "Disney", src: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Disney_wordmark.svg" },
+                                    { name: "Amazon", src: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+                                    { name: "Vodafone", src: vodafone },
+                                    { name: "T-Mobile", src: tmobile },
+                                    { name: "AmCham", src: amcham },
+                                    { name: "Founders First", src: foundersFirst },
+                                    { name: "CO100", src: co100 },
+                                    { name: "Chamber", src: chamber },
+                                    // Duplicate for seamless loop
+                                    { name: "Cisco", src: "https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" },
+                                    { name: "Zoom", src: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Zoom_Communications_Logo.svg" },
+                                    { name: "Disney", src: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Disney_wordmark.svg" },
+                                    { name: "Amazon", src: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+                                    { name: "Vodafone", src: vodafone },
+                                    { name: "T-Mobile", src: tmobile },
+                                    { name: "AmCham", src: amcham },
+                                    { name: "Founders First", src: foundersFirst },
+                                    { name: "CO100", src: co100 },
+                                    { name: "Chamber", src: chamber },
+                                ].map((partner, i) => (
+                                    <div key={i} className="flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity min-w-[120px]">
+                                        <img
+                                            src={partner.src}
+                                            alt={partner.name}
+                                            className="h-7 w-auto object-contain grayscale hover:grayscale-0 transition-all"
+                                            onError={(e) => {
+                                                // Fallback if logo fails
+                                                e.currentTarget.style.display = 'none';
+                                                e.currentTarget.parentElement!.innerText = partner.name;
+                                                e.currentTarget.parentElement!.className = "flex items-center justify-center min-w-[120px] text-lg font-bold text-zinc-400 hover:text-zinc-600 transition-colors uppercase tracking-tight";
+                                            }}
+                                        />
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
                     </div>
-                </div>
+                </FadeIn>
             </Section>
 
             {/* 3. Services Grid */}
             <Section variant="grid">
                 <div className="max-w-layout mx-auto grid grid-cols-1 lg:grid-cols-3 gap-px bg-zinc-200 border-x border-zinc-200">
                     <div className="p-10 lg:p-16 flex flex-col justify-between h-full bg-white lg:row-span-2">
-                        <div>
-                            <div className="w-10 h-10 border border-zinc-200 bg-white flex items-center justify-center mb-6 rounded-md">
-                                <Smartphone className="w-5 h-5 text-black" />
+                        <FadeIn>
+                            <div>
+                                <h3 className="text-2xl font-bold tracking-tight mb-4">How We Help</h3>
+                                <p className="text-zinc-500 leading-relaxed text-sm">
+                                    We build the tools that run your business.
+                                </p>
                             </div>
-                            <h3 className="text-2xl font-bold tracking-tight mb-4">Our Expertise</h3>
-                            <p className="text-zinc-500 leading-relaxed text-sm">
-                                Full-stack capabilities for every stage of growth. From day one to IPO.
-                            </p>
-                        </div>
-                        <div className="mt-8 pt-8 border-t border-zinc-200">
-                            <Link to="/development">
-                                <Button variant="outline" className="w-full rounded-md border-zinc-200">View Process</Button>
-                            </Link>
-                        </div>
+                            <div className="mt-8 pt-8 border-t border-zinc-200">
+                                <Link to="/development">
+                                    <Button variant="outline" className="w-full rounded-md border-zinc-200">View Process</Button>
+                                </Link>
+                            </div>
+                        </FadeIn>
                     </div>
 
                     {[
                         {
-                            title: "Web Apps",
-                            desc: "Scalable, high-performance web applications built with Next.js. Capable of handling 1M+ monthly active users with sub-100ms load times.",
-                            tech: "Next.js",
-                            link: "https://nextjs.org"
+                            title: "Custom Websites",
+                            desc: "A website that works like a 24/7 salesman. It doesn't just look good, it makes money."
                         },
                         {
                             title: "Mobile Apps",
-                            desc: "Native-quality iOS and Android apps using React Native. One codebase delivering 99.9% crash-free sessions across both platforms.",
-                            tech: "React Native",
-                            link: "https://reactnative.dev"
+                            desc: "Your logo on their phone home screen. Send push notifications directly to your customers."
                         },
                         {
-                            title: "Enterprise",
-                            desc: "Robust backend systems designed for massive scale. Secure cloud architecture supporting 50k+ concurrent connections.",
-                            tech: "Cloud"
+                            title: "Company Software",
+                            desc: "Stop using spreadsheets. We build custom software to automate your operations."
                         },
                         {
-                            title: "Product Design",
-                            desc: "UI/UX that converts. Beautiful, functional, and user-centric interfaces designed in Figma to boost engagement.",
-                            tech: "Figma",
-                            link: "https://figma.com"
+                            title: "World Class Design",
+                            desc: "We make you look more expensive than you are. Trust is built on first impressions."
                         },
-                    ].map((service) => (
-                        <div key={service.title} className="p-10 bg-white hover:bg-zinc-50 transition-colors group">
-                            <div className="flex justify-between items-start mb-6">
-                                <h3 className="text-xl font-bold tracking-tight">{service.title}</h3>
-                                {service.link ? (
-                                    <a href={service.link} target="_blank" rel="noopener noreferrer">
-                                        <Badge variant="outline" className="font-mono text-[10px] rounded-[2px] bg-zinc-100 border-zinc-200 text-zinc-500 uppercase hover:bg-zinc-200 cursor-pointer transition-colors">
-                                            {service.tech}
-                                        </Badge>
-                                    </a>
-                                ) : (
-                                    <Badge variant="outline" className="font-mono text-[10px] rounded-[2px] bg-zinc-100 border-zinc-200 text-zinc-500 uppercase">
-                                        {service.tech}
-                                    </Badge>
-                                )}
+                    ].map((service, i) => (
+                        <FadeIn key={service.title} delay={0.1 + (i * 0.1)} className="h-full">
+                            <div className="p-10 bg-white hover:bg-gradient-to-t hover:from-blue-50/40 hover:to-transparent transition-all duration-500 group h-full">
+                                <div className="flex justify-between items-start mb-6">
+                                    <h3 className="text-xl font-bold tracking-tight">{service.title}</h3>
+                                </div>
+                                <p className="text-zinc-500 mb-8 text-sm leading-relaxed">{service.desc}</p>
+                                <Link to="/development" className="text-sm font-medium flex items-center text-zinc-900 group-hover:underline underline-offset-4">
+                                    Explore <ArrowRight className="ml-2 w-4 h-4" />
+                                </Link>
                             </div>
-                            <p className="text-zinc-500 mb-8 text-sm leading-relaxed">{service.desc}</p>
-                            <Link to="/development" className="text-sm font-medium flex items-center text-zinc-900 group-hover:underline underline-offset-4">
-                                Explore <ArrowRight className="ml-2 w-4 h-4" />
-                            </Link>
-                        </div>
+                        </FadeIn>
                     ))}
                 </div>
             </Section>
 
             {/* 4. Social Proof (Testimonials) */}
-            <Section variant="full" className="bg-zinc-50 border-b border-zinc-200">
+            <Section variant="full" className="bg-white border-b border-zinc-200">
                 <div className="max-w-layout mx-auto border-x border-zinc-200">
-                    <div className="bg-white p-10 border-b border-zinc-200">
+                    <FadeIn className="bg-white p-10 border-b border-zinc-200">
                         <div className="flex items-center gap-2 mb-2">
                             <Check className="w-5 h-5 text-green-500" />
                             <h2 className="text-sm font-bold uppercase tracking-widest text-zinc-500">Trusted By Founders</h2>
                         </div>
                         <p className="text-3xl font-bold tracking-tight text-black">Don't take our word for it.</p>
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-zinc-200">
+                    </FadeIn>
+                    <StaggerContainer className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-zinc-200">
                         {[
                             { text: "Buildify shipped our MVP in 3 weeks. We raised seed funding a month later.", author: "Alex Chen, Founder @ Nexus" },
                             { text: "The code quality is insane. It's rare to find an agency that cares this much.", author: "Sarah Jones, CTO @ Flowstate" },
                             { text: "They don't just build, they think. Strategic partners in every sense.", author: "Mike Ross, CEO @ Syntax" }
                         ].map((t) => (
-                            <div key={t.author} className="p-10 bg-white hover:bg-zinc-50 transition-colors">
+                            <motion.div variants={fadeInVariants} key={t.author} className="p-10 bg-white hover:bg-zinc-50 transition-colors">
                                 <p className="text-lg text-zinc-900 mb-6 leading-relaxed">"{t.text}"</p>
                                 <p className="text-xs font-mono text-zinc-500 uppercase tracking-wider">- {t.author}</p>
-                            </div>
+                            </motion.div>
                         ))}
-                    </div>
+                    </StaggerContainer>
                 </div>
             </Section>
 
             {/* 5. Blog (List View) */}
-            <Section variant="full" className="bg-white">
-                <div className="max-w-layout mx-auto px-6 border-x border-zinc-200 py-24">
-                    <div className="flex items-center justify-between mb-16 px-6">
-                        <div className="space-y-4">
-                            <Badge variant="outline" className="px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-md uppercase">
-                                Research
-                            </Badge>
-                            <h2 className="text-4xl font-bold tracking-tight">Latest Insights</h2>
+            <Section variant="full" className="bg-zinc-50 border-b border-zinc-200">
+                <div className="max-w-layout mx-auto px-6 border-x border-zinc-200 py-24 bg-white">
+                    <FadeIn>
+                        <div className="flex items-center justify-between mb-16 px-6">
+                            <div className="space-y-4">
+                                <h2 className="text-4xl font-bold tracking-tight">Read Our Insights</h2>
+                            </div>
+                            <Link to="/insights">
+                                <Button variant="outline" size="sm" className="rounded-md text-xs font-mono px-6">View all</Button>
+                            </Link>
                         </div>
-                        <Link to="/posts">
-                            <Button variant="outline" size="sm" className="rounded-md text-xs font-mono px-6">VIEW_ALL</Button>
-                        </Link>
-                    </div>
+                    </FadeIn>
 
                     <div className="w-full border-t border-zinc-200">
                         {[
-                            { slug: "how-to-make-an-app", date: "OCT 12", title: "How to build an app in 2026" },
-                            { slug: "tech-stack-guide", date: "NOV 01", title: "Choosing the right tech stack" },
-                            { slug: "hiring-developers", date: "NOV 15", title: "How much does it cost to hire an engineer?" },
-                        ].map((post) => (
-                            <Link key={post.slug} to={`/post/${post.slug}`} className="group block">
-                                <div className="flex items-center justify-between py-10 border-b border-zinc-200 hover:bg-zinc-50 transition-colors px-6">
-                                    <div className="flex items-center gap-12">
-                                        <span className="text-xs font-mono text-zinc-500 w-20">{post.date}</span>
-                                        <h3 className="text-xl font-medium text-zinc-900 group-hover:text-black tracking-tight">{post.title}</h3>
+                            { slug: "why-modern-smb-systems-fail-to-scale", date: "Jan 20", title: "Why Modern SMB Systems Fail to Scale" },
+                            { slug: "data-privacy-risks-boutique-law-firms", date: "Jan 22", title: "Data Privacy Risks for Boutique Law Firms" },
+                            { slug: "revenue-recovery-orlando-auto-repair", date: "Jan 23", title: "Revenue Recovery for Auto Repair" },
+                        ].map((post, i) => (
+                            <FadeIn key={post.slug} delay={i * 0.1}>
+                                <div className="group relative flex items-center justify-between py-8 px-6 border-b border-zinc-200 hover:bg-zinc-50 transition-colors">
+                                    <Link to={`/post/${post.slug}`} className="absolute inset-0 z-10" aria-label={`Read ${post.title}`} />
+                                    <div className="space-y-1">
+                                        <p className="text-xs font-mono text-zinc-400 uppercase tracking-wide">{post.date}</p>
+                                        <h3 className="text-xl font-bold tracking-tight text-zinc-900 group-hover:text-black">{post.title}</h3>
                                     </div>
-                                    <ArrowRight className="w-5 h-5 text-zinc-300 group-hover:text-black transition-all group-hover:translate-x-1" />
+                                    <ArrowUpRight className="w-5 h-5 text-zinc-300 group-hover:text-black transition-colors" />
                                 </div>
-                            </Link>
+                            </FadeIn>
                         ))}
                     </div>
-                </div>
-            </Section>
+                </div >
+            </Section >
 
             {/* 6. FAQ (Accordion Style) */}
-            <Section variant="boxed">
+            < Section variant="boxed" >
                 <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200 border-t border-zinc-200">
                     <div className="p-10 bg-zinc-50">
-                        <h3 className="text-2xl font-bold tracking-tight mb-4">FAQ</h3>
-                        <p className="text-zinc-500">Common questions about working with us.</p>
+                        <FadeIn>
+                            <h3 className="text-2xl font-bold tracking-tight mb-4">FAQ</h3>
+                            <p className="text-zinc-500">Common questions about working with us.</p>
+                        </FadeIn>
                     </div>
                     <div className="lg:col-span-2 divide-y divide-zinc-200">
                         {[
@@ -285,24 +313,24 @@ const Home = () => {
                         ))}
                     </div>
                 </div>
-            </Section>
+            </Section >
 
             {/* 7. Final CTA */}
-            <Section variant="default" className="py-32 border-t border-zinc-200 bg-zinc-50">
-                <div className="max-w-layout mx-auto px-6 text-center">
-                    <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-md uppercase">
-                        Get Started
-                    </Badge>
-                    <h2 className="text-6xl font-bold tracking-tighter mb-8 leading-[0.9]">Ready to scale?</h2>
-                    <p className="text-zinc-500 text-xl mb-12 max-w-lg mx-auto leading-relaxed">We handle the tech so you can focus on the business.</p>
-                    <Link to="/contact">
-                        <Button size="lg" className="h-16 px-12 text-lg rounded-md bg-black text-white hover:bg-zinc-800 shadow-none">
-                            Talk To Our Founders <ArrowRight className="ml-2 w-5 h-5" />
-                        </Button>
-                    </Link>
-                </div>
+            <Section variant="full" className="py-32 border-t border-zinc-200 relative overflow-hidden bg-white">
+                <DottedGlowBackground />
+                <FadeIn fullWidth className="relative z-10">
+                    <div className="max-w-layout mx-auto px-6 text-center">
+                        <h2 className="text-6xl font-bold tracking-tighter mb-8 leading-[0.9]">Launch by next week.</h2>
+                        <p className="text-zinc-500 text-xl mb-12 max-w-lg mx-auto leading-relaxed">Get your app live and ready by next Monday.</p>
+                        <Link to="/contact">
+                            <Button size="lg" className="h-16 px-12 text-lg rounded-md bg-black text-white hover:bg-zinc-800 shadow-none">
+                                Launch Next Week <ArrowRight className="ml-2 w-5 h-5" />
+                            </Button>
+                        </Link>
+                    </div>
+                </FadeIn>
             </Section>
-        </div>
+        </div >
     );
 };
 

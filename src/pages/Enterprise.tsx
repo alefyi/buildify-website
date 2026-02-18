@@ -11,6 +11,7 @@ import amcham from "@/assets/partners/amcham.webp";
 import foundersFirst from "@/assets/partners/founders_first.webp";
 import co100 from "@/assets/partners/co100.webp";
 import chamber from "@/assets/partners/chamber.webp";
+import { CypherText } from "@/components/animations/CypherText";
 
 const Enterprise = () => {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -32,8 +33,8 @@ const Enterprise = () => {
                             <Globe className="w-6 h-6 text-black" />
                         </div>
                         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-black leading-hero">
-                            Big systems. <br className="hidden md:block" />
-                            Zero headaches.
+                            <CypherText text="Big systems." duration={1500} /> <br className="hidden md:block" />
+                            <CypherText text="Zero headaches." duration={1500} delay={500} />
                         </h1>
                         <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-12">
                             You have complex needs. We have simple solutions. We untangle your legacy mess and build systems that just work.

@@ -4,6 +4,7 @@ import DottedGlowBackground from "@/components/DottedGlowBackground";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Check, ArrowRight, RefreshCcw, DollarSign, Calculator as CalculatorIcon, Zap } from "lucide-react";
+import { CypherText } from "@/components/animations/CypherText";
 
 type Option = {
     id: string;
@@ -160,7 +161,7 @@ const Calculator = () => {
                     </div>
                     <div className="max-w-3xl">
                         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.05]">
-                            {isStartup ? "Startup Comparison Tool" : "Efficiency ROI Calculator"}
+                            {isStartup ? <CypherText text="Startup Comparison Tool" duration={1500} /> : <CypherText text="Efficiency ROI Calculator" duration={1500} />}
                         </h1>
                         <p className="text-xl text-zinc-500 leading-relaxed mb-12">
                             See what a {isStartup ? "traditional agency" : "custom software firm"} would charge vs. Buildify.
