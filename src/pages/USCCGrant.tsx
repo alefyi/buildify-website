@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { CypherText } from "@/components/animations/CypherText";
+import { IconReveal } from "@/components/animations/IconReveal";
+import { BiGlobe, BiBoltCircle, BiDollarCircle } from "react-icons/bi";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,8 @@ import { CheckCircle, ArrowRight, Building2, User, Globe, FileText, Server, Cred
 import { USFlag } from "@/components/icons/USFlag";
 import { cn } from "@/lib/utils";
 import { Section } from "@/components/ui/section";
+import { FadeIn } from "@/components/animations/FadeIn";
+import { HeroPattern } from "@/components/HeroPattern";
 
 const GOOGLE_FORM_URL = import.meta.env.VITE_USCC_GRANT_FORM_URL || "#";
 
@@ -69,24 +72,37 @@ const USCCGrant = () => {
             <Section variant="default" className="pt-20 md:pt-32 pb-32 border-b border-zinc-200 relative overflow-hidden bg-white">
                 <DottedGlowBackground />
                 <div className="max-w-layout mx-auto px-6 relative z-10">
+                    <HeroPattern />
                     <div className="max-w-4xl">
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-8 leading-hero min-h-[1.2em]">
-                            <CypherText text="Digital Impact Grant" duration={1500} /> <USFlag className="h-10 md:h-16 w-auto rounded-sm shadow-sm inline-block ml-4 align-middle" />
-                        </h1>
-                        <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mb-12 leading-relaxed">
-                            We cover the development costs for apps that empower American businesses. Transform your idea into a scalable technology platform without the agency price tag.
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row items-center gap-4">
-                            <a href={GOOGLE_FORM_URL} target="_blank" rel="noopener noreferrer">
-                                <Button size="lg" className="h-16 px-8 text-lg bg-black text-white hover:bg-zinc-800 rounded-md shadow-lg hover:shadow-xl transition-all">
-                                    Apply Now <ExternalLink className="ml-2 w-5 h-5" />
-                                </Button>
-                            </a>
-                            <p className="text-zinc-500 text-sm">
-                                Takes ~5 mins via Google Forms
+                        <FadeIn>
+                            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-8 leading-hero min-h-[1.2em]">
+                                Digital{" "}
+                                <IconReveal index={0}><span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-blue-50"><BiGlobe className="w-3.5 h-3.5 text-blue-500" /></span></IconReveal>
+                                {" "}Impact{" "}
+                                <IconReveal index={1}><span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-amber-50"><BiBoltCircle className="w-3.5 h-3.5 text-amber-500" /></span></IconReveal>
+                                {" "}Grant{" "}
+                                <IconReveal index={2}><span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-emerald-50"><BiDollarCircle className="w-3.5 h-3.5 text-emerald-500" /></span></IconReveal>
+                                {" "}<USFlag className="h-10 md:h-16 w-auto rounded-sm shadow-sm inline-block ml-4 align-middle" />
+                            </h1>
+                        </FadeIn>
+                        <FadeIn delay={0.1}>
+                            <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mb-12 leading-relaxed">
+                                We cover the development costs for apps that empower American businesses. Transform your idea into a scalable technology platform without the agency price tag.
                             </p>
-                        </div>
+                        </FadeIn>
+
+                        <FadeIn delay={0.2}>
+                            <div className="flex flex-col sm:flex-row items-center gap-4">
+                                <a href={GOOGLE_FORM_URL} target="_blank" rel="noopener noreferrer">
+                                    <Button size="sm" className="text-sm font-semibold px-4 py-1.5 rounded-2xl bg-black text-white hover:bg-zinc-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.16),0_1px_2px_0_rgba(0,0,0,0.24)] active:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.08)] transition-all duration-150">
+                                        Apply Now <ExternalLink className="ml-2 w-5 h-5" />
+                                    </Button>
+                                </a>
+                                <p className="text-zinc-500 text-sm">
+                                    Takes ~5 mins via Google Forms
+                                </p>
+                            </div>
+                        </FadeIn>
                     </div>
                 </div>
             </Section>
@@ -114,12 +130,14 @@ const USCCGrant = () => {
                         { title: "100% Ownership", desc: "You retain full IP rights. We take 0% equity in your business.", icon: ShieldCheck },
                         { title: "Enterprise Tech", desc: "Built on Google Cloud & React Native for massive scale.", icon: Server },
                         { title: "Rapid Launch", desc: "Go from concept to App Store in as little as 4-6 weeks.", icon: ArrowUpRight }
-                    ].map((item) => (
-                        <div key={item.title} className="p-10 bg-white hover:bg-zinc-50 transition-colors group">
-                            <item.icon className="w-6 h-6 text-zinc-500 group-hover:text-black transition-colors mb-4" />
-                            <h4 className="font-bold text-lg mb-2 tracking-tight">{item.title}</h4>
-                            <p className="text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
-                        </div>
+                    ].map((item, i) => (
+                        <FadeIn key={item.title} delay={0.1 + (i * 0.1)}>
+                            <div className="p-10 bg-white hover:bg-zinc-50 transition-colors group">
+                                <item.icon className="w-6 h-6 text-zinc-500 group-hover:text-black transition-colors mb-4" />
+                                <h4 className="font-bold text-lg mb-2 tracking-tight">{item.title}</h4>
+                                <p className="text-sm text-zinc-500 leading-relaxed">{item.desc}</p>
+                            </div>
+                        </FadeIn>
                     ))}
                 </div>
             </Section>
@@ -127,15 +145,17 @@ const USCCGrant = () => {
             {/* 3. FAQ Section (Identical to Home) */}
             <Section variant="boxed">
                 <div className="max-w-layout mx-auto grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200 border-t border-zinc-200">
-                    <div className="p-10 bg-zinc-50">
-                        <h3 className="text-2xl font-bold tracking-tight mb-4">FAQ</h3>
-                        <p className="text-zinc-500">Everything you need to know about eligibility and terms.</p>
-                    </div>
+                    <FadeIn>
+                        <div className="p-10 bg-zinc-50">
+                            <h3 className="text-2xl font-bold tracking-tight mb-4">FAQ</h3>
+                            <p className="text-zinc-500">Everything you need to know about eligibility and terms.</p>
+                        </div>
+                    </FadeIn>
                     <div className="lg:col-span-2 divide-y divide-zinc-200">
                         {faqs.map((faq, i) => (
                             <button
                                 key={i}
-                                className="w-full text-left p-10 hover:bg-zinc-50 transition-colors group cursor-pointer focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black"
+                                className="w-full text-left p-10 transition-colors group cursor-pointer focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black"
                                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
                             >
                                 <div className="flex justify-between items-center transition-colors">
@@ -162,18 +182,20 @@ const USCCGrant = () => {
             {/* 4. Final CTA */}
             <Section variant="default" className="py-32 border-t border-zinc-200 bg-white">
                 <div className="max-w-layout mx-auto px-6 text-center">
-                    <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-md uppercase">
-                        Final Step
-                    </Badge>
-                    <h2 className="text-6xl font-bold tracking-tighter mb-8 leading-[0.9]">Ready to build?</h2>
-                    <p className="text-zinc-500 text-xl mb-12 max-w-lg mx-auto leading-relaxed">
-                        Secure your grant and start building your future today.
-                    </p>
-                    <a href={GOOGLE_FORM_URL} target="_blank" rel="noopener noreferrer">
-                        <Button size="lg" className="h-16 px-12 text-lg rounded-md bg-black text-white hover:bg-zinc-800 shadow-none">
-                            Start Application <ArrowRight className="ml-2 w-5 h-5" />
-                        </Button>
-                    </a>
+                    <FadeIn>
+                        <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-md uppercase">
+                            Final Step
+                        </Badge>
+                        <h2 className="text-6xl font-bold tracking-tighter mb-8 leading-[0.9]">Ready to build?</h2>
+                        <p className="text-zinc-500 text-xl mb-12 max-w-lg mx-auto leading-relaxed">
+                            Secure your grant and start building your future today.
+                        </p>
+                        <a href={GOOGLE_FORM_URL} target="_blank" rel="noopener noreferrer">
+                            <Button size="sm" className="text-sm font-semibold px-4 py-1.5 rounded-2xl bg-black text-white hover:bg-zinc-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.16),0_1px_2px_0_rgba(0,0,0,0.24)] active:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.08)] transition-all duration-150">
+                                Start Application <ArrowRight className="ml-2 w-5 h-5" />
+                            </Button>
+                        </a>
+                    </FadeIn>
                 </div>
             </Section>
         </div>

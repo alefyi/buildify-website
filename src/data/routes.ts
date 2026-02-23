@@ -30,41 +30,49 @@ export const mainRoutes: Route[] = [
 
 export const footerRoutes = [
     {
-        title: "Product",
+        title: "Services",
         links: [
-            { label: "Pricing", href: "/business" },
             { label: "Development", href: "/development" },
             { label: "Market Analysis", href: "/market-analysis" },
             { label: "Branding & Identity", href: "/branding-identity" },
-            { label: "Wireframes", href: "/wireframes-blueprints" },
+            { label: "Wireframes & Blueprints", href: "/wireframes-blueprints" },
             { label: "Next Versions", href: "/next-versions" },
-            { label: "For Creators", href: "/creators" },
+            { label: "Adalo Development", href: "/adalo" },
         ]
     },
     {
-        title: "Solutions",
+        title: "Industries",
         links: [
+            { label: "For Business", href: "/business" },
+            { label: "For Enterprise", href: "/enterprise" },
+            { label: "For Creators", href: "/creators" },
+            { label: "For Faith", href: "/faith" },
             { label: "For Restaurants", href: "/for/restaurant" },
             { label: "For Gyms", href: "/for/gym" },
-            { label: "Loyalty Programs", href: "/for/business" },
             { label: "Use Cases", href: "/use-cases" },
-            { label: "For Adalo", href: "/adalo" },
         ]
     },
     {
-        title: "Resources",
+        title: "Tools",
         links: [
-            { label: "Insights (Blog)", href: "/insights" },
             { label: "App Calculator", href: "/app-calculator/for-business" },
-            { label: "Help Center", href: "/contact" },
-            { label: "Referral Program", href: "/referral" },
+            { label: "Startup Calculator", href: "/app-calculator/for-startups" },
+            { label: "Billing", href: "/bill" },
         ]
     },
     {
         title: "Company",
         links: [
-            { label: "Enterprise", href: "/enterprise" },
+            { label: "Insights (Blog)", href: "/insights" },
+            { label: "Discovery Call", href: "/discovery" },
             { label: "Contact", href: "/contact" },
+            { label: "Referral Program", href: "/referral" },
+            { label: "USCC Grant", href: "/uscc-grant" },
+        ]
+    },
+    {
+        title: "Legal",
+        links: [
             { label: "Privacy Policy", href: "/disclosures/privacy" },
             { label: "Terms of Service", href: "/disclosures/terms" },
             { label: "Acceptable Use", href: "/disclosures/acceptable-use" },

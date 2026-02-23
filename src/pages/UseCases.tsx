@@ -8,6 +8,8 @@ import { ArrowRight, CheckCircle, ArrowUpRight, Search } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { SmartInput } from "@/components/ui/smart-input";
+import { FadeIn } from "@/components/animations/FadeIn";
+import { Section } from "@/components/ui/section";
 
 // Simple Levenshtein distance for "Did you mean"
 const levenshteinDistance = (a: string, b: string): number => {
@@ -66,39 +68,47 @@ const UseCases = () => {
             />
 
             {/* Desktop Sticky Container */}
-            <div className="max-w-[1400px] mx-auto w-full flex flex-col lg:flex-row relative">
+            <div className="max-w-layout mx-auto w-full flex flex-col lg:flex-row relative">
 
                 {/* Main Content (Left) */}
                 <div className="flex-1 w-full lg:pr-12">
                     {/* Hero - Modified: px-8 to match grid padding */}
                     <div className="px-8 py-32 border-b border-zinc-100 relative overflow-hidden">
                         <DottedGlowBackground />
-                        <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase relative z-10">
-                            Industries
-                        </Badge>
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-black relative z-10">
-                            Built for Your Business.
-                        </h1>
-                        <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-8 relative z-10">
-                            Find your industry to see exactly how we can help you scale.
-                        </p>
+                        <FadeIn>
+                            <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase relative z-10">
+                                Industries
+                            </Badge>
+                        </FadeIn>
+                        <FadeIn delay={0.1}>
+                            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-black relative z-10">
+                                Built for Your Business.
+                            </h1>
+                        </FadeIn>
+                        <FadeIn delay={0.2}>
+                            <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-8 relative z-10">
+                                Find your industry to see exactly how we can help you scale.
+                            </p>
+                        </FadeIn>
 
                         {/* Search Bar */}
-                        <div className="max-w-md relative z-10">
-                            <SmartInput
-                                type="text"
-                                placeholder="Search your industry..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="text-lg"
-                            />
-                            {/* Did You Mean */}
-                            {didYouMean && (
-                                <div className="mt-2 text-sm text-zinc-500">
-                                    Did you mean <button onClick={() => setSearchQuery(didYouMean.name)} className="text-blue-600 font-medium hover:underline">{didYouMean.name}</button>?
-                                </div>
-                            )}
-                        </div>
+                        <FadeIn delay={0.3}>
+                            <div className="max-w-md relative z-10">
+                                <SmartInput
+                                    type="text"
+                                    placeholder="Search your industry..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="text-lg"
+                                />
+                                {/* Did You Mean */}
+                                {didYouMean && (
+                                    <div className="mt-2 text-sm text-zinc-500">
+                                        Did you mean <button onClick={() => setSearchQuery(didYouMean.name)} className="text-blue-600 font-medium hover:underline">{didYouMean.name}</button>?
+                                    </div>
+                                )}
+                            </div>
+                        </FadeIn>
                     </div>
 
                     {/* Grid - Modified: Removed outer border to prevent 'box' look. Inner lines via gap-px. */}
@@ -136,25 +146,27 @@ const UseCases = () => {
                 {/* Right Sidebar (Sticky on Desktop) */}
                 <div className="hidden lg:block w-[350px] flex-shrink-0 border-l border-zinc-200 bg-white relative">
                     <div className="sticky top-24 p-8">
-                        <div className="bg-zinc-50 p-8 border border-zinc-200 shadow-sm">
-                            <h3 className="text-2xl font-bold mb-4">Don't see your industry?</h3>
-                            <p className="text-zinc-500 mb-8 leading-relaxed">
-                                We work with all types of businesses. Let's chat about your specific needs.
-                            </p>
-                            <Link to="/contact" className="block">
-                                <Button size="lg" className="w-full h-12 text-lg rounded-none bg-black text-white hover:bg-zinc-800">
-                                    Let's Chat
-                                </Button>
-                            </Link>
-                            <div className="mt-6 space-y-3">
-                                <div className="flex items-center text-sm text-zinc-600">
-                                    <CheckCircle className="w-4 h-4 mr-2 text-green-500" /> Custom Solutions
-                                </div>
-                                <div className="flex items-center text-sm text-zinc-600">
-                                    <CheckCircle className="w-4 h-4 mr-2 text-green-500" /> Same Day Quote
+                        <FadeIn delay={0.2}>
+                            <div className="bg-zinc-50 p-8 border border-zinc-200 shadow-sm">
+                                <h3 className="text-2xl font-bold mb-4">Don't see your industry?</h3>
+                                <p className="text-zinc-500 mb-8 leading-relaxed">
+                                    We work with all types of businesses. Let's chat about your specific needs.
+                                </p>
+                                <Link to="/contact" className="block">
+                                    <Button size="sm" className="w-full text-sm font-semibold px-4 py-1.5 rounded-2xl bg-black text-white hover:bg-zinc-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.16),0_1px_2px_0_rgba(0,0,0,0.24)] active:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.08)] transition-all duration-150">
+                                        Let's Chat
+                                    </Button>
+                                </Link>
+                                <div className="mt-6 space-y-3">
+                                    <div className="flex items-center text-sm text-zinc-600">
+                                        <CheckCircle className="w-4 h-4 mr-2 text-green-500" /> Custom Solutions
+                                    </div>
+                                    <div className="flex items-center text-sm text-zinc-600">
+                                        <CheckCircle className="w-4 h-4 mr-2 text-green-500" /> Same Day Quote
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </FadeIn>
                     </div>
                 </div>
 

@@ -11,9 +11,9 @@ interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Section = ({ variant = "default", container = false, className, children, ...props }: SectionProps) => {
     const variants = {
         default: "bg-white",
-        boxed: "max-w-[1200px] mx-auto border-x border-zinc-200 bg-white",
+        boxed: "max-w-layout mx-auto bg-white",
         full: "w-full bg-white",
-        grid: "border-b border-zinc-200 bg-zinc-50"
+        grid: "bg-zinc-50"
     };
 
     const styles = cn(variants[variant], className);
@@ -21,7 +21,7 @@ export const Section = ({ variant = "default", container = false, className, chi
     return (
         <section className={styles} {...props}>
             {container ? (
-                <div className="max-w-[1200px] mx-auto">
+                <div className="max-w-layout mx-auto">
                     {children}
                 </div>
             ) : (

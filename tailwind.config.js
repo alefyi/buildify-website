@@ -47,11 +47,33 @@ export default {
       },
       borderRadius: {
         lg: "8px",
-        md: "4px",
-        sm: "2px",
+        md: "6px",
+        sm: "4px",
       },
       maxWidth: {
-        'layout': '1200px',
+        'layout': '900px',
+        'container-xs': '20rem',    // 320px
+        'container-sm': '24rem',    // 384px
+        'container-md': '28rem',    // 448px
+        'container-lg': '32rem',    // 512px
+        'container-xl': '36rem',    // 576px
+        'container-2xl': '42rem',   // 672px
+        'container-3xl': '48rem',   // 768px
+        'container-4xl': '56rem',   // 896px
+        'container-5xl': '64rem',   // 1024px
+        'container-6xl': '72rem',   // 1152px
+        'container-7xl': '80rem',   // 1280px
+      },
+      fontSize: {
+        'hero': ['30px', { lineHeight: '36px', letterSpacing: '-0.75px', fontWeight: '600' }],
+        'section': ['30px', { lineHeight: '36px', letterSpacing: '-0.75px', fontWeight: '600' }],
+        'card-title': ['20px', { lineHeight: '28px', fontWeight: '600' }],
+        'card-title-sm': ['18px', { lineHeight: '28px', fontWeight: '600' }],
+        'label': ['14px', { lineHeight: '20px', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '26px', fontWeight: '500' }],
+        'body': ['14px', { lineHeight: '22.75px', fontWeight: '400' }],
+        'body-medium': ['14px', { lineHeight: '22.75px', fontWeight: '500' }],
+        'caption': ['12px', { lineHeight: '20px', fontWeight: '400' }],
       },
       lineHeight: {
         'hero': '1.05',

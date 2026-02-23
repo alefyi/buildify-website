@@ -6,20 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="Buildify builds software for your business. From custom apps to scalable platforms, we help you grow with technology.">
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta property="og:image" content="/og-image.jpg" />
     <title>Buildify | High-Performance Business Tech</title>
     <!-- Tailwind Script for backup if build fails? No, we are using npm. But original used script. Let's keep Google Fonts. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Hide static fallback to prevent flash before React hydrates.
+           Bots/crawlers still see the content in the HTML source. */
+        #root>.static-fallback {
+            display: none;
+        }
+    </style>
 </head>
 
 <body class="bg-white">
     <div id="root">
         <!-- App Shell / Static Fallback for Bots & No-JS -->
-        <div style="font-family: 'Inter', sans-serif; padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto;">
+        <div class="static-fallback"
+            style="font-family: 'Inter', sans-serif; padding: 4rem 1.5rem; max-width: 1200px; margin: 0 auto;">
             <header style="margin-bottom: 4rem;">
                 <h1
                     style="font-size: 3.75rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.025em; color: #000; margin-bottom: 2rem;">

@@ -150,52 +150,52 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
     return (
         <div className="w-full space-y-6">
             {/* Search Input Area */}
-            <div className="flex flex-col md:flex-row items-stretch gap-4">
-                <div className="w-full md:flex-1 relative group p-[2px] overflow-hidden rounded-[4px] bg-zinc-200 h-20 transition-all duration-500">
-                    {/* Layer 1: The Underlying Glow (Blurred) */}
-                    <div className="absolute inset-[-200%] animate-border-glow glow-gradient glow-blur z-0" />
+            <div className="w-full relative group p-[2px] overflow-hidden rounded-full bg-zinc-200 transition-all duration-500">
+                {/* Layer 1: The Underlying Glow (Blurred) */}
+                <div className="absolute inset-[-200%] animate-border-glow glow-gradient glow-blur z-0" />
 
-                    {/* Layer 2: The Sharp Border (Rotating) */}
-                    <div className="absolute inset-[-200%] animate-border-glow glow-gradient z-0 opacity-100" />
+                {/* Layer 2: The Sharp Border (Rotating) */}
+                <div className="absolute inset-[-200%] animate-border-glow glow-gradient z-0 opacity-100" />
 
-                    <div
-                        className={cn(
-                            "relative z-10 flex items-center px-6 bg-white transition-all duration-300",
-                            "rounded-[3px] w-full h-full"
-                        )}
-                        onClick={() => inputRef.current?.focus()}
-                    >
-                        <Search className="w-6 h-6 text-zinc-400 mr-4 shrink-0 transition-colors group-focus-within:text-black" />
+                <div
+                    className={cn(
+                        "relative z-10 flex flex-row items-center bg-white transition-all duration-300",
+                        "rounded-full w-full py-1.5 pr-2.5 pl-5 gap-4"
+                    )}
+                    onClick={() => inputRef.current?.focus()}
+                >
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                        <Search className="w-4 h-4 text-zinc-400 shrink-0 transition-colors group-focus-within:text-black" />
                         <input
                             ref={inputRef}
                             type="text"
                             placeholder={`Try your ${placeholder}`}
-                            className="flex-1 bg-transparent outline-none text-xl md:text-2xl font-semibold tracking-tight text-black placeholder:text-zinc-300 py-4"
+                            className="flex-1 min-w-0 bg-transparent outline-none text-base font-medium tracking-tight text-black placeholder:text-zinc-300 py-2.5"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
                         />
                     </div>
+                    <button
+                        onClick={handleGenerate}
+                        disabled={!input.trim() || loadingState === LoadingState.LOADING}
+                        className={cn(
+                            "w-auto px-5 py-2 font-medium text-sm rounded-full transition-all flex items-center justify-center gap-2 shrink-0",
+                            loadingState === LoadingState.LOADING
+                                ? "bg-zinc-100 text-zinc-400 cursor-not-allowed"
+                                : "bg-black text-white hover:bg-zinc-800"
+                        )}
+                    >
+                        {loadingState === LoadingState.LOADING ? (
+                            <Loader2 className="w-5 h-5 animate-spin" />
+                        ) : (
+                            <>
+                                See my results
+                                <ArrowRight className="w-4 h-4" />
+                            </>
+                        )}
+                    </button>
                 </div>
-                <button
-                    onClick={handleGenerate}
-                    disabled={!input.trim() || loadingState === LoadingState.LOADING}
-                    className={cn(
-                        "w-full md:w-auto px-10 h-20 font-bold text-xl md:text-2xl rounded-[4px] transition-all flex items-center justify-center gap-3 relative z-10",
-                        loadingState === LoadingState.LOADING
-                            ? "bg-zinc-100 text-zinc-400 border border-zinc-200 cursor-not-allowed"
-                            : "bg-black text-white hover:bg-zinc-800"
-                    )}
-                >
-                    {loadingState === LoadingState.LOADING ? (
-                        <Loader2 className="w-6 h-6 animate-spin" />
-                    ) : (
-                        <>
-                            See my results
-                            <ArrowRight className="w-5 h-5" />
-                        </>
-                    )}
-                </button>
             </div>
 
             {/* Results Display */}
@@ -204,7 +204,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                 loadingState !== LoadingState.IDLE ? "max-h-[2500px] opacity-100 mt-8" : "max-h-0 opacity-0"
             )}>
                 {loadingState === LoadingState.ERROR ? (
-                    <div className="bg-zinc-50 border border-zinc-200 p-8 rounded-[4px] text-center space-y-4">
+                    <div className="bg-zinc-50 border border-zinc-200 p-8 rounded-xl text-center space-y-4">
                         <div className="flex justify-center">
                             <RefreshCcw className="w-8 h-8 text-zinc-400" />
                         </div>
@@ -222,7 +222,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                         </button>
                     </div>
                 ) : (
-                    <div className="bg-white border border-zinc-200 rounded-[4px] divide-y divide-zinc-200 shadow-sm">
+                    <div className="bg-white border border-zinc-200 rounded-xl divide-y divide-zinc-200 shadow-sm">
                         {/* Methodology Checkboxes */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-zinc-200 border-b border-zinc-200 bg-zinc-50/50">
                             <div className="p-10 flex flex-col justify-center space-y-1">
@@ -237,7 +237,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                                 onClick={() => setChecklist(prev => ({ ...prev, website: !prev.website }))}
                             >
                                 <div className={cn(
-                                    "w-5 h-5 rounded-[4px] border flex items-center justify-center transition-all shrink-0",
+                                    "w-5 h-5 rounded-md border flex items-center justify-center transition-all shrink-0",
                                     checklist.website ? "bg-green-500 border-green-500 text-white" : "bg-white border-zinc-300 group-hover:border-zinc-400"
                                 )}>
                                     {checklist.website && <Check className="w-3 h-3" />}
@@ -251,7 +251,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                                 onClick={() => setChecklist(prev => ({ ...prev, loyalty: !prev.loyalty }))}
                             >
                                 <div className={cn(
-                                    "w-5 h-5 rounded-[4px] border flex items-center justify-center transition-all shrink-0",
+                                    "w-5 h-5 rounded-md border flex items-center justify-center transition-all shrink-0",
                                     checklist.loyalty ? "bg-green-500 border-green-500 text-white" : "bg-white border-zinc-300 group-hover:border-zinc-400"
                                 )}>
                                     {checklist.loyalty && <Check className="w-3 h-3" />}
@@ -265,7 +265,7 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                                 onClick={() => setChecklist(prev => ({ ...prev, automation: !prev.automation }))}
                             >
                                 <div className={cn(
-                                    "w-5 h-5 rounded-[4px] border flex items-center justify-center transition-all shrink-0",
+                                    "w-5 h-5 rounded-md border flex items-center justify-center transition-all shrink-0",
                                     checklist.automation ? "bg-green-500 border-green-500 text-white" : "bg-white border-zinc-300 group-hover:border-zinc-400"
                                 )}>
                                     {checklist.automation && <Check className="w-3 h-3" />}
@@ -339,34 +339,20 @@ export const GrowthTool = ({ industryName }: { industryName?: string }) => {
                                             data-cal-namespace="buildify-business"
                                             data-cal-link="alefyi/buildify-business"
                                             data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                                            className="w-full md:w-auto px-8 py-4 bg-black text-white hover:bg-zinc-800 rounded-[4px] font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                                            className="w-full md:w-auto px-8 py-4 bg-black text-white hover:bg-zinc-800 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                                         >
-                                            Start Building <ArrowRight className="w-5 h-5" />
+                                            Get Started <ArrowRight className="w-5 h-5" />
                                         </button>
                                     ) : (
                                         <button
                                             data-cal-namespace="buildify-creators"
                                             data-cal-link="alefyi/buildify-creators"
                                             data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
-                                            className="w-full md:w-auto px-8 py-4 bg-black text-white hover:bg-zinc-800 rounded-[4px] font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                                            className="w-full md:w-auto px-8 py-4 bg-black text-white hover:bg-zinc-800 rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                                         >
-                                            Start Building <ArrowRight className="w-5 h-5" />
+                                            Get Started <ArrowRight className="w-5 h-5" />
                                         </button>
                                     )}
-                                    <div className="flex items-center gap-2 w-full md:w-auto">
-                                        <ContactButton
-                                            href="tel:9093455543"
-                                            label="Call"
-                                            icon={Phone}
-                                            className="flex-1 justify-center"
-                                        />
-                                        <ContactButton
-                                            href="sms:3238077736"
-                                            label="Text"
-                                            icon={MessageSquare}
-                                            className="flex-1 justify-center"
-                                        />
-                                    </div>
                                 </div>
                             </div>
                         )}
@@ -394,7 +380,7 @@ const StatCard = ({ label, value, sub, icon: Icon, loading }: any) => (
         </div>
         <div className="space-y-1">
             {loading ? (
-                <div className="h-12 w-24 bg-zinc-100 animate-pulse rounded-[2px]" />
+                <div className="h-12 w-24 bg-zinc-100 animate-pulse rounded-lg" />
             ) : (
                 <div className="text-5xl font-bold tracking-tighter text-black tabular-nums">{value}</div>
             )}
@@ -407,7 +393,7 @@ const ContactButton = ({ href, label, icon: Icon, primary, className }: any) => 
     <a
         href={href}
         className={cn(
-            "flex items-center gap-2 px-6 py-4 rounded-[4px] text-sm font-bold transition-all active:scale-95",
+            "flex items-center gap-2 px-6 py-4 rounded-xl text-sm font-bold transition-all active:scale-95",
             primary
                 ? "bg-black text-white hover:bg-zinc-800"
                 : "bg-white border border-zinc-200 text-black hover:bg-zinc-50",

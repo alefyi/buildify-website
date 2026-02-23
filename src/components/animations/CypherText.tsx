@@ -10,9 +10,7 @@ interface CypherTextProps {
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+";
 
 export function CypherText({ text, duration = 2000, delay = 0, className }: CypherTextProps) {
-    const [displayText, setDisplayText] = useState(() => {
-        return text.split('').map(char => char === ' ' ? ' ' : CHARS[Math.floor(Math.random() * CHARS.length)]).join('');
-    });
+    const [displayText, setDisplayText] = useState("");
     const [isAnimating, setIsAnimating] = useState(false);
 
     useEffect(() => {
@@ -22,13 +20,16 @@ export function CypherText({ text, duration = 2000, delay = 0, className }: Cyph
         const startAnimation = () => {
             setIsAnimating(true);
             const startTime = Date.now();
-            const totalSteps = text.length;
-            const timePerStep = duration / totalSteps;
+            const totalLength = text.length;
 
             interval = setInterval(() => {
                 const now = Date.now();
+                // Easing? Maybe linear is fine.
                 const progress = Math.min((now - startTime) / duration, 1);
-                const stepsRevealed = Math.floor(progress * totalSteps);
+
+                // Calculate how many characters to show based on progress
+                // We want to slightly overshoot 1 to ensure full reveal
+                const visibleLength = Math.floor(progress * totalLength);
 
                 if (progress >= 1) {
                     setDisplayText(text);
@@ -38,23 +39,31 @@ export function CypherText({ text, duration = 2000, delay = 0, className }: Cyph
                 }
 
                 let result = "";
-                for (let i = 0; i < text.length; i++) {
-                    if (i < stepsRevealed) {
-                        result += text[i];
+                // Build string up to visibleLength
+                for (let i = 0; i <= visibleLength && i < totalLength; i++) {
+                    // Current character to process
+                    const char = text[i];
+
+                    // Logic:
+                    // If we are "deep" in the history (i.e. i < visibleLength - scrambleWindow), show correct char.
+                    // If we are at the "tip" (i.e. i >= visibleLength - scrambleWindow), show random char.
+                    // scrambleWindow controls how many chars at the end are scrambled.
+
+                    const scrambleWindow = 2; // Adjust for effect
+
+                    if (visibleLength - i > scrambleWindow) {
+                        result += char;
                     } else {
-                        // Random cypher character
-                        const randomChar = CHARS[Math.floor(Math.random() * CHARS.length)];
-                        // Preserve spaces mostly, but sometimes cypher them for effect? 
-                        // Playbooks usually keeps structure. Let's keep spaces as spaces.
-                        if (text[i] === " ") {
+                        // Tip is scrambling
+                        if (char === " ") {
                             result += " ";
                         } else {
-                            result += randomChar;
+                            result += CHARS[Math.floor(Math.random() * CHARS.length)];
                         }
                     }
                 }
                 setDisplayText(result);
-            }, 50); // Frame rate
+            }, 50); // frequency
         };
 
         timeout = setTimeout(startAnimation, delay);

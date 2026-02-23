@@ -1,99 +1,20 @@
 import React from "react";
 
-export const Logo = ({ className = "w-auto h-8", isActive = false }: { className?: string, isActive?: boolean }) => {
+export const Logo = ({ className = "w-auto h-8" }: { className?: string }) => {
     return (
         <svg
-            width="1000"
-            height="1000"
-            viewBox="0 0 1000 1000"
+            width="367"
+            height="367"
+            viewBox="0 0 367 367"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className={`${className} transition-all duration-300`}
+            className={className}
         >
-            <defs>
-                <linearGradient id="logo-rainbow" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#ef4444" /> {/* red-500 */}
-                    <stop offset="20%" stopColor="#f97316" /> {/* orange-500 */}
-                    <stop offset="40%" stopColor="#22c55e" /> {/* green-500 */}
-                    <stop offset="60%" stopColor="#3b82f6" /> {/* blue-500 */}
-                    <stop offset="80%" stopColor="#a855f7" /> {/* purple-500 */}
-                    <stop offset="100%" stopColor="#ec4899" /> {/* pink-500 */}
-                </linearGradient>
-                <filter id="logo-glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="15" result="blur" />
-                </filter>
-            </defs>
-
-            {/* Layer 0: Subtle Colored Glow (Fades in) */}
-            <rect
-                x="20" y="20" width="960" height="960" rx="120" ry="120"
-                fill="none"
-                stroke="url(#logo-rainbow)"
-                strokeWidth="40"
-                filter="url(#logo-glow)"
-                style={{
-                    opacity: isActive ? 0.4 : 0,
-                    transition: "opacity 0.7s ease-in-out"
-                }}
+            <rect width="366.977" height="366.977" rx="100" fill="black" />
+            <path
+                d="M208.086 92.8181C221.366 83.1999 238.555 72.0307 252.189 81.1405C265.244 89.8638 276.539 101.015 285.428 113.949C294.933 127.779 283.217 145.477 273.319 159.029C268.301 165.899 265.339 174.366 265.339 183.525C265.339 192.711 268.318 201.201 273.362 208.081C283.285 221.615 295.033 239.291 285.552 253.139C277.07 265.528 266.383 276.288 254.056 284.855C240.077 294.57 222.089 282.446 208.393 272.335C201.493 267.24 192.961 264.229 183.725 264.229C174.517 264.229 166.009 267.222 159.119 272.288C145.404 282.374 127.393 294.464 113.432 284.723C101.159 276.159 90.5184 265.417 82.0707 253.058C72.6161 239.226 84.3227 221.584 94.2239 208.068C99.2624 201.19 102.237 192.705 102.237 183.525C102.237 174.372 99.2795 165.909 94.2673 159.042C84.3899 145.508 72.7146 127.845 82.1934 114.029C91.0479 101.123 102.296 89.9889 115.299 81.2659C128.916 72.1304 146.127 83.2685 159.425 92.8626C166.26 97.7937 174.653 100.699 183.725 100.699C192.824 100.699 201.24 97.7762 208.086 92.8181ZM183.839 130.62C154.561 130.62 130.825 154.355 130.825 183.634C130.825 212.912 154.561 236.646 183.839 236.646C213.117 236.646 236.852 212.912 236.852 183.634C236.852 154.355 213.117 130.62 183.839 130.62Z"
+                fill="white"
             />
-
-            {/* Layer 0.5: Inner Dots Glow (Fades in) - Colored Rainbow Version */}
-            <g transform="translate(198, 197)"
-                filter="url(#logo-glow)"
-                style={{
-                    opacity: isActive ? 0.4 : 0,
-                    transition: "opacity 0.7s ease-in-out"
-                }}
-            >
-                <circle cx="67.315" cy="189.715" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="67.315" cy="418.965" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="181.946" cy="304.34" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="302.397" cy="187.774" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="185.831" cy="71.1998" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="418.965" cy="67.315" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="535.538" cy="420.907" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="537.479" cy="185.831" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="417.022" cy="539.422" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="185.831" cy="537.479" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="300.456" cy="422.85" r="67.315" fill="url(#logo-rainbow)" />
-                <circle cx="420.907" cy="306.282" r="67.315" fill="url(#logo-rainbow)" />
-            </g>
-
-            {/* Layer 1: Sharp Rainbow Gradient (Always rendered, covered by black) */}
-            <rect
-                x="20" y="20" width="960" height="960" rx="120" ry="120"
-                fill="none"
-                stroke="url(#logo-rainbow)"
-                strokeWidth="40"
-            />
-
-            {/* Layer 2: Black Overlay (Fades out) */}
-            <rect
-                x="20" y="20" width="960" height="960" rx="120" ry="120"
-                fill="none"
-                stroke="black"
-                strokeWidth="40"
-                style={{
-                    opacity: isActive ? 0 : 1,
-                    transition: "opacity 0.7s ease-in-out"
-                }}
-            />
-
-            {/* Inner Content - Black Dots (Fixed) */}
-            <g transform="translate(198, 197)">
-                <circle cx="67.315" cy="189.715" r="67.315" fill="black" />
-                <circle cx="67.315" cy="418.965" r="67.315" fill="black" />
-                <circle cx="181.946" cy="304.34" r="67.315" fill="black" />
-                <circle cx="302.397" cy="187.774" r="67.315" fill="black" />
-                <circle cx="185.831" cy="71.1998" r="67.315" fill="black" />
-                <circle cx="418.965" cy="67.315" r="67.315" fill="black" />
-                <circle cx="535.538" cy="420.907" r="67.315" fill="black" />
-                <circle cx="537.479" cy="185.831" r="67.315" fill="black" />
-                <circle cx="417.022" cy="539.422" r="67.315" fill="black" />
-                <circle cx="185.831" cy="537.479" r="67.315" fill="black" />
-                <circle cx="300.456" cy="422.85" r="67.315" fill="black" />
-                <circle cx="420.907" cy="306.282" r="67.315" fill="black" />
-            </g>
         </svg>
     );
 };

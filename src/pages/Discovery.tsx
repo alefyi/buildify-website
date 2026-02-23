@@ -11,7 +11,7 @@ export default function Discovery() {
         })();
     }, [])
     return (
-        <div className="w-full max-w-[1200px] mx-auto px-6">
+        <div className="w-full max-w-layout mx-auto px-6">
             <SEO
                 title="Discovery Call"
                 description="Book a discovery call with our team to discuss your project."

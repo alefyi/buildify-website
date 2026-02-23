@@ -4,7 +4,9 @@ import DottedGlowBackground from "@/components/DottedGlowBackground";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Check, ArrowRight, RefreshCcw, DollarSign, Calculator as CalculatorIcon, Zap } from "lucide-react";
-import { CypherText } from "@/components/animations/CypherText";
+
+import { FadeIn } from "@/components/animations/FadeIn";
+import { Section } from "@/components/ui/section";
 
 type Option = {
     id: string;
@@ -153,22 +155,28 @@ const Calculator = () => {
                 url="https://usebuildify.com/app-calculator"
             />
 
-            <section className="bg-white pt-20 md:pt-32 pb-32 px-6 border-b border-zinc-200 relative overflow-hidden">
+            <Section variant="default" className="pt-20 md:pt-32 pb-32 px-6 border-b border-zinc-200 relative overflow-hidden">
                 <DottedGlowBackground />
                 <div className="max-w-layout mx-auto relative z-10">
-                    <div className="w-12 h-12 bg-zinc-50 border border-zinc-200 rounded-md flex items-center justify-center mb-10">
-                        <CalculatorIcon className="w-5 h-5 text-black" />
-                    </div>
+                    <FadeIn>
+                        <div className="w-12 h-12 bg-zinc-50 border border-zinc-200 rounded-md flex items-center justify-center mb-10">
+                            <CalculatorIcon className="w-5 h-5 text-black" />
+                        </div>
+                    </FadeIn>
                     <div className="max-w-3xl">
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.05]">
-                            {isStartup ? <CypherText text="Startup Comparison Tool" duration={1500} /> : <CypherText text="Efficiency ROI Calculator" duration={1500} />}
-                        </h1>
-                        <p className="text-xl text-zinc-500 leading-relaxed mb-12">
-                            See what a {isStartup ? "traditional agency" : "custom software firm"} would charge vs. Buildify.
-                        </p>
+                        <FadeIn delay={0.1}>
+                            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.05]">
+                                {isStartup ? "Startup Comparison Tool" : "Efficiency ROI Calculator"}
+                            </h1>
+                        </FadeIn>
+                        <FadeIn delay={0.2}>
+                            <p className="text-xl text-zinc-500 leading-relaxed mb-12">
+                                See what a {isStartup ? "traditional agency" : "custom software firm"} would charge vs. Buildify.
+                            </p>
+                        </FadeIn>
                     </div>
                 </div>
-            </section>
+            </Section>
 
             {/* Added flex-1 to expand this section to fill remaining space */}
             <div className="bg-zinc-50 flex-1">

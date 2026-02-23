@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Check, ArrowRight, DollarSign, Users, Mail, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { FadeIn } from "@/components/animations/FadeIn";
+import { Section } from "@/components/ui/section";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
 
 const Referral = () => {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -88,41 +91,57 @@ const Referral = () => {
                 url="https://usebuildify.com/referral"
             />
 
-            {/* 1. Hero Section (Glow Effect on Money) */}
-            <section className="pt-20 md:pt-32 pb-20 border-b border-zinc-200 bg-white">
-                <div className="max-w-layout mx-auto px-6 text-center">
-                    <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase bg-zinc-50">
-                        Partner Program
-                    </Badge>
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-6 leading-[1.05] max-w-4xl mx-auto">
-                        Refer a founder. <br />
-                        <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-700">
-                            Earn $650.
-                            {/* Glow Underline/Blur */}
-                            <span className="absolute inset-0 bg-green-400 blur-2xl opacity-20 -z-10"></span>
-                        </span>
-                    </h1>
-                    <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mx-auto mb-16 leading-relaxed">
-                        Know a business that needs a tech upgrade? Send them our way. If they sign up, you get paid. Simple.
-                    </p>
+            {/* 1. Hero Section */}
+            <Section variant="default" className="pt-20 md:pt-32 pb-20 relative overflow-hidden">
+                <DottedGlowBackground />
+                <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-transparent to-white" />
+                <div className="max-w-layout mx-auto px-6 text-center relative z-10">
+                    <FadeIn>
+                        <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase bg-zinc-50">
+                            Partner Program
+                        </Badge>
+                    </FadeIn>
+                    <FadeIn delay={0.1}>
+                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-black mb-6 leading-[1.05] max-w-4xl mx-auto">
+                            Refer a founder. <br />
+                            <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-700">
+                                Earn $650.
+                                <span className="absolute inset-0 bg-green-400 blur-2xl opacity-20 -z-10"></span>
+                            </span>
+                        </h1>
+                    </FadeIn>
+                    <FadeIn delay={0.2}>
+                        <p className="text-lg md:text-xl text-zinc-500 max-w-2xl mx-auto mb-16 leading-relaxed">
+                            Know a business that needs a tech upgrade? Send them our way. If they sign up, you get paid. Simple.
+                        </p>
+                    </FadeIn>
 
-                    <div className="flex justify-center">
-                        <Link to="#submit-lead" onClick={(e) => {
-                            e.preventDefault();
-                            document.getElementById('submit-lead')?.scrollIntoView({ behavior: 'smooth' });
-                        }}>
-                            <Button size="lg" className="h-16 px-10 text-lg font-bold bg-black text-white hover:bg-zinc-800 rounded-sm shadow-none flex items-center justify-center gap-2">
-                                Submit a Lead <ArrowRight className="w-5 h-5" />
-                            </Button>
-                        </Link>
-                    </div>
+                    <FadeIn delay={0.3}>
+                        <div className="flex justify-center">
+                            <Link to="#submit-lead" onClick={(e) => {
+                                e.preventDefault();
+                                document.getElementById('submit-lead')?.scrollIntoView({ behavior: 'smooth' });
+                            }}>
+                                <Button size="sm" className="text-sm font-semibold px-4 py-1.5 rounded-2xl bg-black text-white hover:bg-zinc-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.16),0_1px_2px_0_rgba(0,0,0,0.24)] active:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.08)] transition-all duration-150 flex items-center justify-center gap-2">
+                                    Submit a Lead <ArrowRight className="w-5 h-5" />
+                                </Button>
+                            </Link>
+                        </div>
+                    </FadeIn>
                 </div>
-            </section>
+            </Section>
 
             {/* 2. How it Works (3-Step Process) */}
-            <section className="py-24 bg-zinc-50 border-b border-zinc-200">
-                <div className="max-w-layout mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Section variant="full" className="">
+                <div className="max-w-layout mx-auto px-6 py-10 md:py-16">
+                    <FadeIn>
+                        <h2 className="text-section text-black max-w-xl">How it works.</h2>
+                    </FadeIn>
+                    <FadeIn delay={0.1}>
+                        <p className="text-sm font-medium text-zinc-500 max-w-2xl mt-4 leading-relaxed">Three steps. No complexity.</p>
+                    </FadeIn>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
                         {[
                             {
                                 step: "01",
@@ -143,33 +162,37 @@ const Referral = () => {
                                 icon: DollarSign
                             }
                         ].map((item, i) => (
-                            <div key={i} className="bg-white p-10 border border-zinc-200 rounded-sm relative overflow-hidden group">
-                                <span className="text-[120px] font-bold text-zinc-50 absolute -right-6 -bottom-10 select-none group-hover:text-zinc-100 transition-colors">
-                                    {item.step}
-                                </span>
-                                <div className="relative z-10">
-                                    <div className="w-12 h-12 bg-zinc-100 rounded-sm flex items-center justify-center mb-6">
-                                        <item.icon className="w-5 h-5 text-black" />
+                            <FadeIn key={i} delay={0.1 + (i * 0.1)}>
+                                <div className="bg-zinc-50 rounded-2xl p-8 h-full relative overflow-hidden group">
+                                    <span className="text-[120px] font-bold text-zinc-100 absolute -right-6 -bottom-10 select-none group-hover:text-zinc-200 transition-colors">
+                                        {item.step}
+                                    </span>
+                                    <div className="relative z-10">
+                                        <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center mb-5">
+                                            <item.icon className="w-5 h-5 text-black" />
+                                        </div>
+                                        <h3 className="text-base font-semibold mb-2">{item.title}</h3>
+                                        <p className="text-zinc-500 leading-relaxed text-sm">
+                                            {item.desc}
+                                        </p>
                                     </div>
-                                    <h3 className="text-xl font-bold tracking-tight mb-4">{item.title}</h3>
-                                    <p className="text-zinc-500 leading-relaxed text-sm">
-                                        {item.desc}
-                                    </p>
                                 </div>
-                            </div>
+                            </FadeIn>
                         ))}
                     </div>
                 </div>
-            </section>
+            </Section>
 
             {/* 3. Lead Submission Form */}
-            <section id="submit-lead" className="py-24 bg-white border-b border-zinc-200">
-                <div className="max-w-[800px] mx-auto px-6">
-                    <div className="text-center mb-16">
-                        <CertificateIcon className="w-12 h-12 mx-auto mb-6 text-black" />
-                        <h2 className="text-4xl font-bold tracking-tight mb-4">Submit a Referral</h2>
-                        <p className="text-zinc-500">We'll handle the rest. You'll hear from us within 24 hours.</p>
-                    </div>
+            <Section variant="full" className="">
+                <div id="submit-lead" className="max-w-[800px] mx-auto px-6 py-10 md:py-16">
+                    <FadeIn>
+                        <div className="text-center mb-16">
+                            <CertificateIcon className="w-12 h-12 mx-auto mb-6 text-black" />
+                            <h2 className="text-section text-black">Submit a Referral</h2>
+                            <p className="text-sm font-medium text-zinc-500 mt-4">We'll handle the rest. You'll hear from us within 24 hours.</p>
+                        </div>
+                    </FadeIn>
 
                     <div className="bg-zinc-50 p-8 md:p-12 border border-zinc-200 rounded-sm">
                         <form onSubmit={handleSubmit} className="space-y-6">
@@ -253,48 +276,56 @@ const Referral = () => {
                                 ></textarea>
                             </div>
 
-                            <Button disabled={isSubmitting} size="lg" className="w-full h-14 text-lg font-bold bg-black text-white hover:bg-zinc-800 rounded-sm shadow-none mt-4">
+                            <Button disabled={isSubmitting} size="sm" className="w-full text-sm font-semibold px-4 py-1.5 rounded-2xl bg-black text-white hover:bg-zinc-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.16),0_1px_2px_0_rgba(0,0,0,0.24)] active:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.08)] transition-all duration-150 mt-4">
                                 {isSubmitting ? "Submitting..." : "Submit Referral"}
                             </Button>
                         </form>
                     </div>
                 </div>
-            </section>
+            </Section>
 
             {/* 4. FAQ (Partner Specific) */}
-            <section className="max-w-[800px] mx-auto px-6 py-24">
-                <h3 className="text-2xl font-bold tracking-tight mb-8 text-center">Partner FAQ</h3>
-                <div className="divide-y divide-zinc-200 border-t border-b border-zinc-200">
-                    {[
-                        { q: "Is there a limit to how much I can earn?", a: "No. Unlimited. Refer 10 clients, earn $6,500." },
-                        { q: "When do I get paid?", a: "Payouts are issued 30 days after the client pays their first month's invoice." },
-                        { q: "How do I track my referrals?", a: "We'll send you email updates at every stage: Received, Contacted, Closed." },
-                        { q: "Does the client pay more?", a: "Nope! The referral fee comes out of our pocket, not theirs." }
-                    ].map((faq, i) => (
-                        <div
-                            key={faq.q}
-                            className="py-6 hover:bg-zinc-50 transition-colors group cursor-pointer px-4 -mx-4 rounded-sm"
-                            onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                        >
-                            <div className="flex justify-between items-center transition-colors">
-                                <h4 className="font-bold text-base">{faq.q}</h4>
-                                <ChevronDown className={cn(
-                                    "w-5 h-5 text-zinc-300 transition-transform duration-300 group-hover:text-black",
-                                    openFaq === i ? "rotate-180 text-black" : ""
-                                )} />
-                            </div>
-                            <div className={cn(
-                                "grid transition-all duration-300 ease-in-out",
-                                openFaq === i ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"
-                            )}>
-                                <div className="overflow-hidden">
-                                    <p className="text-zinc-500 leading-relaxed text-sm">{faq.a}</p>
+            <Section variant="full" className="">
+                <div className="max-w-layout mx-auto px-6 py-10 md:py-16">
+                    <FadeIn>
+                        <h2 className="text-section text-black max-w-xl">Frequently asked questions</h2>
+                    </FadeIn>
+                    <FadeIn delay={0.1}>
+                        <p className="text-sm font-medium text-zinc-500 max-w-2xl mt-4 leading-relaxed">Common questions about the partner program.</p>
+                    </FadeIn>
+
+                    <div className="mt-16 divide-y divide-zinc-200">
+                        {[
+                            { q: "Is there a limit to how much I can earn?", a: "No. Unlimited. Refer 10 clients, earn $6,500." },
+                            { q: "When do I get paid?", a: "Payouts are issued 30 days after the client pays their first month's invoice." },
+                            { q: "How do I track my referrals?", a: "We'll send you email updates at every stage: Received, Contacted, Closed." },
+                            { q: "Does the client pay more?", a: "Nope! The referral fee comes out of our pocket, not theirs." }
+                        ].map((faq, i) => (
+                            <button
+                                key={faq.q}
+                                className="w-full text-left py-6 transition-colors group cursor-pointer focus:outline-none"
+                                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                            >
+                                <div className="flex justify-between items-center">
+                                    <h4 className="text-card-title-sm">{faq.q}</h4>
+                                    <ChevronDown className={cn(
+                                        "w-5 h-5 text-zinc-300 transition-transform duration-300 group-hover:text-black flex-shrink-0 ml-4",
+                                        openFaq === i ? "rotate-180 text-black" : ""
+                                    )} />
                                 </div>
-                            </div>
-                        </div>
-                    ))}
+                                <div className={cn(
+                                    "grid transition-all duration-300 ease-in-out",
+                                    openFaq === i ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0"
+                                )}>
+                                    <div className="overflow-hidden">
+                                        <p className="text-sm text-zinc-500 leading-relaxed">{faq.a}</p>
+                                    </div>
+                                </div>
+                            </button>
+                        ))}
+                    </div>
                 </div>
-            </section>
+            </Section>
         </div>
     );
 };

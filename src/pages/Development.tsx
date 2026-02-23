@@ -2,31 +2,40 @@ import React from "react";
 import { SEO } from "@/components/SEO";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Terminal, MessageSquare, PenTool, Hammer, Heart, ArrowRight, Wrench, Server, Shield, Smartphone } from "lucide-react";
+import { MessageSquare, PenTool, Hammer, Heart, ArrowRight, Wrench, Server, Shield, Smartphone, Globe, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { CypherText } from "@/components/animations/CypherText";
+import { IconReveal } from "@/components/animations/IconReveal";
+import { BiSolidTerminal, BiBriefcase } from "react-icons/bi";
+import { Section } from "@/components/ui/section";
+import { FadeIn } from "@/components/animations/FadeIn";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
+import { HeroPattern } from "@/components/HeroPattern";
 
 const Development = () => {
     const steps = [
         {
             title: "The Chat",
             description: "We talk about what you need and who your customers are.",
-            icon: MessageSquare
+            icon: MessageSquare,
+            color: "text-blue-500"
         },
         {
             title: "The Drawing",
             description: "We show you a simple plan of how the app will look and work.",
-            icon: PenTool
+            icon: PenTool,
+            color: "text-purple-500"
         },
         {
             title: "The Build",
             description: "We do the hard work in the background. You get a text every week with an update.",
-            icon: Hammer
+            icon: Hammer,
+            color: "text-orange-500"
         },
         {
             title: "The Hand-off & Support",
             description: "We put your app online and stay by your side to manage it 24/7.",
-            icon: Heart
+            icon: Heart,
+            color: "text-pink-500"
         }
     ];
 
@@ -34,22 +43,26 @@ const Development = () => {
         {
             title: "We fix bugs",
             text: "If it breaks, we fix it. Period.",
-            icon: Wrench
+            icon: Wrench,
+            color: "text-red-500"
         },
         {
             title: "We manage servers",
             text: "We make sure your site never goes down.",
-            icon: Server
+            icon: Server,
+            color: "text-green-500"
         },
         {
             title: "We secure data",
             text: "We keep your customer information safe and private.",
-            icon: Shield
+            icon: Shield,
+            color: "text-cyan-500"
         },
         {
             title: "We are a text away",
             text: "Human support 9-5. No robots, no confusing tickets.",
-            icon: Smartphone
+            icon: Smartphone,
+            color: "text-yellow-500"
         }
     ];
 
@@ -60,7 +73,7 @@ const Development = () => {
     ];
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen font-sans">
             <SEO
                 title="Development"
                 description="We handle the tech stuff. You run your business. Simple, reliable software development."
@@ -68,119 +81,138 @@ const Development = () => {
             />
 
             {/* Hero Section */}
-            <section className="bg-white pt-20 md:pt-32 pb-32 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
+            <Section variant="default" className="pt-20 md:pt-32 pb-20 relative overflow-hidden">
+                <DottedGlowBackground />
+                <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-transparent to-white" />
+                <div className="max-w-layout mx-auto px-6 relative z-10">
+                    <HeroPattern />
                     <div className="mb-12">
-                        <div className="w-12 h-12 bg-zinc-50 border border-zinc-200 rounded-[4px] flex items-center justify-center mb-10">
-                            <Terminal className="w-6 h-6 text-black" />
-                        </div>
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-black leading-[1.05]">
-                            <CypherText text="We handle the tech stuff." duration={1500} /> <br className="hidden md:block" />
-                            <CypherText text="You run your business." duration={1500} delay={500} />
-                        </h1>
-                        <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed mb-12">
-                            Most people find software confusing. We make it simple. We build your tools, keep them running, and fix things before you even notice—so you never have to think about "code" ever again.
-                        </p>
+                        <FadeIn delay={0.1}>
+                            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-black leading-[1.05]">
+                                We handle the{" "}
+                                <IconReveal index={0}><span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-blue-50"><BiSolidTerminal className="w-3.5 h-3.5 text-blue-500" /></span></IconReveal>
+                                {" "}tech stuff. <br className="hidden md:block" />
+                                You run your{" "}
+                                <IconReveal index={1}><span className="inline-flex items-center justify-center w-6 h-6 rounded-md bg-emerald-50"><BiBriefcase className="w-3.5 h-3.5 text-emerald-500" /></span></IconReveal>
+                                {" "}business.
+                            </h1>
+                        </FadeIn>
+                        <FadeIn delay={0.2}>
+                            <p className="text-base text-zinc-500 max-w-2xl leading-relaxed mb-12">
+                                Most people find software confusing. We make it simple. We build your tools, keep them running, and fix things before you even notice—so you never have to think about "code" ever again.
+                            </p>
+                        </FadeIn>
                     </div>
-                    <Link to="/contact">
-                        <Button size="lg" className="h-14 px-8 text-lg rounded-[4px] bg-black text-white hover:bg-zinc-800">
-                            Let's Chat <ArrowRight className="ml-2 w-5 h-5" />
-                        </Button>
-                    </Link>
+                    <FadeIn delay={0.3}>
+                        <Link to="/contact">
+                            <Button size="sm" className="text-sm font-semibold px-4 py-1.5 rounded-2xl bg-black text-white hover:bg-zinc-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.16),0_1px_2px_0_rgba(0,0,0,0.24)] active:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.08)] transition-all duration-150">
+                                Let's Chat <ArrowRight className="ml-2 w-5 h-5" />
+                            </Button>
+                        </Link>
+                        <p className="mt-4 flex items-center gap-2 text-xs text-zinc-400">
+                            <span className="inline-flex items-center gap-1"><Globe className="w-3 h-3" />Team in North America</span>
+                            <span className="text-zinc-300">·</span>
+                            <span className="inline-flex items-center gap-1"><Clock className="w-3 h-3" />9–5 Mon–Fri</span>
+                        </p>
+                    </FadeIn>
                 </div>
-            </section>
+            </Section>
 
             {/* How We Work (4 Steps) */}
-            <section className="py-32 bg-zinc-50 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
-                    <div className="mb-20">
-                        <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-6 font-bold">How We Work</p>
-                        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 leading-[0.9]">Simple by Design</h2>
-                    </div>
+            <Section variant="full" className="">
+                <div className="max-w-layout mx-auto px-6 py-10 md:py-16">
+                    <FadeIn>
+                        <h2 className="text-section text-black max-w-xl">Simple by Design</h2>
+                    </FadeIn>
+                    <FadeIn delay={0.1}>
+                        <p className="text-sm font-medium text-zinc-500 max-w-2xl mt-4 leading-relaxed">Four steps from idea to launch. No jargon, no surprises.</p>
+                    </FadeIn>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-zinc-200 border border-zinc-200">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mt-16">
                         {steps.map((step, index) => (
-                            <div key={index} className="p-10 bg-white hover:bg-zinc-50 transition-colors group h-full flex flex-col">
-                                <span className="font-mono text-[10px] text-zinc-400 mb-8 block">0{index + 1}</span>
-                                <step.icon className="w-8 h-8 text-black mb-6" />
-                                <h3 className="text-xl font-bold tracking-tight mb-4 text-black">
-                                    {step.title}
-                                </h3>
-                                <p className="text-zinc-500 leading-relaxed text-sm">
-                                    {step.description}
-                                </p>
-                            </div>
+                            <FadeIn key={index} delay={0.15 + (index * 0.1)}>
+                                <div className="flex flex-col gap-3">
+                                    <step.icon className={`w-8 h-8 ${step.color}`} />
+                                    <h4 className="font-bold text-base tracking-tight">{step.title}</h4>
+                                    <p className="text-sm text-zinc-500 leading-relaxed">
+                                        {step.description}
+                                    </p>
+                                </div>
+                            </FadeIn>
                         ))}
                     </div>
                 </div>
-            </section>
+            </Section>
 
             {/* Everything Included */}
-            <section className="py-32 bg-white border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
-                    <div className="mb-20">
-                        <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-6 font-bold">Everything Included</p>
-                        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-6 leading-[0.9]">Peace of Mind</h2>
-                    </div>
+            <Section variant="full" className="">
+                <div className="max-w-layout mx-auto px-6 py-10 md:py-16">
+                    <FadeIn>
+                        <h2 className="text-section text-black max-w-xl">Peace of Mind</h2>
+                    </FadeIn>
+                    <FadeIn delay={0.1}>
+                        <p className="text-sm font-medium text-zinc-500 max-w-2xl mt-4 leading-relaxed">Everything included, nothing extra. We handle the full stack so you can focus on growth.</p>
+                    </FadeIn>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[1px] bg-zinc-200 border border-zinc-200">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mt-16">
                         {includedItems.map((item, index) => (
-                            <div key={index} className="p-10 bg-white hover:bg-zinc-50 transition-colors group flex flex-col border border-transparent">
-                                <item.icon className="w-6 h-6 text-zinc-400 mb-6 group-hover:text-black transition-colors" />
-                                <h3 className="font-bold tracking-tight mb-2 text-black">
-                                    {item.title}
-                                </h3>
-                                <p className="text-zinc-500 leading-relaxed text-sm">
-                                    {item.text}
-                                </p>
-                            </div>
+                            <FadeIn key={index} delay={0.15 + (index * 0.1)}>
+                                <div className="flex flex-col gap-3">
+                                    <item.icon className={`w-8 h-8 ${item.color}`} />
+                                    <h4 className="font-bold text-base tracking-tight">{item.title}</h4>
+                                    <p className="text-sm text-zinc-500 leading-relaxed">
+                                        {item.text}
+                                    </p>
+                                </div>
+                            </FadeIn>
                         ))}
                     </div>
                 </div>
-            </section>
+            </Section>
 
             {/* Tech Stack */}
-            <section className="py-32 bg-zinc-50 border-b border-zinc-200">
-                <div className="max-w-[1200px] mx-auto px-6">
-                    <div className="mb-20">
+            <Section variant="full" className="">
+                <div className="max-w-layout mx-auto px-6 py-10 md:py-16">
+                    <FadeIn>
                         <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase">
                             The Gold Standard
                         </Badge>
-                        <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-8 leading-[0.9]">Built to Last.</h2>
-                        <p className="text-xl text-zinc-500 max-w-2xl leading-relaxed tracking-tight">
+                        <h2 className="text-section text-black max-w-xl">Built to Last.</h2>
+                    </FadeIn>
+                    <FadeIn delay={0.1}>
+                        <p className="text-sm font-medium text-zinc-500 max-w-2xl mt-4 leading-relaxed">
                             You don't need to know how the engine works to drive the car. We use the most reliable tools in the world to make sure your business stays online, stays fast, and stays secure.
                         </p>
-                    </div>
+                    </FadeIn>
 
-                    <div className="border border-zinc-200 bg-white p-12">
-                        <div className="flex flex-wrap gap-x-12 gap-y-8 justify-center items-center opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
+                    <FadeIn delay={0.2}>
+                        <div className="flex flex-wrap gap-x-12 gap-y-8 mt-16">
                             {techStack.map((tech) => (
                                 <span key={tech} className="text-lg md:text-xl font-bold tracking-tight text-zinc-400 hover:text-black cursor-default transition-colors">
                                     {tech}
                                 </span>
                             ))}
                         </div>
-                    </div>
+                    </FadeIn>
                 </div>
-            </section>
+            </Section>
 
             {/* CTA */}
-            <section className="py-32 bg-white">
-                <div className="max-w-[1200px] mx-auto px-6 text-center">
-                    <Badge variant="outline" className="mb-6 px-3 py-1 text-xs font-mono font-normal tracking-wide border-zinc-200 text-zinc-600 rounded-[4px] uppercase">
-                        Get Started
-                    </Badge>
-                    <h2 className="text-6xl font-bold mb-8 tracking-tighter leading-[0.9]">Simple. Fast. Done.</h2>
-                    <p className="text-xl text-zinc-500 mb-12 max-w-lg mx-auto leading-relaxed">
-                        Ready to hand off the tech work? Let's talk.
-                    </p>
-                    <Link to="/contact">
-                        <Button size="lg" className="h-16 px-10 text-lg rounded-[4px] bg-black text-white hover:bg-zinc-800">
-                            Let's Chat <ArrowRight className="ml-2 w-5 h-5" />
-                        </Button>
-                    </Link>
-                </div>
-            </section>
+            <Section variant="full" className="py-10 md:py-16 relative overflow-hidden bg-white">
+                <DottedGlowBackground />
+                <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-white to-transparent" />
+                <FadeIn fullWidth className="relative z-10">
+                    <div className="max-w-layout mx-auto px-6 text-center">
+                        <h2 className="text-section mb-8">Simple. Fast. Done.</h2>
+                        <p className="text-body-lg text-zinc-500 mb-12 max-w-lg mx-auto">Ready to hand off the tech work? Let's talk.</p>
+                        <Link to="/contact">
+                            <Button size="sm" className="text-sm font-semibold px-4 py-1.5 rounded-2xl bg-black text-white hover:bg-zinc-800 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.16),0_1px_2px_0_rgba(0,0,0,0.24)] active:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.08)] transition-all duration-150">
+                                Let's Chat <ArrowRight className="ml-2 w-5 h-5" />
+                            </Button>
+                        </Link>
+                    </div>
+                </FadeIn>
+            </Section>
         </div>
     );
 };

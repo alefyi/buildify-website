@@ -4,6 +4,7 @@ import { Loader2 } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
+import { ContactFAB } from './ContactFAB';
 
 const Layout: React.FC = () => {
     return (
@@ -20,6 +21,7 @@ const Layout: React.FC = () => {
                 </Suspense>
             </main>
             <Footer />
+            <ContactFAB />
         </div>
     );
 };

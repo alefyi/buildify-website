@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SEO } from "@/components/SEO";
-import { Check, Loader2, ArrowRight } from "lucide-react";
+import { Check, Loader2, ArrowRight, Globe, Clock, Target, Lightbulb, DollarSign, Rocket } from "lucide-react";
 import { cn } from "@/lib/utils";
+import DottedGlowBackground from "@/components/DottedGlowBackground";
+import { FadeIn } from "@/components/animations/FadeIn";
 
-// Webhook URL provided by user
+// Webhook URL
 const WEBHOOK_URL = 'https://hook.us1.make.com/mr14arr8pp6gndfm3iwsrpk8b1krpp23';
 
 const countryCodes = [
@@ -27,16 +29,19 @@ const countryCodes = [
     { code: "+971", name: "AE (+971)" },
     { code: "+65", name: "SG (+65)" },
     { code: "+966", name: "SA (+966)" },
-    // Simplified list for brevity, can expand if needed
 ];
 
-import { CypherText } from "@/components/animations/CypherText";
+const benefits = [
+    { icon: Target, title: "Understand your vision", desc: "We listen first, build second" },
+    { icon: Lightbulb, title: "Technical game plan", desc: "A clear roadmap for your project" },
+    { icon: DollarSign, title: "Transparent pricing", desc: "No surprises, no hidden fees" },
+    { icon: Rocket, title: "Fast turnaround", desc: "Weeks, not months" },
+];
 
 const Contact = () => {
-    const [step, setStep] = useState(0);
+    const [step, setStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    // Form Data State
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -47,17 +52,14 @@ const Contact = () => {
         description: ''
     });
 
-    // Auto-focus ref
     const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
-    // Auto-focus on step change
     useEffect(() => {
-        if (step > 0 && step < 7) {
+        if (step >= 1 && step <= 5) {
             setTimeout(() => {
                 inputRef.current?.focus();
             }, 300);
         }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }, [step]);
 
     // Handle Enter Key
@@ -71,7 +73,7 @@ const Contact = () => {
         };
         document.addEventListener('keydown', handleKeyDown);
         return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [step, formData]); // Dependency on step/formData to ensure valid check is fresh
+    }, [step, formData]);
 
     const handleChange = (field: string, value: string) => {
         setFormData(prev => ({ ...prev, [field]: value }));
@@ -79,18 +81,14 @@ const Contact = () => {
 
     const checkValidity = () => {
         switch (step) {
-            case 1: // Name
-                return formData.name.trim().length > 0;
-            case 2: // Email
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim());
-            case 3: // Phone
+            case 1: // Name + Email
+                return formData.name.trim().length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim());
+            case 2: // Phone
                 const digits = formData.phone.replace(/[^\d]/g, '');
                 return formData.countryCode === '+1' ? digits.length === 10 : (digits.length >= 7 && digits.length <= 15);
-            case 4: // Help Type
+            case 3: // Help Type
                 return !!formData.helpType;
-            case 5: // Budget (Optional)
-                return true;
-            case 6: // Description
+            case 4: // Budget + Description
                 return formData.description.trim().length > 0;
             default:
                 return true;
@@ -98,13 +96,13 @@ const Contact = () => {
     };
 
     const handleNext = () => {
-        if (checkValidity() && step < 7) {
+        if (checkValidity() && step < 5) {
             setStep(prev => prev + 1);
         }
     };
 
     const handleBack = () => {
-        if (step > 0) {
+        if (step > 1) {
             setStep(prev => prev - 1);
         }
     };
@@ -124,7 +122,7 @@ const Contact = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            setStep(7); // Success Step
+            setStep(5);
         } catch (error) {
             console.error(error);
             alert("Something went wrong. Please try again.");
@@ -133,242 +131,283 @@ const Contact = () => {
         }
     };
 
-    const totalSteps = 8; // 0 to 7
-    const progress = ((step + 1) / totalSteps) * 100;
+    const totalSteps = 5;
+    const progress = step >= 5 ? 100 : (step / (totalSteps - 1)) * 100;
 
     return (
-        <div className="min-h-screen bg-white font-sans text-black flex flex-col relative pt-20">
+        <div className="bg-white font-sans text-black flex flex-col relative overflow-hidden">
+            <DottedGlowBackground />
+            <div className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-transparent via-white/50 to-white" />
             <SEO
                 title="Contact Us"
                 description="Let's build something great together. Tell us about your project."
                 url="https://usebuildify.com/contact"
             />
 
-            {/* Progress Bar (Hidden on Success) */}
-            {step < 7 && (
-                <div className="fixed top-0 left-0 w-full h-1 bg-gray-100 z-50">
-                    <div
-                        className="h-full bg-black transition-all duration-500 ease-out"
-                        style={{ width: `${progress}%` }}
-                    ></div>
-                </div>
-            )}
+            <main className="relative z-10 px-4 sm:px-6 pt-28 md:pt-36 pb-16">
+                <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
 
-            <main className="w-full max-w-3xl mx-auto p-6 md:p-12 lg:p-16 flex-1 flex flex-col justify-center min-h-[600px]">
+                    {/* ───── Left Column: Value Proposition ───── */}
+                    <div className="lg:sticky lg:top-32">
+                        <FadeIn delay={0.1}>
+                            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-5 text-black leading-[1.1]">
+                                Let's build something{' '}
+                                <span className="bg-gradient-to-r from-zinc-900 via-zinc-600 to-zinc-900 bg-clip-text text-transparent">great together.</span>
+                            </h1>
+                        </FadeIn>
+                        <FadeIn delay={0.2}>
+                            <p className="text-lg text-zinc-500 leading-relaxed mb-6 max-w-lg">
+                                No commitment. No sales pitch. Just a conversation about your project and how we can help bring it to life.
+                            </p>
+                        </FadeIn>
+                        <FadeIn delay={0.25}>
+                            <p className="flex items-center gap-2 text-xs text-zinc-400 mb-10">
+                                <span className="inline-flex items-center gap-1"><Globe className="w-3 h-3" />Team in North America</span>
+                                <span className="text-zinc-300">·</span>
+                                <span className="inline-flex items-center gap-1"><Clock className="w-3 h-3" />9–5 Mon–Fri</span>
+                            </p>
+                        </FadeIn>
 
-                {/* Step 0: Welcome */}
-                {step === 0 && (
-                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <h1 className="text-3xl md:text-4xl font-semibold mb-6 leading-tight">
-                            <CypherText text="Hey there!" duration={1000} /> 👋
-                        </h1>
-                        <p className="text-lg md:text-xl text-gray-600 leading-relaxed mb-10">
-                            We're Buildify, and we're here to help you bring your app idea to life.
-                            Before we jump on a call, we'd love to learn a bit about what you're working on.
-                            This'll just take a minute.
-                        </p>
-                        <button
-                            onClick={handleNext}
-                            className="px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-zinc-800 transition-transform active:scale-[0.98] shadow-lg hover:shadow-xl w-full sm:w-auto flex items-center justify-center gap-2"
-                        >
-                            Let's do it
-                            <ArrowRight className="w-5 h-5" />
-                        </button>
-                    </div>
-                )}
-
-                {/* Step 1: Name */}
-                {step === 1 && (
-                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <label className="block text-xl md:text-2xl font-normal text-gray-700 mb-6">What's your name?</label>
-                        <input
-                            ref={inputRef as any}
-                            type="text"
-                            value={formData.name}
-                            onChange={(e) => handleChange('name', e.target.value)}
-                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-sm bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
-                            placeholder="Your name"
-                        />
-                        <NavButtons onBack={handleBack} onNext={handleNext} isValid={checkValidity()} />
-                    </div>
-                )}
-
-                {/* Step 2: Email */}
-                {step === 2 && (
-                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <label className="block text-xl md:text-2xl font-normal text-gray-700 mb-6">What's your email?</label>
-                        <input
-                            ref={inputRef as any}
-                            type="email"
-                            value={formData.email}
-                            onChange={(e) => handleChange('email', e.target.value)}
-                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-sm bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
-                            placeholder="you@example.com"
-                        />
-                        <NavButtons onBack={handleBack} onNext={handleNext} isValid={checkValidity()} />
-                    </div>
-                )}
-
-                {/* Step 3: Phone */}
-                {step === 3 && (
-                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <label className="block text-xl md:text-2xl font-normal text-gray-700 mb-6">And your phone number?</label>
-                        <div className="flex gap-2">
-                            <select
-                                value={formData.countryCode}
-                                onChange={(e) => handleChange('countryCode', e.target.value)}
-                                className="w-1/3 md:w-1/4 p-4 text-lg border-2 border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:bg-white focus:border-black transition-all cursor-pointer"
-                            >
-                                {countryCodes.map(c => (
-                                    <option key={`${c.code}-${c.name}`} value={c.code}>{c.name}</option>
+                        {/* Benefit Grid */}
+                        <FadeIn delay={0.3}>
+                            <p className="text-sm font-semibold text-zinc-900 mb-4 uppercase tracking-wider">On your call, we'll cover</p>
+                            <div className="grid grid-cols-2 gap-3">
+                                {benefits.map((b, i) => (
+                                    <div
+                                        key={i}
+                                        className="p-4 rounded-xl border border-zinc-100 bg-zinc-50/60 hover:bg-white hover:border-zinc-200 transition-all duration-200"
+                                    >
+                                        <b.icon className="w-5 h-5 text-zinc-700 mb-2.5" />
+                                        <p className="text-sm font-semibold text-zinc-900 leading-snug">{b.title}</p>
+                                        <p className="text-xs text-zinc-500 mt-1">{b.desc}</p>
+                                    </div>
                                 ))}
-                            </select>
-                            <input
-                                ref={inputRef as any}
-                                type="tel"
-                                value={formData.phone}
-                                onChange={(e) => handleChange('phone', e.target.value)}
-                                className="flex-1 w-full p-4 text-lg border-2 border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
-                                placeholder="(555) 123-4567"
-                            />
-                        </div>
-                        <NavButtons onBack={handleBack} onNext={handleNext} isValid={checkValidity()} />
-                    </div>
-                )}
+                            </div>
+                        </FadeIn>
 
-                {/* Step 4: Help Type */}
-                {step === 4 && (
-                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <label className="block text-xl md:text-2xl font-normal text-gray-700 mb-8">What do you need help with?</label>
-                        <div className="flex flex-col gap-3">
-                            {["Building a new app from scratch", "I have an app and need help", "I need my app maintained", "Adalo", "Flutterflow"].map(option => (
-                                <label
-                                    key={option}
-                                    className={cn(
-                                        "flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 hover:translate-x-1 group",
-                                        formData.helpType === option
-                                            ? "border-black bg-gray-50"
-                                            : "border-gray-200 bg-gray-50 hover:bg-white hover:border-gray-400"
-                                    )}
-                                >
-                                    <input
-                                        type="radio"
-                                        name="helpType"
-                                        value={option}
-                                        checked={formData.helpType === option}
-                                        onChange={(e) => handleChange('helpType', e.target.value)}
-                                        className="w-5 h-5 mr-3 accent-black"
+                        {/* Testimonial */}
+                        <FadeIn delay={0.4}>
+                            <div className="mt-8 p-5 rounded-xl border border-zinc-100 bg-zinc-50/60">
+                                <p className="text-sm text-zinc-600 italic leading-relaxed">
+                                    "Buildify understood our vision from day one. They turned our rough idea into a polished product in weeks — not months."
+                                </p>
+                                <p className="text-xs text-zinc-400 mt-3 font-medium">— Happy Client</p>
+                            </div>
+                        </FadeIn>
+                    </div>
+
+                    {/* ───── Right Column: Form Card ───── */}
+                    <FadeIn delay={0.2}>
+                        <div className="bg-white rounded-2xl border border-zinc-200 shadow-[0_4px_40px_-12px_rgba(0,0,0,0.08)] overflow-hidden">
+                            {/* Card Progress Bar */}
+                            {step < 5 && (
+                                <div className="h-1 bg-zinc-100">
+                                    <div
+                                        className="h-full bg-black transition-all duration-500 ease-out rounded-r-full"
+                                        style={{ width: `${progress}%` }}
                                     />
-                                    <span className="text-lg text-gray-800 group-hover:text-black">{option}</span>
-                                </label>
-                            ))}
-                        </div>
-                        <NavButtons onBack={handleBack} onNext={handleNext} isValid={checkValidity()} />
-                    </div>
-                )}
+                                </div>
+                            )}
 
-                {/* Step 5: Budget */}
-                {step === 5 && (
-                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <label className="block text-xl md:text-2xl font-normal text-gray-700 mb-6">Do you have an estimated budget?</label>
-                        <input
-                            ref={inputRef as any}
-                            type="text"
-                            value={formData.budget}
-                            onChange={(e) => handleChange('budget', e.target.value)}
-                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-sm bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400"
-                            placeholder="e.g., $10k - $20k, or just leave blank"
-                        />
-                        <div className="mt-3 text-sm text-gray-500 italic">No worries if you don't have one yet - totally optional!</div>
-                        <NavButtons onBack={handleBack} onNext={handleNext} isValid={checkValidity()} />
-                    </div>
-                )}
-
-                {/* Step 6: Description */}
-                {step === 6 && (
-                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                        <label className="block text-xl md:text-2xl font-normal text-gray-700 mb-6">Tell us a bit about what you're building</label>
-                        <textarea
-                            ref={inputRef as any}
-                            value={formData.description}
-                            onChange={(e) => handleChange('description', e.target.value)}
-                            className="w-full p-4 text-lg border-2 border-gray-200 rounded-lg bg-gray-50 focus:outline-none focus:bg-white focus:border-black focus:shadow-lg transition-all duration-300 placeholder:text-gray-400 min-h-[160px] resize-y"
-                            placeholder="Just a quick overview - what's the app about? What are you hoping to achieve?"
-                        ></textarea>
-
-                        <div className="flex flex-col sm:flex-row gap-3 mt-8">
-                            <button
-                                onClick={handleBack}
-                                className="px-8 py-4 text-lg font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors w-full sm:w-auto"
-                            >
-                                Back
-                            </button>
-                            <button
-                                onClick={handleSubmit}
-                                disabled={!checkValidity() || isSubmitting}
-                                className="flex-1 px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-zinc-800 transition-transform active:scale-[0.98] shadow-lg w-full sm:w-auto flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                {isSubmitting ? (
-                                    <>Submitting... <Loader2 className="w-5 h-5 animate-spin" /></>
-                                ) : (
-                                    <>Submit <ArrowRight className="w-5 h-5" /></>
+                            <div className="p-6 md:p-8">
+                                {/* Card Header */}
+                                {step < 5 && (
+                                    <div className="mb-6">
+                                        <h2 className="text-xl font-semibold text-black">Tell us about your project</h2>
+                                        <p className="text-sm text-zinc-400 mt-1">Step {step} of 4 · Takes about a minute</p>
+                                    </div>
                                 )}
-                            </button>
-                        </div>
-                    </div>
-                )}
 
-                {/* Step 7: Success */}
-                {step === 7 && (
-                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 text-center">
-                        <div className="w-20 h-20 bg-black rounded-full flex items-center justify-center mb-8 shadow-xl mx-auto">
-                            <Check className="w-10 h-10 text-white" />
-                        </div>
-                        <h1 className="text-3xl font-semibold mb-6 text-black">Check your inbox! 📬</h1>
+                                {/* ── Step 1: Name + Email ── */}
+                                {step === 1 && (
+                                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-zinc-700 mb-1.5">Your name</label>
+                                            <input
+                                                ref={inputRef as any}
+                                                type="text"
+                                                value={formData.name}
+                                                onChange={(e) => handleChange('name', e.target.value)}
+                                                className="w-full px-4 py-3 text-sm border border-zinc-200 rounded-lg bg-zinc-50 focus:outline-none focus:bg-white focus:border-black focus:ring-1 focus:ring-black/5 transition-all duration-200 placeholder:text-zinc-400"
+                                                placeholder="John Doe"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-zinc-700 mb-1.5">Email address</label>
+                                            <input
+                                                type="email"
+                                                value={formData.email}
+                                                onChange={(e) => handleChange('email', e.target.value)}
+                                                className="w-full px-4 py-3 text-sm border border-zinc-200 rounded-lg bg-zinc-50 focus:outline-none focus:bg-white focus:border-black focus:ring-1 focus:ring-black/5 transition-all duration-200 placeholder:text-zinc-400"
+                                                placeholder="you@example.com"
+                                            />
+                                        </div>
+                                        <FormNav onNext={handleNext} isValid={checkValidity()} />
+                                    </div>
+                                )}
 
-                        {/* Loom Video Embed */}
-                        <div className="mb-6 rounded-lg overflow-hidden shadow-lg border border-gray-100 max-w-2xl mx-auto">
-                            <div className="relative pb-[56.25%] h-0">
-                                <iframe
-                                    src="https://www.loom.com/embed/073f96ed1b644a618c5c8486451b0031"
-                                    frameBorder="0"
-                                    allowFullScreen
-                                    className="absolute top-0 left-0 w-full h-full"
-                                ></iframe>
+                                {/* ── Step 2: Phone ── */}
+                                {step === 2 && (
+                                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-zinc-700 mb-1.5">Phone number</label>
+                                            <div className="flex gap-2">
+                                                <select
+                                                    value={formData.countryCode}
+                                                    onChange={(e) => handleChange('countryCode', e.target.value)}
+                                                    className="w-28 px-3 py-3 text-sm border border-zinc-200 rounded-lg bg-zinc-50 focus:outline-none focus:bg-white focus:border-black transition-all cursor-pointer"
+                                                >
+                                                    {countryCodes.map(c => (
+                                                        <option key={`${c.code}-${c.name}`} value={c.code}>{c.name}</option>
+                                                    ))}
+                                                </select>
+                                                <input
+                                                    ref={inputRef as any}
+                                                    type="tel"
+                                                    value={formData.phone}
+                                                    onChange={(e) => handleChange('phone', e.target.value)}
+                                                    className="flex-1 px-4 py-3 text-sm border border-zinc-200 rounded-lg bg-zinc-50 focus:outline-none focus:bg-white focus:border-black focus:ring-1 focus:ring-black/5 transition-all duration-200 placeholder:text-zinc-400"
+                                                    placeholder="(555) 123-4567"
+                                                />
+                                            </div>
+                                        </div>
+                                        <FormNav onBack={handleBack} onNext={handleNext} isValid={checkValidity()} />
+                                    </div>
+                                )}
+
+                                {/* ── Step 3: Help Type ── */}
+                                {step === 3 && (
+                                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-3">
+                                        <label className="block text-sm font-medium text-zinc-700 mb-1">What do you need help with?</label>
+                                        <div className="flex flex-col gap-2">
+                                            {["Building a new app from scratch", "I have an app and need help", "I need my app maintained", "Adalo", "Flutterflow"].map(option => (
+                                                <label
+                                                    key={option}
+                                                    className={cn(
+                                                        "flex items-center px-4 py-3 border rounded-lg cursor-pointer transition-all duration-200 group text-sm",
+                                                        formData.helpType === option
+                                                            ? "border-black bg-zinc-50 ring-1 ring-black/5"
+                                                            : "border-zinc-200 bg-zinc-50 hover:bg-white hover:border-zinc-300"
+                                                    )}
+                                                >
+                                                    <input
+                                                        type="radio"
+                                                        name="helpType"
+                                                        value={option}
+                                                        checked={formData.helpType === option}
+                                                        onChange={(e) => handleChange('helpType', e.target.value)}
+                                                        className="w-4 h-4 mr-3 accent-black"
+                                                    />
+                                                    <span className="text-zinc-700 group-hover:text-black">{option}</span>
+                                                </label>
+                                            ))}
+                                        </div>
+                                        <FormNav onBack={handleBack} onNext={handleNext} isValid={checkValidity()} />
+                                    </div>
+                                )}
+
+                                {/* ── Step 4: Budget + Description ── */}
+                                {step === 4 && (
+                                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 space-y-4">
+                                        <div>
+                                            <label className="block text-sm font-medium text-zinc-700 mb-1.5">
+                                                Estimated budget <span className="text-zinc-400 font-normal">(optional)</span>
+                                            </label>
+                                            <input
+                                                ref={inputRef as any}
+                                                type="text"
+                                                value={formData.budget}
+                                                onChange={(e) => handleChange('budget', e.target.value)}
+                                                className="w-full px-4 py-3 text-sm border border-zinc-200 rounded-lg bg-zinc-50 focus:outline-none focus:bg-white focus:border-black focus:ring-1 focus:ring-black/5 transition-all duration-200 placeholder:text-zinc-400"
+                                                placeholder="e.g., $10k – $20k"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-sm font-medium text-zinc-700 mb-1.5">Tell us about your project</label>
+                                            <textarea
+                                                value={formData.description}
+                                                onChange={(e) => handleChange('description', e.target.value)}
+                                                className="w-full px-4 py-3 text-sm border border-zinc-200 rounded-lg bg-zinc-50 focus:outline-none focus:bg-white focus:border-black focus:ring-1 focus:ring-black/5 transition-all duration-200 placeholder:text-zinc-400 min-h-[120px] resize-y"
+                                                placeholder="What's the app about? What are you hoping to achieve?"
+                                            />
+                                        </div>
+
+                                        <div className="flex gap-3 pt-2">
+                                            <button
+                                                onClick={handleBack}
+                                                className="px-5 py-2.5 text-sm font-medium text-zinc-600 bg-zinc-100 rounded-lg hover:bg-zinc-200 transition-colors"
+                                            >
+                                                Back
+                                            </button>
+                                            <button
+                                                onClick={handleSubmit}
+                                                disabled={!checkValidity() || isSubmitting}
+                                                className="flex-1 px-5 py-2.5 text-sm font-semibold text-white bg-black rounded-lg hover:bg-zinc-800 transition-all active:scale-[0.98] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.16),0_1px_2px_0_rgba(0,0,0,0.24)] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                                            >
+                                                {isSubmitting ? (
+                                                    <>Submitting... <Loader2 className="w-4 h-4 animate-spin" /></>
+                                                ) : (
+                                                    <>Submit <ArrowRight className="w-4 h-4" /></>
+                                                )}
+                                            </button>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* ── Step 5: Success ── */}
+                                {step === 5 && (
+                                    <div className="animate-in fade-in slide-in-from-bottom-4 duration-500 text-center py-8">
+                                        <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mb-6 shadow-xl mx-auto">
+                                            <Check className="w-8 h-8 text-white" />
+                                        </div>
+                                        <h2 className="text-2xl font-semibold mb-4 text-black">Check your inbox! 📬</h2>
+
+                                        {/* Loom Video Embed */}
+                                        <div className="mb-5 rounded-lg overflow-hidden shadow-md border border-zinc-100">
+                                            <div className="relative pb-[56.25%] h-0">
+                                                <iframe
+                                                    src="https://www.loom.com/embed/073f96ed1b644a618c5c8486451b0031"
+                                                    frameBorder="0"
+                                                    allowFullScreen
+                                                    className="absolute top-0 left-0 w-full h-full"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <p className="text-base text-zinc-500 leading-relaxed">
+                                            We just sent you a booking link to your email.<br />
+                                            Looking forward to chatting!
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                         </div>
+                    </FadeIn>
 
-                        <p className="text-xl text-gray-600 leading-relaxed">
-                            We just sent you a booking link to your email. <br />
-                            Looking forward to chatting!
-                        </p>
-                    </div>
-                )}
-
+                </div>
             </main>
-
-            <footer className="p-6 text-center text-gray-300 text-sm">
-                Buildify Questionnaire
-            </footer>
         </div>
     );
 };
 
-const NavButtons = ({ onBack, onNext, isValid }: { onBack: () => void, onNext: () => void, isValid: boolean }) => (
-    <div className="flex flex-col sm:flex-row gap-3 mt-8">
-        <button
-            onClick={onBack}
-            className="px-8 py-4 text-lg font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors w-full sm:w-auto"
-        >
-            Back
-        </button>
+/* ── Navigation Buttons ── */
+const FormNav = ({ onBack, onNext, isValid }: { onBack?: () => void, onNext: () => void, isValid: boolean }) => (
+    <div className="flex gap-3 pt-2">
+        {onBack && (
+            <button
+                onClick={onBack}
+                className="px-5 py-2.5 text-sm font-medium text-zinc-600 bg-zinc-100 rounded-lg hover:bg-zinc-200 transition-colors"
+            >
+                Back
+            </button>
+        )}
         <button
             onClick={onNext}
             disabled={!isValid}
-            className="flex-1 px-8 py-4 text-lg font-medium text-white bg-black rounded-lg hover:bg-zinc-800 transition-transform active:scale-[0.98] shadow-lg w-full sm:w-auto flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 px-5 py-2.5 text-sm font-semibold text-white bg-black rounded-lg hover:bg-zinc-800 transition-all active:scale-[0.98] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.16),0_1px_2px_0_rgba(0,0,0,0.24)] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
             Next
-            <ArrowRight className="w-5 h-5" />
+            <ArrowRight className="w-4 h-4" />
         </button>
     </div>
 );

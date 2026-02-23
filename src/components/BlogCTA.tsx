@@ -35,7 +35,7 @@ const BlogCTA: React.FC<BlogCTAProps> = ({ tags }) => {
     const content = isCreator ? {
         title: "Launch your brand",
         text: "Launch a high-performance, multi-page site on your own custom domain in under 48 hours for just $20/mo.",
-        buttonText: "Start Building",
+        buttonText: "Get Started",
         link: "/creators"
     } : {
         title: "Get a loyalty app",
